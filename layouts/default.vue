@@ -7,8 +7,7 @@
       rel="stylesheet"
     />
     <header>
-      <nuxt-link to="/" id="logoLink">Alias<span>Game</span>
-      </nuxt-link>
+      <nuxt-link to="/" id="logoLink">Alias<span>Game</span> </nuxt-link>
     </header>
     <Nuxt />
   </div>

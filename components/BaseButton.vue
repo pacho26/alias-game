@@ -29,6 +29,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+  box-sizing: border-box;
+}
+
 .container {
   background: blue;
 }
@@ -36,15 +40,17 @@ export default {
 .btn {
   border: 2px #283558 solid;
   border-radius: 8px;
-  padding: 10px 10px;
+  padding: 10px;
   width: 400px;
   font-size: 26px;
   text-transform: uppercase;
   margin: 10px;
   text-align: center;
-  background: #3c5186;
+  background: #374b7b;
   color: #fff5de;
-  margin: 10px 0;
+  margin: 0;
+  transition: all 0.3s ease-in-out;
+  max-width: 250px;
 }
 
 .btn:hover {
