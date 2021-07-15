@@ -44,6 +44,10 @@ main {
     user-select: none;
   }
 
+  p {
+    font-size: 20px;
+  }
+
   .nuxtLink {
     transform: scale(0.6, 0.6);
   }

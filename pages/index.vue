@@ -1,7 +1,10 @@
 <template>
   <body>
+    <div id="desc">
+      <h1>Explain using other words!</h1>
+    </div>
+
     <main>
-      <h1>Explain with another words!</h1>
       <div class="buttons">
         <nuxt-link class="nuxtLink" to="/lobby"
           ><BaseButton class="btn" :buttonText="'New game'"
@@ -20,23 +23,23 @@ export default {
     return {
       // language {
       //   eng: {
-      //     moto: 'Explain with another words!',
+      //     desc: 'Explain using another words!',
       //     newGame: 'New game',
       //     rules: 'Rules',
       //   },
       //   cro: {
-      //     moto: 'Objasni drugim riječima!',
+      //     desc: 'Objasni drugim riječima!',
       //     newGame: 'Nova igra',
       //     rules: 'Pravila',
       //   },
-    }
+    };
   },
   computed: {
     chosenLanguage() {
-      const chosenLang = 'eng'
+      const chosenLang = 'eng';
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -48,10 +51,20 @@ main {
   align-items: center;
   max-width: 1000px;
   padding: 20px;
+}
+
+#desc {
+  background: #374b7b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
 
   h1 {
-    font-size: 60px;
-    color: #3c5186;
+    font-size: 50px;
+    color: #fff5de;
+    text-align: center;
   }
 }
 

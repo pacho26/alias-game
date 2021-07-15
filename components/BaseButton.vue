@@ -25,7 +25,7 @@ export default {
       default: () => ({}),
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -33,12 +33,8 @@ export default {
   box-sizing: border-box;
 }
 
-.container {
-  background: blue;
-}
-
 .btn {
-  border: 2px #283558 solid;
+  border: 2px #374b7b solid;
   border-radius: 8px;
   padding: 10px;
   width: 400px;
@@ -49,7 +45,7 @@ export default {
   background: #374b7b;
   color: #fff5de;
   margin: 0;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   max-width: 250px;
 }
 
