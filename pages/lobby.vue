@@ -1,9 +1,5 @@
 <template>
   <body>
-    <script
-      src="https://kit.fontawesome.com/06e4cc1e22.js"
-      crossorigin="anonymous"
-    ></script>
     <div class="teamsContainer">
       <h3 @click="ispisi">Current teams:</h3>
       <ul>
