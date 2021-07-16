@@ -1,17 +1,23 @@
 <template>
   <body>
     <div class="teamsContainer">
-      <h3 @click="ispisi">Current teams:</h3>
+      <h3 @click="ispisi">CURRENT TEAMS:</h3>
       <ul>
         <li v-for="team in currentTeamsData" :key="team.name">
           {{ team.name }} --> {{ team.players[0] }} i {{ team.players[1] }}
         </li>
       </ul>
-      <PlusButton :tooltipText="'Add a new team!'" v-b-modal.addTeam />
+      <div
+        class="iconPlusContainer"
+        v-b-tooltip.hover.right="'Add a new team!'"
+      >
+        <fa class="iconPlus" v-b-modal.addTeam icon="plus"></fa>
+      </div>
+
       <b-modal id="addTeam" title="New team">
         <div class="addTeamForm">
           <b-form-input
-          class="mb-3 teamNameInput"
+            class="mb-3 teamNameInput"
             v-model="newTeamName"
             placeholder="Enter team name"
           ></b-form-input>
@@ -133,5 +139,34 @@ body > * {
 
 .teamNameInput {
   max-width: 220px;
+}
+
+.iconPlus {
+  font-size: 30px;
+  color: #fff5de;
+  border: none;
+  margin: 0;
+  transition: 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.iconPlusContainer {
+  transform: scale(1.1, 1);
+  padding: 6px;
+  background: #3c5186;
+  border-radius: 8px;
+  margin: 0;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    background: #8e609f;
+    .iconPlus {
+      color: #c6b4ce;
+      transform: scale(1.15, 1.15);
+    }
+  }
 }
 </style>

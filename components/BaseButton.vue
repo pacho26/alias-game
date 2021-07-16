@@ -47,11 +47,11 @@ export default {
   margin: 0;
   transition: all 0.2s ease-in-out;
   max-width: 250px;
-}
 
-.btn:hover {
-  color: #3c5186;
-  background: #fff5de;
+  &:hover {
+    color: #3c5186;
+    background: #fff5de;
+  }
 }
 
 .btn:focus {
