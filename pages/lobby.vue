@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="teamsContainer">
-      <h3 @click="ispisi">CURRENT TEAMS:</h3>
+      <h3>CURRENT TEAMS:</h3>
       <ul>
         <li v-for="team in currentTeamsData" :key="team.name">
           {{ team.name }} --> {{ team.players[0] }} i {{ team.players[1] }}
@@ -11,15 +11,16 @@
         class="iconPlusContainer"
         v-b-tooltip.hover.right="'Add a new team!'"
       >
-        <fa class="iconPlus" v-b-modal.addTeam icon="plus"></fa>
+        <fa class="iconPlus" v-b-modal.addTeamModal icon="plus"></fa>
       </div>
 
-      <b-modal id="addTeam" title="New team">
-        <div class="addTeamForm">
+      <b-modal id="addTeamModal" title="New team" hide-footer hide-header>
+        <div id="addTeamForm">
           <b-form-input
             class="mb-3 teamNameInput"
             v-model="newTeamName"
             placeholder="Enter team name"
+            autocomplete="off"
           ></b-form-input>
           <b-form-select
             class="selectForm"
@@ -33,13 +34,40 @@
               v-for="index in numberOfPlayers"
               :key="index"
             >
-              <p class="pr-4 mt-3">Player {{ index }}:</p>
+              <p class="pr-2 mt-3">Player {{ index }}:</p>
               <b-form-input
                 class="nameInput"
-                v-model="names[index]"
+                v-model="names[index - 1]"
+                @keyup.enter="
+                  $bvModal.hide('addTeamModal');
+                  ispisi();
+                  clearForm();
+                "
                 placeholder="Enter player's name"
+                autocomplete="off"
               ></b-form-input>
             </div>
+          </div>
+        </div>
+
+        <div class="modalButtons">
+          <div
+            @click="
+              $bvModal.hide('addTeamModal');
+              clearForm();
+            "
+          >
+            <BaseButton id="closeFormButton" :buttonText="'Cancel'" />
+          </div>
+
+          <div
+            @click="
+              $bvModal.hide('addTeamModal');
+              ispisi();
+              clearForm();
+            "
+          >
+            <BaseButton id="addTeamButton" :buttonText="'Add team'" />
           </div>
         </div>
       </b-modal>
@@ -53,7 +81,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   data() {
@@ -80,8 +108,19 @@ export default {
     this.currentTeamsData = this.setCurrentTeams;
   },
   methods: {
+    ...mapActions(['addNewTeam']),
     ispisi() {
-      console.log(this.currentTeamsData);
+      const newTeam = {
+        name: this.newTeamName,
+        players: this.names,
+      };
+      console.log(newTeam);
+      this.addNewTeam(newTeam);
+    },
+    clearForm() {
+      this.newTeamName = '';
+      this.numberOfPlayers = null;
+      this.names = [];
     },
   },
 };
@@ -113,18 +152,22 @@ body > * {
 }
 
 .nameInput {
-  max-width: 170px;
+  max-width: 183px;
 }
 
-.selectForm {
-  max-width: 220px;
+.selectForm,
+.teamNameInput {
+  max-width: 250px;
 }
 
-.addTeamForm {
+#addTeamForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  margin: 14px 0;
 }
 
 .playersList {
@@ -135,10 +178,6 @@ body > * {
 
 .playersContainer {
   margin-top: 20px;
-}
-
-.teamNameInput {
-  max-width: 220px;
 }
 
 .iconPlus {
@@ -160,6 +199,7 @@ body > * {
   border-radius: 8px;
   margin: 0;
   transition: 0.2s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     background: #8e609f;
@@ -168,5 +208,33 @@ body > * {
       transform: scale(1.15, 1.15);
     }
   }
+}
+
+#addTeamButton {
+  font-size: 15px;
+  font-weight: 700;
+  max-width: 110px;
+}
+
+#closeFormButton {
+  background: #9b72aa;
+  border-color: #9a70a9;
+  font-size: 15px;
+  font-weight: 700;
+  max-width: 110px;
+
+  &:hover {
+    background: #fff5de;
+    color: #9a70a9;
+  }
+}
+
+.modalButtons {
+  margin: 0 auto;
+  padding: 12px 0;
+  max-width: 280px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 </style>
