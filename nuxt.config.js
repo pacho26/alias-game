@@ -17,6 +17,12 @@ export default {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Fascinate&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap',
       },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
+        rel: 'stylesheet',
+      },
     ],
   },
 

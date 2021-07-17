@@ -1,9 +1,8 @@
 <template>
-  <body>
+  <div>
     <div id="desc">
       <h1>Explain using other words!</h1>
     </div>
-
     <main>
       <div class="buttons">
         <nuxt-link class="nuxtLink" to="/lobby"
@@ -14,32 +13,11 @@
         /></nuxt-link>
       </div>
     </main>
-  </body>
+  </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      // language {
-      //   eng: {
-      //     desc: 'Explain using another words!',
-      //     newGame: 'New game',
-      //     rules: 'Rules',
-      //   },
-      //   cro: {
-      //     desc: 'Objasni drugim riječima!',
-      //     newGame: 'Nova igra',
-      //     rules: 'Pravila',
-      //   },
-    };
-  },
-  computed: {
-    chosenLanguage() {
-      const chosenLang = 'eng';
-    },
-  },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

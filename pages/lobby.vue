@@ -14,7 +14,13 @@
         <fa class="iconPlus" v-b-modal.addTeamModal icon="plus"></fa>
       </div>
 
-      <b-modal id="addTeamModal" title="New team" hide-footer hide-header>
+      <b-modal
+        id="addTeamModal"
+        ref="my-modal"
+        title="New team"
+        hide-footer
+        hide-header
+      >
         <div id="addTeamForm">
           <b-form-input
             class="mb-3 teamNameInput"
@@ -40,7 +46,7 @@
                 v-model="names[index - 1]"
                 @keyup.enter="
                   $bvModal.hide('addTeamModal');
-                  ispisi();
+                  addTeamMethod();
                   clearForm();
                 "
                 placeholder="Enter player's name"
@@ -48,6 +54,7 @@
               ></b-form-input>
             </div>
           </div>
+          <p v-if="unfinishedForm">You have some empty values.</p>
         </div>
 
         <div class="modalButtons">
@@ -60,13 +67,7 @@
             <BaseButton id="closeFormButton" :buttonText="'Cancel'" />
           </div>
 
-          <div
-            @click="
-              $bvModal.hide('addTeamModal');
-              ispisi();
-              clearForm();
-            "
-          >
+          <div @click="addTeamMethod()">
             <BaseButton id="addTeamButton" :buttonText="'Add team'" />
           </div>
         </div>
@@ -96,6 +97,7 @@ export default {
         { value: 4, text: '4 players' },
       ],
       names: [],
+      unfinishedForm: false,
     };
   },
   computed: {
@@ -109,18 +111,37 @@ export default {
   },
   methods: {
     ...mapActions(['addNewTeam']),
-    ispisi() {
-      const newTeam = {
-        name: this.newTeamName,
-        players: this.names,
-      };
-      console.log(newTeam);
-      this.addNewTeam(newTeam);
+
+    addTeamMethod() {
+      if (
+        this.newTeamName.split(' ').join('') === '' ||
+        this.names.length !== this.numberOfPlayers ||
+        !this.checkIfNamesExist()
+      ) {
+        this.unfinishedForm = true;
+      } else {
+        const newTeam = {
+          name: this.newTeamName,
+          players: this.names,
+        };
+        console.log(newTeam);
+        this.addNewTeam(newTeam);
+        this.$refs['my-modal'].hide();
+      }
+    },
+    checkIfNamesExist() {
+      for (const name of this.names) {
+        if (!name || name.split(' ').join('') === '') {
+          return false;
+        }
+      }
+      return true;
     },
     clearForm() {
       this.newTeamName = '';
       this.numberOfPlayers = null;
       this.names = [];
+      this.unfinishedForm = false;
     },
   },
 };
