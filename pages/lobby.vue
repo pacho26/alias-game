@@ -8,7 +8,7 @@
             <th>Team name</th>
             <th>Players</th>
           </tr>
-          <tr v-for="team in currentTeamsData" :key="team.name">
+          <tr v-for="team in this.currentTeams" :key="team.name">
             <td>{{ team.name }}</td>
             <td>{{ team.players.join(', ') }}</td>
           </tr>
@@ -81,7 +81,7 @@
       </b-modal>
     </div>
     <BaseButton
-      v-if="currentTeamsData.length >= 2"
+      v-if="this.currentTeams.length >= 2"
       :buttonText="'Start game'"
     />
     <h2 v-else>There must be at least 2 teams!</h2>
@@ -90,12 +90,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import isEmpty from 'lodash.isempty';
 
 export default {
   data() {
     return {
-      currentTeamsData: this.currentTeams,
       newTeamName: '',
       numberOfPlayers: null,
       options: [
@@ -110,9 +108,6 @@ export default {
   },
   computed: {
     ...mapGetters(['currentTeams']),
-  },
-  created() {
-    this.currentTeamsData = this.currentTeams;
   },
   methods: {
     ...mapActions(['addNewTeam']),
@@ -136,7 +131,7 @@ export default {
     },
     checkIfNamesExist() {
       for (const name of this.names) {
-        if (name.split(' ').join('') === '') {
+        if (!name) {
           return false;
         }
       }
