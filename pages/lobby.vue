@@ -287,6 +287,7 @@ main > * {
   padding: 16px;
   border-radius: 8px;
   font-size: 24px;
+  color: #283558;
 
   th {
     padding: 0 30px;
