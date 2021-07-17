@@ -32,7 +32,7 @@
         <div id="addTeamForm">
           <b-form-input
             class="mb-3 teamNameInput"
-            v-model="newTeamName"
+            v-model.trim="newTeamName"
             placeholder="Enter team name"
             autocomplete="off"
           ></b-form-input>
@@ -51,7 +51,7 @@
               <p class="pr-2 mt-3">Player {{ index }}:</p>
               <b-form-input
                 class="nameInput"
-                v-model="names[index - 1]"
+                v-model.trim="names[index - 1]"
                 @keyup.enter="addTeamMethod()"
                 placeholder="Enter player's name"
                 autocomplete="off"
@@ -90,11 +90,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import isEmpty from 'lodash.isempty';
 
 export default {
   data() {
     return {
-      currentTeamsData: [],
+      currentTeamsData: this.currentTeams,
       newTeamName: '',
       numberOfPlayers: null,
       options: [
@@ -109,19 +110,16 @@ export default {
   },
   computed: {
     ...mapGetters(['currentTeams']),
-    setCurrentTeams() {
-      return this.currentTeams;
-    },
   },
   created() {
-    this.currentTeamsData = this.setCurrentTeams;
+    this.currentTeamsData = this.currentTeams;
   },
   methods: {
     ...mapActions(['addNewTeam']),
 
     addTeamMethod() {
       if (
-        this.newTeamName.split(' ').join('') === '' ||
+        !this.newTeamName ||
         this.names.length !== this.numberOfPlayers ||
         !this.checkIfNamesExist()
       ) {
@@ -131,7 +129,6 @@ export default {
           name: this.newTeamName,
           players: this.names,
         };
-        console.log(newTeam);
         this.addNewTeam(newTeam);
         this.$refs['my-modal'].hide();
         this.clearForm();
@@ -139,7 +136,7 @@ export default {
     },
     checkIfNamesExist() {
       for (const name of this.names) {
-        if (!name || name.split(' ').join('') === '') {
+        if (name.split(' ').join('') === '') {
           return false;
         }
       }

@@ -52,10 +52,10 @@ export default {
     color: #3c5186;
     background: #fff5de;
   }
-}
 
-.btn:focus {
-  outline: 0;
-  box-shadow: none;
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
 }
 </style>
