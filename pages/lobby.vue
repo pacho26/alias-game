@@ -1,12 +1,20 @@
 <template>
-  <body>
+  <main>
     <div class="teamsContainer">
       <h3>CURRENT TEAMS:</h3>
-      <ul>
-        <li v-for="team in currentTeamsData" :key="team.name">
-          {{ team.name }} --> {{ team.players[0] }} i {{ team.players[1] }}
-        </li>
-      </ul>
+      <div id="teamsTable">
+        <table style="width: 100%">
+          <tr>
+            <th>Team name</th>
+            <th>Players</th>
+          </tr>
+          <tr v-for="team in currentTeamsData" :key="team.name">
+            <td>{{ team.name }}</td>
+            <td>{{ team.players.join(', ') }}</td>
+          </tr>
+        </table>
+      </div>
+
       <div
         class="iconPlusContainer"
         v-b-tooltip.hover.right="'Add a new team!'"
@@ -44,18 +52,17 @@
               <b-form-input
                 class="nameInput"
                 v-model="names[index - 1]"
-                @keyup.enter="
-                  $bvModal.hide('addTeamModal');
-                  addTeamMethod();
-                  clearForm();
-                "
+                @keyup.enter="addTeamMethod()"
                 placeholder="Enter player's name"
                 autocomplete="off"
               ></b-form-input>
             </div>
           </div>
-          <p v-if="unfinishedForm">You have some empty values.</p>
         </div>
+
+        <p id="errorMessage" v-if="unfinishedForm">
+          You have some empty values!
+        </p>
 
         <div class="modalButtons">
           <div
@@ -78,7 +85,7 @@
       :buttonText="'Start game'"
     />
     <h2 v-else>There must be at least 2 teams!</h2>
-  </body>
+  </main>
 </template>
 
 <script>
@@ -127,6 +134,7 @@ export default {
         console.log(newTeam);
         this.addNewTeam(newTeam);
         this.$refs['my-modal'].hide();
+        this.clearForm();
       }
     },
     checkIfNamesExist() {
@@ -148,7 +156,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-body {
+main {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -158,7 +166,7 @@ body {
   padding: 20px;
 }
 
-body > * {
+main > * {
   margin: 20px;
 }
 
@@ -170,6 +178,15 @@ body > * {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+
+  h3 {
+    color: #3c5186;
+  }
+}
+
+.table {
+  background: #dcd1e1;
+  color: #2f406a;
 }
 
 .nameInput {
@@ -189,6 +206,12 @@ body > * {
   border: none;
   font-family: 'Poppins', sans-serif;
   margin: 14px 0;
+}
+
+#errorMessage {
+  color: #8e609f;
+  font-weight: 500;
+  text-align: center;
 }
 
 .playersList {
@@ -218,7 +241,7 @@ body > * {
   padding: 6px;
   background: #3c5186;
   border-radius: 8px;
-  margin: 0;
+  margin-top: 12px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 
@@ -257,5 +280,26 @@ body > * {
   display: flex;
   justify-content: space-between;
   align-content: center;
+}
+
+#teamsTable {
+  background: #dcd1e1;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 24px;
+
+  th {
+    padding: 0 30px;
+    margin-bottom: 4px;
+  }
+
+  td {
+    padding: 0 30px;
+  }
+
+  tr:hover:not(:first-child) {
+    background: white;
+    cursor: pointer;
+  }
 }
 </style>
