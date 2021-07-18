@@ -4,13 +4,12 @@
       <h3>CURRENT TEAMS:</h3>
       <div id="teamsTable">
         <table style="width: 100%">
-          <tr>
-            <th>Team name</th>
-            <th>Players</th>
-          </tr>
           <tr v-for="team in this.currentTeams" :key="team.name">
-            <td>{{ team.name }}</td>
-            <td>{{ team.players.join(', ') }}</td>
+            <td id="logo-container" class="pl-4">
+              <img :src="team.logo" id="team-logo" alt="team logo" />
+            </td>
+            <td id="team-name">{{ team.name }}</td>
+            <td class="px-4">{{ team.players.join(', ') }}</td>
           </tr>
         </table>
       </div>
@@ -173,6 +172,7 @@ main > * {
 
   h3 {
     color: #3c5186;
+    font-weight: 600;
   }
 }
 
@@ -281,18 +281,25 @@ main > * {
   font-size: 24px;
   color: #283558;
 
-  th {
-    padding: 0 30px;
-    margin-bottom: 4px;
-  }
-
-  td {
-    padding: 0 30px;
-  }
-
-  tr:hover:not(:first-child) {
+  tr:hover {
     background: white;
     cursor: pointer;
+  }
+
+  #team-name {
+    font-weight: 600;
+    padding-right: 36px;
+    padding-left: 2px;
+  }
+
+  #logo-container {
+    padding-right: 10px;
+    padding: 10px 10px 10px 0;
+
+    #team-logo {
+      max-width: 80px;
+      border-radius: 8px;
+    }
   }
 }
 </style>

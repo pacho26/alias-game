@@ -14,14 +14,12 @@
       consequatur rerum mollitia modi pariatur blanditiis voluptates minus
       quisquam doloremque? Error laudantium voluptatum dolorem adipisci.
     </p>
-    <nuxt-link class="nuxtLink" to="/"
-      ><BaseButton class="btn" :buttonText="'Return to menu'"
-    /></nuxt-link>
+    <BaseButton class="btn" :to="'/'" :buttonText="'Return to menu'" />
   </main>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style lang="scss" scoped>

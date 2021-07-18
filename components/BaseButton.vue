@@ -1,7 +1,5 @@
 <template>
-  <nuxt-link v-if="link" class="container" :to="to">
-    <button class="btn">{{ buttonText }}</button>
-  </nuxt-link>
+  <nuxt-link v-if="to" class="btn" :to="to">{{ buttonText }} </nuxt-link>
 
   <button v-else class="btn">{{ buttonText }}</button>
 </template>
@@ -14,15 +12,9 @@ export default {
       required: false,
       default: '',
     },
-    link: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
     to: {
-      type: Object,
+      type: String,
       required: false,
-      default: () => ({}),
     },
   },
 };
