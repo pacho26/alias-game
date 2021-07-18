@@ -10,6 +10,11 @@ export const state = () => ({
       players: ['David', 'Luke'],
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png',
     },
+    {
+      name: 'Milan',
+      players: ['Ante', 'Zlatan'],
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/1306px-Logo_of_AC_Milan.svg.png',
+    },
   ],
 });
 

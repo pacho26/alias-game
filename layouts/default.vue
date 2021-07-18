@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <nuxt-link to="/" id="logoLink">Alias<span>Game</span> </nuxt-link>
+      <nuxt-link to="/" id="logo-link">Alias<span>Game</span> </nuxt-link>
     </header>
     <Nuxt />
   </div>
@@ -12,7 +12,7 @@
   font-family: 'Poppins', sans-serif;
 }
 
-#logoLink {
+#logo-link {
   text-decoration: none;
   font-family: 'Poppins Bold', sans-serif;
   color: #3c5186;

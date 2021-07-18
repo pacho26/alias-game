@@ -1,8 +1,8 @@
 <template>
   <main>
-    <div class="teamsContainer">
+    <div class="teams-container">
       <h3>CURRENT TEAMS:</h3>
-      <div id="teamsTable">
+      <div id="teams-table">
         <table style="width: 100%">
           <tr v-for="team in this.currentTeams" :key="team.name">
             <td id="logo-container" class="pl-4">
@@ -15,41 +15,42 @@
       </div>
 
       <div
-        class="iconPlusContainer"
+        class="icon-plus-container"
         v-b-tooltip.hover.right="'Add a new team!'"
+        v-b-modal.add-team-modal
       >
-        <fa class="iconPlus" v-b-modal.addTeamModal icon="plus"></fa>
+        <fa class="icon-plus" icon="plus"></fa>
       </div>
 
       <b-modal
-        id="addTeamModal"
+        id="add-team-modal"
         ref="my-modal"
         title="New team"
         hide-footer
         hide-header
       >
-        <div id="addTeamForm">
+        <div id="add-team-form">
           <b-form-input
-            class="mb-3 teamNameInput"
+            class="mb-3 team-name-input"
             v-model.trim="newTeamName"
             placeholder="Enter team name"
             autocomplete="off"
           ></b-form-input>
           <b-form-select
-            class="selectForm"
+            class="select-form"
             v-model="numberOfPlayers"
             :options="options"
           ></b-form-select>
 
-          <div class="playersContainer">
+          <div class="players-container">
             <div
-              class="playersList"
+              class="players-list"
               v-for="index in numberOfPlayers"
               :key="index"
             >
               <p class="pr-2 mt-3">Player {{ index }}:</p>
               <b-form-input
-                class="nameInput"
+                class="name-input"
                 v-model.trim="names[index - 1]"
                 @keyup.enter="addTeamMethod()"
                 placeholder="Enter player's name"
@@ -59,22 +60,22 @@
           </div>
         </div>
 
-        <p id="errorMessage" v-if="unfinishedForm">
+        <p id="error-message" v-if="unfinishedForm">
           You have some empty values!
         </p>
 
-        <div class="modalButtons">
+        <div class="modal-buttons">
           <div
             @click="
-              $bvModal.hide('addTeamModal');
+              $bvModal.hide('add-team-modal');
               clearForm();
             "
           >
-            <BaseButton id="closeFormButton" :buttonText="'Cancel'" />
+            <BaseButton id="close-form-button" :buttonText="'Cancel'" />
           </div>
 
           <div @click="addTeamMethod()">
-            <BaseButton id="addTeamButton" :buttonText="'Add team'" />
+            <BaseButton id="add-team-button" :buttonText="'Add team'" />
           </div>
         </div>
       </b-modal>
@@ -161,9 +162,9 @@ main > * {
   margin: 20px;
 }
 
-.teamsContainer {
+.teams-container {
+  padding: 20px 0;
   background: #fff5de;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -181,16 +182,16 @@ main > * {
   color: #2f406a;
 }
 
-.nameInput {
+.name-input {
   max-width: 183px;
 }
 
-.selectForm,
-.teamNameInput {
+.select-form,
+.team-name-input {
   max-width: 250px;
 }
 
-#addTeamForm {
+#add-team-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -200,59 +201,59 @@ main > * {
   margin: 14px 0;
 }
 
-#errorMessage {
+#error-message {
   color: #8e609f;
   font-weight: 500;
   text-align: center;
 }
 
-.playersList {
+.players-list {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.playersContainer {
+.players-container {
   margin-top: 20px;
 }
 
-.iconPlus {
-  font-size: 30px;
-  color: #fff5de;
-  border: none;
-  margin: 0;
-  transition: 0.2s ease-in-out;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.iconPlusContainer {
+.icon-plus-container {
   transform: scale(1.1, 1);
   padding: 6px;
   background: #3c5186;
   border-radius: 8px;
-  margin-top: 12px;
+  margin-top: 20px;
   transition: 0.2s ease-in-out;
   cursor: pointer;
 
+  .icon-plus {
+    font-size: 30px;
+    color: #fff5de;
+    border: none;
+    margin: 0;
+    transition: 0.2s ease-in-out;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
   &:hover {
     background: #8e609f;
-    .iconPlus {
+    .icon-plus {
       color: #c6b4ce;
       transform: scale(1.15, 1.15);
     }
   }
 }
 
-#addTeamButton {
+#add-team-button {
   font-size: 15px;
   font-weight: 700;
   max-width: 110px;
 }
 
-#closeFormButton {
+#close-form-button {
   background: #9b72aa;
   border-color: #9a70a9;
   font-size: 15px;
@@ -265,7 +266,7 @@ main > * {
   }
 }
 
-.modalButtons {
+.modal-buttons {
   margin: 0 auto;
   padding: 12px 0;
   max-width: 280px;
@@ -274,22 +275,20 @@ main > * {
   align-content: center;
 }
 
-#teamsTable {
-  background: #dcd1e1;
-  padding: 16px;
+#teams-table {
   border-radius: 8px;
   font-size: 24px;
   color: #283558;
 
   tr:hover {
-    background: white;
+    background: #cad2e7;
     cursor: pointer;
   }
 
   #team-name {
     font-weight: 600;
     padding-right: 36px;
-    padding-left: 2px;
+    padding-left: 4px;
   }
 
   #logo-container {
@@ -298,6 +297,7 @@ main > * {
 
     #team-logo {
       max-width: 80px;
+      max-height: 100px;
       border-radius: 8px;
     }
   }

@@ -5,12 +5,8 @@
     </div>
     <main>
       <div class="buttons">
-        <nuxt-link class="nuxtLink" to="/lobby"
-          ><BaseButton class="btn" :buttonText="'New game'"
-        /></nuxt-link>
-        <nuxt-link class="nuxtLink" to="/rules"
-          ><BaseButton class="btn" :buttonText="'Rules'"
-        /></nuxt-link>
+        <BaseButton class="btn" :to="'/lobby'" :buttonText="'New game'" />
+        <BaseButton class="btn" :to="'/rules'" :buttonText="'Rules'" />
       </div>
     </main>
   </div>
@@ -54,7 +50,7 @@ main {
   align-items: center;
 }
 
-.buttons > * {
+.btn {
   margin: 12px 0;
 }
 </style>
