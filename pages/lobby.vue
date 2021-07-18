@@ -172,8 +172,9 @@ main > * {
   border-radius: 8px;
 
   h3 {
-    color: #3c5186;
+    color: #374b7b;
     font-weight: 600;
+    margin-bottom: 12px;
   }
 }
 
@@ -278,7 +279,7 @@ main > * {
 #teams-table {
   border-radius: 8px;
   font-size: 24px;
-  color: #283558;
+  color: #2f406a;
 
   tr:hover {
     background: #cad2e7;
@@ -294,10 +295,13 @@ main > * {
   #logo-container {
     padding-right: 10px;
     padding: 10px 10px 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     #team-logo {
       max-width: 80px;
-      max-height: 100px;
+      max-height: 80px;
       border-radius: 8px;
     }
   }
