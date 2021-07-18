@@ -43,6 +43,7 @@ main {
 }
 
 .buttons {
+  padding: 30px 0;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -50,7 +51,7 @@ main {
   align-items: center;
 }
 
-.btn {
-  margin: 12px 0;
+.btn:first-of-type {
+  margin-bottom: 20px;
 }
 </style>

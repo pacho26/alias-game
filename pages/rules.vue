@@ -44,6 +44,7 @@ main {
 
   p {
     font-size: 20px;
+    text-align: justify;
   }
 
   .btn {
