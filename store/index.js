@@ -28,8 +28,8 @@ export const mutations = {
   addTeam(state, team) {
     state.currentTeams.push(team);
   },
-  editTeam(state, payload) {
-    state.currentTeams[payload.idx] = payload.team;
+  editTeam(state, {idx, team}) {
+    state.currentTeams[idx] = team;
   },
 };
 
