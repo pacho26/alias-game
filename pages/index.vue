@@ -39,6 +39,7 @@ main {
     font-size: 50px;
     color: #fff5de;
     text-align: center;
+    max-width: 660px;
   }
 }
 

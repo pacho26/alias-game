@@ -4,7 +4,11 @@
       <h3>CURRENT TEAMS:</h3>
       <div id="teams-table">
         <table style="width: 100%">
-          <tr v-for="team in this.currentTeams" :key="team.name">
+          <tr
+            v-for="team in this.currentTeams"
+            :key="team.name"
+            @click="prepareEditing(team.name)"
+          >
             <td id="logo-container" class="pl-4">
               <img :src="team.logo" id="team-logo" alt="team logo" />
             </td>
@@ -17,14 +21,14 @@
       <div
         class="icon-plus-container"
         v-b-tooltip.hover.right="'Add a new team!'"
-        v-b-modal.add-team-modal
+        @click="openEmptyTeamModal"
       >
         <fa class="icon-plus" icon="plus"></fa>
       </div>
 
       <b-modal
         id="add-team-modal"
-        ref="my-modal"
+        ref="team-modal"
         title="New team"
         hide-footer
         hide-header
@@ -74,8 +78,11 @@
             <BaseButton id="close-form-button" :buttonText="'Cancel'" />
           </div>
 
-          <div @click="addTeamMethod()">
+          <div v-if="!editingTeam" @click="addTeamMethod">
             <BaseButton id="add-team-button" :buttonText="'Add team'" />
+          </div>
+          <div v-else @click="addTeamMethod">
+            <BaseButton id="add-team-button" :buttonText="'Confirm'" />
           </div>
         </div>
       </b-modal>
@@ -89,7 +96,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -104,13 +111,15 @@ export default {
       ],
       names: [],
       unfinishedForm: false,
+      editingTeam: false,
+      previousTeamName: '',
     };
   },
   computed: {
     ...mapGetters(['currentTeams']),
   },
   methods: {
-    ...mapActions(['addNewTeam']),
+    ...mapMutations(['addTeam', 'editTeam']),
 
     addTeamMethod() {
       if (
@@ -124,10 +133,38 @@ export default {
           name: this.newTeamName,
           players: this.names,
         };
-        this.addNewTeam(newTeam);
-        this.$refs['my-modal'].hide();
+        const idx = this.currentTeams.findIndex(
+          (t) => t.name === this.previousTeamName
+        );
+
+        if (idx >= 0) {
+          this.editTeam({
+            team: newTeam,
+            idx: idx,
+          });
+          this.previousTeamName = '';
+        } else {
+          this.addTeam(newTeam);
+        }
+        this.$refs['team-modal'].hide();
         this.clearForm();
       }
+    },
+    prepareEditing(teamName) {
+      const foundTeam = _.cloneDeep(
+        this.currentTeams.find((t) => t.name === teamName)
+      );
+      this.newTeamName = foundTeam.name;
+      this.names = foundTeam.players;
+      this.numberOfPlayers = foundTeam.players.length;
+      this.editingTeam = true;
+      this.previousTeamName = teamName;
+      this.$refs['team-modal'].show();
+    },
+    openEmptyTeamModal() {
+      this.clearForm();
+      this.$refs['team-modal'].show();
+      this.editingTeam = false;
     },
     checkIfNamesExist() {
       for (const name of this.names) {
@@ -156,6 +193,7 @@ main {
   align-items: center;
   max-width: 1000px;
   padding: 20px;
+  color: #374b7b;
 }
 
 main > * {
@@ -240,7 +278,7 @@ main > * {
   }
 
   &:hover {
-    background: #8e609f;
+    background: #a580b3;
     .icon-plus {
       color: #c6b4ce;
       transform: scale(1.15, 1.15);

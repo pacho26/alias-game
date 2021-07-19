@@ -25,13 +25,13 @@ export const getters = {
 };
 
 export const mutations = {
-  pushNewTeam(state, team) {
+  addTeam(state, team) {
     state.currentTeams.push(team);
+  },
+  editTeam(state, payload) {
+    state.currentTeams[payload.idx] = payload.team;
   },
 };
 
 export const actions = {
-  addNewTeam({ commit }, team) {
-    commit('pushNewTeam', team);
-  },
 };
