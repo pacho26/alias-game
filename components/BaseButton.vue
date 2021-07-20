@@ -26,7 +26,7 @@ export default {
 }
 
 .btn {
-  border: 2px #374b7b solid;
+  border: 2.5px #374b7b solid;
   border-radius: 8px;
   padding: 10px;
   width: 400px;
@@ -34,15 +34,15 @@ export default {
   text-transform: uppercase;
   margin: 10px;
   text-align: center;
-  background: #374b7b;
-  color: #fff5de;
+  color: #3c5186;
+  background: #fff5de;
   margin: 0;
   transition: all 0.2s ease-in-out;
   max-width: 250px;
 
   &:hover {
-    color: #3c5186;
-    background: #fff5de;
+    background: #374b7b;
+    color: #fff5de;
   }
 
   &:focus {

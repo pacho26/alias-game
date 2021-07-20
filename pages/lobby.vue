@@ -103,7 +103,7 @@
           step="5"
         ></b-form-input>
 
-        <div class="slider mt-3">
+        <div class="slider mt-4">
           Duration of the round: <span>{{ duration }}</span>
         </div>
         <b-form-input
@@ -115,7 +115,7 @@
         ></b-form-input>
 
         <div>
-          <p id="selected-language" class="mt-3">
+          <p id="selected-language" class="mt-4">
             Selected language: <span>{{ selectedLanguage }}</span>
           </p>
           <div class="flags">
@@ -381,15 +381,16 @@ main > * {
 }
 
 #close-form-button {
-  background: #9b72aa;
-  border-color: #9a70a9;
+  background: #fff5de;
+  color: #8e609f;
+  border-color: #8e609f;
   font-size: 15px;
   font-weight: 700;
   max-width: 110px;
 
   &:hover {
-    background: #fff5de;
-    color: #9a70a9;
+    color: #fff5de;
+    background: #8e609f;
   }
 }
 
@@ -441,7 +442,7 @@ main > * {
 
   h3 {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     font-weight: 600;
   }
 
