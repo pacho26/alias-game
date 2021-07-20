@@ -40,6 +40,7 @@
             placeholder="Enter team name"
             autocomplete="off"
           ></b-form-input>
+          
           <b-form-select
             class="select-form"
             v-model="numberOfPlayers"
@@ -96,7 +97,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
   data() {
@@ -117,6 +118,7 @@ export default {
   },
   computed: {
     ...mapGetters(['currentTeams']),
+    ...mapState('colors', ['colors']),
   },
   methods: {
     ...mapMutations(['addTeam', 'editTeam']),
@@ -129,9 +131,13 @@ export default {
       ) {
         this.unfinishedForm = true;
       } else {
+        const num = Math.floor(Math.random() * this.colors.length);
+        const color = this.colors[num];
+        console.log(num);
         const newTeam = {
           name: this.newTeamName,
           players: this.names,
+          logo: `https://avatar.oxro.io/avatar.svg?name=${this.newTeamName}&caps=1&fontSize=200&bold=true&background=${color.bg}&color=${color.text}`,
         };
         const idx = this.currentTeams.findIndex(
           (t) => t.name === this.previousTeamName
