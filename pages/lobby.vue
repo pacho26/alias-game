@@ -2,7 +2,7 @@
   <main>
     <div class="settings">
       <div class="teams-container">
-        <h3>CURRENT TEAMS:</h3>
+        <h3>CURRENT TEAMS</h3>
         <div id="teams-table">
           <table style="width: 100%">
             <tr
@@ -91,7 +91,8 @@
       </div>
 
       <div class="sliders">
-        <div class="slider mb-2">
+        <h3>SETTINGS</h3>
+        <div class="slider">
           Target result: <span>{{ targetResult }}</span>
         </div>
         <b-form-input
@@ -102,7 +103,7 @@
           step="5"
         ></b-form-input>
 
-        <div class="slider mb-2">
+        <div class="slider mt-3">
           Duration of the round: <span>{{ duration }}</span>
         </div>
         <b-form-input
@@ -112,6 +113,34 @@
           max="90"
           step="10"
         ></b-form-input>
+
+        <div>
+          <p id="selected-language" class="mt-3">
+            Selected language: <span>{{ selectedLanguage }}</span>
+          </p>
+          <div class="flags">
+            <img
+              src="../assets/countryFlags/croatia.svg"
+              alt="Croatia flag"
+              id="croatia-flag"
+              class="flag"
+              @click="
+                selectedLanguage = 'Croatian';
+                selectFlag();
+              "
+            />
+            <img
+              src="../assets/countryFlags/united-kingdom.svg"
+              alt="United Kingdom flag"
+              id="united-kingdom-flag"
+              class="flag"
+              @click="
+                selectedLanguage = 'English';
+                selectFlag();
+              "
+            />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -143,6 +172,7 @@ export default {
       previousTeamName: '',
       targetResult: '60',
       duration: '60',
+      selectedLanguage: 'Croatian',
     };
   },
   computed: {
@@ -215,6 +245,18 @@ export default {
       this.names = [];
       this.unfinishedForm = false;
     },
+    selectFlag() {
+      switch (this.selectedLanguage) {
+        case 'Croatian':
+          document.getElementById('croatia-flag').style.opacity = '1';
+          document.getElementById('united-kingdom-flag').style.opacity = '0.5';
+          break;
+        case 'English':
+          document.getElementById('croatia-flag').style.opacity = '0.5';
+          document.getElementById('united-kingdom-flag').style.opacity = '1';
+          break;
+      }
+    },
   },
 };
 </script>
@@ -226,9 +268,8 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
+  max-width: 1100px;
   color: #374b7b;
-  min-width: 450px;
 }
 
 main > * {
@@ -240,6 +281,8 @@ main > * {
 
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
 }
 .settings > * {
   margin: 20px;
@@ -257,7 +300,7 @@ main > * {
   h3 {
     color: #374b7b;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 }
 
@@ -391,6 +434,37 @@ main > * {
 }
 
 .sliders {
+  background: #fff5de;
+  padding: 22px;
+  border-radius: 8px;
+  min-width: 360px;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .flags {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .flag {
+      max-width: 60px;
+      cursor: pointer;
+      margin: 0;
+      transition: 0.2s;
+
+      &:hover {
+        transform: scale(1.2, 1.2);
+      }
+    }
+
+    #united-kingdom-flag {
+      opacity: 0.5;
+    }
+  }
 
   .slider {
     font-size: 20px;
@@ -400,6 +474,19 @@ main > * {
     span {
       font-weight: 800;
       font-size: 26px;
+      margin-left: 7px;
+    }
+  }
+
+  #selected-language {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-weight: 700;
+      font-size: 24px;
       margin-left: 7px;
     }
   }
