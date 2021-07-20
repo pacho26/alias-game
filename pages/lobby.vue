@@ -391,7 +391,6 @@ main > * {
 }
 
 .sliders {
-  min-width: 260px;
 
   .slider {
     font-size: 20px;

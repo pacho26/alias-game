@@ -32,7 +32,6 @@
 header {
   margin: 0;
   padding: 0;
-  width: 100%;
   background: #fff5de;
 }
 </style>
