@@ -5,5 +5,10 @@
       "use": "@nuxtjs/vercel-builder",
       "config": {}
     }
-  ]
+  ],
+  "functions": {
+    "pages/api/contact.ts": {
+      "excludeFiles": "public/**/*"
+    }
+  }
 }
