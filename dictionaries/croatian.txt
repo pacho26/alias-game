@@ -1,0 +1,611 @@
+mačak
+mačka
+pas
+lav
+koza
+guska
+patka
+kokoš
+pijetao
+krava
+ovca
+jelen
+košuta
+konj
+magarac
+ždrijebe
+srna
+svinja
+ovan
+jarac
+koza
+tigar
+majmun
+ždral
+jato
+čopor
+kralj
+kraljica
+Eiffelov toranj
+Kineski zid
+Notre Dame
+Disneyland
+Taj Mahal
+Louvre
+Yellowstone
+Vatikan
+Njemačka
+Australija
+Austrija
+Francuska
+Kina
+Indija
+Kenija
+Etiopija
+vic
+vući
+Las Vegas
+London
+Pariz
+New York
+Washington
+Moskva
+Turska
+Istanbul
+kolačić
+instrument
+ručak
+doručak
+večera
+užina
+uzbudljivo
+država
+grad
+rijeka
+biljka
+životinja
+ime
+prezime
+naziv
+kategorija
+algoritam
+buka
+uređenje
+odlično
+dobro
+brzo
+dovoljno
+oprost
+grijeh
+cigla
+zločinac
+horoskop
+kamin
+peć
+proljeće
+ljeto
+jesen
+zima
+umor
+godišnje doba
+doba
+glazba
+nota
+violinski ključ
+roda
+čaplja
+Lonsko polje
+prigušivač
+puška
+dužnost
+hinduizam
+Katolik
+Islam
+Buda
+Shrek
+Ledeno doba
+Neandertalac
+špilja
+mač
+sjekira
+lopata
+grablje
+metla
+hlače
+remen
+polirati
+odluka
+vratar
+slijep
+gluhoća
+nijem
+vezati
+njegovateljica
+ponoviti
+pranje mozga
+depresija
+sreća
+tuga
+žalost
+poštanski sandučić
+ulje
+pohvala
+poznanik
+koljeno
+glava
+vrat
+rame
+crkveno zvono
+list
+mini golf
+mali nogomet
+kum
+polijetanje
+pista
+kelj
+rajčica
+bicikl
+zemljopis
+zemljopisna karta
+žbuka
+pletenica
+operater
+mjesto stanovanja
+mjesto prebivanja
+osobna iskaznica
+zdravstvena iskaznica
+biokemičar
+odobravati
+torta
+baklava
+grozan
+astrologija
+onesvijestiti se
+krivotvorenje
+kafić
+sklad
+ubojstvo
+umorstvo
+pištolj
+podsjetiti
+predsoblje
+hodnik
+kupaonica
+sauna
+Ikea
+rabljen
+labirint
+lopta
+frizura
+sposobnost
+osobina
+kabanica
+lozinka
+ćelav
+stražnja vrata
+kloniranje
+pečat
+mudrac
+madrac
+balon
+cepelin
+Venecija
+rijeka
+Varaždin
+Čakovec
+Pula
+Biograd
+Beograd
+kobasica
+helikopter
+zrakoplov
+gluposti
+prijateljstvo
+Texas
+izravan
+Havaji
+rukavica
+nogavica
+mrštenje
+som
+štuka
+šaran
+oluja
+tornado
+sobar
+Češka
+pas vodič
+pelud
+prodirati
+pobijediti
+vukodlak
+Drakula
+Transilvanija
+NASA
+torba
+uhititi
+truba
+trombon
+klarinet
+violina
+viola
+violončelo
+gudalo
+teret
+gnjurac
+poderati
+šampanjac
+alkohol
+gemišt
+bambus
+ulična rasvjeta
+spremnik
+spremnik goriva
+demokracija
+tiranin
+stepenište
+konzervativan
+liberalan
+stube
+nacizam
+fašizam
+arterija
+vena
+kapilare
+artiljerija
+imitator
+imitacija
+proba
+kopati
+zavoj
+previjati
+umjetnost
+strip
+korica kruha
+korica
+miris
+tanak
+zanat
+orgulje
+Donald Trump
+Vladimir Putin
+Elon Musk
+Bill Gates
+William Shakespeare
+Ana Karenjina
+bijeg
+omča
+maslinovo ulje
+uznemiriti
+pizza
+hrenovke
+parfem
+strojar
+elektrotehnika
+informatika
+filozofija
+Pitagora
+piramida
+svemir
+crna rupa
+čimpanza
+Kutina
+različit
+Sisak
+kleveta
+bazen
+olimpijski bazen
+akord
+terca
+harmonika
+ulaz
+izlaz
+mamurluk
+gajba piva
+tenisice
+mozak
+piliti
+cvijet
+barikada
+bokal
+pokrivač
+polarni medvjed
+crni medvjed
+vučna služba
+pekar
+udovica
+crna udovica
+tarantula
+Harry Potter
+Gospodar prstenova
+Batman
+Kapetan Amerika
+zvončić
+Alpe
+tepsija
+vanilija
+pilići
+patuljast
+jagode
+kamen
+Danska
+opomena
+odvratiti
+pozornost
+vika
+galama
+nagurano
+zakopčan
+otkopčan
+odbojka
+vaterpolo
+picigin
+Dioklecijanova palača
+pinceta
+neozbiljno
+ozbiljan
+fascikl
+omot
+alarm
+kraljevna
+parket
+lice
+dijamant
+rubin
+smaragd
+kristal
+emerald
+terorist
+sirup
+voćni sirup
+bubreg
+jetra
+bubreg u loju
+skeptičan
+moljac
+streljivo
+tjeskoba
+pjev ptica
+pradjed
+prabaka
+strina
+stric
+ujak
+ujna
+bratić
+sestrična
+rezati
+profil
+nasljedstvo
+izručenje
+plesti
+zglob
+igla i konac
+otpuštenje
+otkaz
+ostavka
+ludilo
+zemljotres
+trčanje
+hodati
+dodati
+zobena kaša
+disanje
+astma
+alergija
+upala uha
+vatrogasno vozilo
+trening
+vježba
+automobil
+kamion
+traktor
+kombajn
+vještina
+grudnjak
+natkoljenica
+Zagreb
+Sarajevo
+Skoplje
+Podgorica
+Sidney
+Dunav
+rat
+sedlo
+umijeće
+jabuka
+krumpir
+prozor
+okvir
+slika
+fotograf
+fotografija
+soboslikar
+nacionalni park
+park prirode
+Rubikova kocka
+kocka
+šestar
+kvadrat
+pravokutnik
+kvadar
+krug
+kružnica
+promjer
+polumjer
+fizika
+kemija
+biologija
+psihologija
+pedagogija
+pedijatar
+psihijatar
+psiholog
+programiranje
+računalo
+tipkovnica
+miš
+štakor
+podloga za miš
+utičnica
+tipka
+čaša
+pehar
+tava
+vreća
+vrećica
+knjiga
+kabel
+monitor
+kružni tok
+radijator
+lampa
+žarulja
+karton
+okvir
+šah
+pantomima
+alias
+kaktus
+djetelina
+djetelina s 4 lista
+ravnalo
+kist
+mapa
+zvučnik
+Facebook
+Instagram
+Snapchat
+WhatsApp
+Spotify
+Deezer
+Google
+stabilizacija
+ekonomija
+sociologija
+logika
+zub
+nagib
+američki dolar
+apostrof
+zaleđe
+robot
+kratkovidan
+maslac
+badem
+orah
+kesten
+California
+Pandorina kutija
+baciti
+nadmoć
+zvijeri
+kruna
+pas čuvar
+jezik
+kalibar
+strijela
+senzacija
+obraz
+procjenitelj
+zalagaonica
+odijelo
+Brazil
+Rio de Janeiro
+ledena kava
+Ana Karenjina
+Ratovi zvijezda
+gazela
+uteg
+općenito
+čarolija
+pogriješiti
+bankovni račun
+tekući račun
+žiro račun
+sitnica
+štrukla
+poništenje
+klađenje
+sjaj
+pokopati
+ugljen
+Zadar
+magnet
+Dioklecijanova palača
+vruć
+dodatak
+začin
+morska sol
+pače
+crkveno zvono
+nemoral
+oduzimanje
+diskvalifikacija
+krivotvoritelj
+pronalazak
+pothranjenost
+pojačalo
+hrskavo
+slobodan pad
+konjska snaga
+izmišljotina
+meta
+čajna vrećica
+prečica
+antena
+kalendar
+ispravno
+Wembley
+Santiago Bernabeu
+Maksimir
+zoološki vrt
+slikovit
+orgulje
+albatros
+tonuti
+Titanic
+prtljažnik
+jasno
+zalazak sunca
+krv
+dati
+kutija šibica
+onesviješten
+omotnica
+krilo
+glas
+vokal
+jazbina
+pukotina
+vukodlak
+srebro
+živa
+krpelj
+garaža
+slatko
+slano
+kiselo
+cvjećar
+glad
+ruter
+glavobolja
+intelekt
+gatara
+pustinjak
+staviti
+padobran
+presaviti
+matematika
+marioneta
+varijabla
+kubični metar
+kvadratni metar
+kraljevstvo
+zid
+sprint
+patuljast
+gluhoća
+faraon
+ratovati
+popularnost

@@ -144,9 +144,11 @@
       </div>
     </div>
 
+
     <BaseButton
       v-if="this.currentTeams.length >= 2"
       :buttonText="'Start game'"
+      :to="'/game'"
     />
     <h2 v-else>There must be at least 2 teams!</h2>
   </main>
@@ -192,7 +194,6 @@ export default {
       } else {
         const num = Math.floor(Math.random() * this.colors.length);
         const color = this.colors[num];
-        console.log(num);
         const newTeam = {
           name: this.newTeamName,
           players: this.names,

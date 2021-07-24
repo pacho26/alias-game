@@ -47,7 +47,7 @@ main {
   }
 
   .btn {
-    transform: scale(0.75, 0.75);
+    transform: scale(0.8, 0.8);
   }
 }
 </style>

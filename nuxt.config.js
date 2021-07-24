@@ -9,7 +9,7 @@ export default {
       { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=0.75 maximum-scale=1',
+        content: 'width=device-width, initial-scale=0.78 maximum-scale=1',
       },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
@@ -43,7 +43,7 @@ export default {
   fontawesome: {
     component: 'fa',
     icons: {
-      solid: ['faPlus'],
+      solid: ['faPlus', 'faCheck', 'faTimes'],
       brands: [],
     },
   },
@@ -54,11 +54,35 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyBo0EH99efYvKtfxW2fwRCBmGNuqFk2bV8',
+          authDomain: 'alias-game-24cb4.firebaseapp.com',
+          projectId: 'alias-game-24cb4',
+          storageBucket: 'alias-game-24cb4.appspot.com',
+          messagingSenderId: '1040210065443',
+          appId: '1:1040210065443:web:53f48506e7c842d6935996',
+          measurementId: 'G-3MCMV32TEF',
+        },
+        services: {
+          // auth: true,  // Just as example. Can be any other service.
+          firestore: true,
+        },
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    // extend(config, { isDev, isClient }) {
+    //   config.node = {
+    //     fs: 'empty',
+    //   };
+    // },
+  },
 };
