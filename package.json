@@ -18,9 +18,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.15.1",
     "firebase": "^8.7.1",
-    "glob-parent": "^6.0.0",
-    "lodash": "^4.17.21",
-    "nuxt": "^2.15.7"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
@@ -32,6 +30,7 @@
     "eslint-config-prettier": "^8.3.0",
     "jest": "^27.0.5",
     "node-sass": "^6.0.1",
+    "nuxt": "^2.15.7",
     "prettier": "^2.3.2",
     "sass": "^1.35.2",
     "sass-loader": "10.1.1",
