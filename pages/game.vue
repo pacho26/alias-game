@@ -71,7 +71,7 @@ export default {
     ...mapGetters('words', ['getAppearedIndexes']),
   },
   created() {
-    this.getWords();
+    // this.getWords();
     this.startCountdown();
   },
   methods: {
