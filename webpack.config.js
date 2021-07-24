@@ -11,5 +11,6 @@ module.exports = {
       },
     ],
   },
+
   // plugin omitted
-}
+};

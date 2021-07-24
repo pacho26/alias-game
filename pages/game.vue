@@ -71,7 +71,7 @@ export default {
     ...mapGetters('words', ['getAppearedIndexes']),
   },
   created() {
-    // this.getWords();
+    this.getWords();
     this.startCountdown();
   },
   methods: {
@@ -79,6 +79,7 @@ export default {
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
+
 
       let files = input.files;
 
