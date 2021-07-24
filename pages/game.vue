@@ -49,7 +49,7 @@
         <fa id="button-correct" icon="check"></fa>
       </div>
     </div>
-    <input type="file" @change="setWordsInDatabase" />
+    <!-- <input type="file" @change="setWordsInDatabase" /> -->
   </div>
 </template>
 

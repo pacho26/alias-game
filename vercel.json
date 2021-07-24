@@ -6,9 +6,4 @@
       "config": {}
     }
   ],
-  "functions": {
-    "pages/api/contact.ts": {
-      "excludeFiles": "public/**/*"
-    }
-  }
 }

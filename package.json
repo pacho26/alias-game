@@ -20,9 +20,7 @@
     "firebase": "^8.7.1",
     "glob-parent": "^6.0.0",
     "lodash": "^4.17.21",
-    "node-sass": "^6.0.1",
-    "nuxt": "^2.15.7",
-    "vue-lodash": "^2.1.2"
+    "nuxt": "^2.15.7"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
@@ -33,10 +31,12 @@
     "babel-jest": "^27.0.5",
     "eslint-config-prettier": "^8.3.0",
     "jest": "^27.0.5",
+    "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
     "sass": "^1.35.2",
     "sass-loader": "10.1.1",
     "vue-jest": "^3.0.4",
+    "vue-lodash": "^2.1.2",
     "webpack": "^5.44.0"
   }
 }
