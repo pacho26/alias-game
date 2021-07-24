@@ -9,16 +9,11 @@
     "generate": "nuxt generate",
     "test": "jest"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "@nuxtjs/axios": "^5.13.6",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@nuxtjs/axios": "^5.13.6",
-    "bootstrap": "^4.6.0",
-    "bootstrap-vue": "^2.21.2",
-    "core-js": "^3.15.1",
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@nuxtjs/firebase": "^7.6.1",
@@ -26,9 +21,13 @@
     "@vue/test-utils": "^1.2.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^27.0.5",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "core-js": "^3.15.1",
     "eslint-config-prettier": "^8.3.0",
     "firebase": "^8.7.1",
     "jest": "^27.0.5",
+    "lodash": "^4.17.21",
     "node-sass": "^6.0.1",
     "nuxt": "^2.15.7",
     "prettier": "^2.3.2",
