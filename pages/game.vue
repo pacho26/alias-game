@@ -28,7 +28,7 @@
     <img
       v-if="showCheatPicture"
       id="cheat-pic"
-      src="https://pngimage.net/wp-content/uploads/2018/06/no-cheating-png-6.png"
+      src="../assets/no-cheating.png"
       alt="cheating"
     />
 
@@ -100,7 +100,7 @@
       <h1>{{ currentWord }}</h1>
     </div>
 
-    <div id="points-buttons" v-if="currentWord">
+    <div id="points-buttons" v-if="!showCheatPicture">
       <div
         id="wrong-container"
         @click="
