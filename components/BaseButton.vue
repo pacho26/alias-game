@@ -29,7 +29,7 @@ export default {
   border: 2.5px #374b7b solid;
   border-radius: 8px;
   padding: 10px;
-  width: 400px;
+  width: 300px;
   font-size: 26px;
   text-transform: uppercase;
   margin: 10px;

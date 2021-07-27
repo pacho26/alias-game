@@ -25,11 +25,82 @@
       </div>
     </section>
 
-    <div id="word-container">
+    <img
+      v-if="showCheatPicture"
+      id="cheat-pic"
+      src="https://pngimage.net/wp-content/uploads/2018/06/no-cheating-png-6.png"
+      alt="cheating"
+    />
+
+    <b-modal
+      ref="game-modal"
+      hide-footer
+      hide-header
+      no-close-on-backdrop
+      centered
+    >
+      <div id="game-modal">
+        <div>
+          <h1>Current team</h1>
+          <h4>Explaining: <span>Player1</span></h4>
+        </div>
+
+        <div class="modal-buttons">
+          <div
+            @click="
+              $refs['game-modal'].hide();
+              $refs['quit-modal'].show();
+            "
+          >
+            <BaseButton class="modal-button" :buttonText="'Quit'" />
+          </div>
+          <div
+            @click="
+              startCountdown();
+              showCurrentWord = true;
+              $refs['game-modal'].hide();
+            "
+          >
+            <BaseButton class="modal-button" :buttonText="'Play'" />
+          </div>
+        </div>
+      </div>
+    </b-modal>
+
+    <b-modal
+      ref="quit-modal"
+      hide-footer
+      hide-header
+      no-close-on-backdrop
+      centered
+    >
+      <div id="quit-modal">
+        <h2>Are you sure?</h2>
+        <div class="modal-buttons">
+          <div
+            @click="
+              $refs['quit-modal'].hide();
+              $refs['game-modal'].show();
+            "
+          >
+            <BaseButton class="modal-button" :buttonText="'No'" />
+          </div>
+          <div>
+            <BaseButton
+              class="modal-button"
+              :buttonText="'Yes'"
+              :to="'/lobby'"
+            />
+          </div>
+        </div>
+      </div>
+    </b-modal>
+
+    <div v-if="showCurrentWord" id="word-container">
       <h1>{{ currentWord }}</h1>
     </div>
 
-    <div id="points-buttons">
+    <div id="points-buttons" v-if="currentWord">
       <div
         id="wrong-container"
         @click="
@@ -64,7 +135,8 @@ export default {
       currentWord: '',
       correctWords: [],
       wrongWords: [],
-      hasWords: false,
+      showCurrentWord: false,
+      showCheatPicture: false,
     };
   },
   computed: {
@@ -72,14 +144,15 @@ export default {
   },
   created() {
     this.getWords();
-    this.startCountdown();
+  },
+  mounted() {
+    this.$refs['game-modal'].show();
   },
   methods: {
     ...mapMutations('words', ['addToAppearedIndexes', 'clearAppearedIndexes']),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
-
 
       let files = input.files;
 
@@ -105,7 +178,6 @@ export default {
     async getWords() {
       this.wordsArray = await this.getRandomWordsFromDatabase(40);
       this.setNewWord();
-      this.hasWords = true;
     },
     async getRandomWordsFromDatabase(amount) {
       const wordsRef = this.$fire.firestore
@@ -131,6 +203,12 @@ export default {
     },
     setNewWord() {
       this.currentWord = this.wordsArray[0];
+      if (
+        !this.currentWord &&
+        (!_.isEmpty(this.correctWords) || !_.isEmpty(this.wrongWords))
+      ) {
+        this.showCheatPicture = true;
+      }
       this.wordsArray.shift();
     },
     startCountdown() {
@@ -155,10 +233,10 @@ export default {
   justify-content: space-between;
   min-height: 91vh;
   margin: 0 auto;
+  color: #374b7b;
 }
 
 section {
-  color: #374b7b;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -227,12 +305,62 @@ section {
 
 #word-container {
   padding: 6px 14px;
-  color: #374b7b;
 
   h1 {
     user-select: none;
     font-size: 50px;
     text-align: center;
+  }
+}
+
+#cheat-pic {
+  max-height: 50vh;
+  margin: 0 auto;
+}
+
+#game-modal {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  color: #374b7b;
+  text-align: center;
+
+  h1 {
+    font-weight: 700;
+  }
+
+  h4 {
+    span {
+      font-weight: 800;
+      font-size: 28px;
+    }
+  }
+}
+
+.modal-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 360px;
+}
+
+.modal-button {
+  max-width: 120px;
+}
+
+#quit-modal {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+
+  h2 {
+    color: #374b7b;
   }
 }
 

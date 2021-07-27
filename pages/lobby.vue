@@ -33,6 +33,7 @@
           title="New team"
           hide-footer
           hide-header
+          centered
         >
           <div id="add-team-form">
             <b-form-input

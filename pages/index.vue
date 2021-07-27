@@ -50,9 +50,9 @@ main {
   text-align: center;
   justify-content: center;
   align-items: center;
-}
 
-.btn:first-of-type {
-  margin-bottom: 20px;
+  :first-of-type {
+    margin-bottom: 20px;
+  }
 }
 </style>
