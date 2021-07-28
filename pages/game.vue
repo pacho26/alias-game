@@ -62,6 +62,7 @@
           <div
             @click="
               startCountdown();
+              openedModal = false;
               showCurrentWord = true;
               $refs['game-modal'].hide();
             "
@@ -143,6 +144,7 @@ export default {
       showCurrentWord: false,
       showCheatPicture: false,
       gameModalText: 'Play',
+      openedModal: false,
     };
   },
   computed: {
@@ -220,7 +222,8 @@ export default {
     startCountdown() {
       const interval = setInterval(
         function () {
-          this.remainingSeconds--;
+          this.openedModal ? clearInterval(interval) : this.remainingSeconds--;
+
           if (this.remainingSeconds === 0) {
             clearInterval(interval);
           }
@@ -229,6 +232,7 @@ export default {
       );
     },
     openGameModal() {
+      this.openedModal = true;
       this.gameModalText = 'Continue';
       this.$refs['game-modal'].show();
     },
