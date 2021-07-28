@@ -1,21 +1,26 @@
 <template>
   <div class="main-container">
     <section>
-      <div id="points-container">
-        <div class="points-counter">
-          <div id="correct-counter">
-            <fa icon="check"></fa>
-          </div>
-          <div class="points-number">
-            <h3>{{ correctWords.length }}</h3>
-          </div>
+      <div id="pause-and-points">
+        <div id="pause-container" @click="openGameModal">
+          <fa id="pause-icon" icon="pause"></fa>
         </div>
-        <div class="points-counter">
-          <div id="wrong-counter">
-            <fa icon="times"></fa>
+        <div id="points-container">
+          <div class="points-counter">
+            <div id="correct-counter">
+              <fa icon="check"></fa>
+            </div>
+            <div class="points-number">
+              <h3>{{ correctWords.length }}</h3>
+            </div>
           </div>
-          <div class="points-number">
-            <h3>{{ wrongWords.length }}</h3>
+          <div class="points-counter">
+            <div id="wrong-counter">
+              <fa icon="times"></fa>
+            </div>
+            <div class="points-number">
+              <h3>{{ wrongWords.length }}</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -61,7 +66,7 @@
               $refs['game-modal'].hide();
             "
           >
-            <BaseButton class="modal-button" :buttonText="'Play'" />
+            <BaseButton class="modal-button" :buttonText="gameModalText" />
           </div>
         </div>
       </div>
@@ -137,6 +142,7 @@ export default {
       wrongWords: [],
       showCurrentWord: false,
       showCheatPicture: false,
+      gameModalText: 'Play',
     };
   },
   computed: {
@@ -222,6 +228,10 @@ export default {
         1000
       );
     },
+    openGameModal() {
+      this.gameModalText = 'Continue';
+      this.$refs['game-modal'].show();
+    },
   },
 };
 </script>
@@ -238,64 +248,96 @@ export default {
 
 section {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 16px;
 
-  #points-container {
-    max-width: 120px;
+  #pause-and-points {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-left: 20px;
 
-    .points-counter {
+    #pause-container {
+      position: relative;
+      right: 7px;
+      margin-bottom: 16px;
+      background: #374b7b;
+      padding: 15px;
+      border-radius: 8px;
+
+      #pause-icon {
+        font-size: 30px;
+        color: white;
+        transition: 0.2s ease-in-out;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        #pause-icon {
+          transform: scale(1.2, 1.2);
+        }
+      }
+    }
+
+    #points-container {
+      max-width: 120px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      margin-left: 16px;
+      border-radius: 8px;
+      padding: 10px;
 
-      &:first-child {
-        margin-bottom: 10px;
-      }
+      .points-counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      .points-number {
-        width: 40px;
-      }
+        &:first-child {
+          margin-bottom: 4px;
+        }
 
-      h3 {
-        user-select: none;
-        margin-top: 10px;
-        margin-left: 6px;
-      }
+        .points-number {
+          width: 40px;
+        }
 
-      #correct-counter {
-        color: white;
-        background: green;
-        padding: 8px 12px;
-        font-size: 20px;
-        border-radius: 8px;
-      }
+        h3 {
+          user-select: none;
+          margin-top: 10px;
+          margin-left: 6px;
+        }
 
-      #wrong-counter {
-        color: white;
-        background: red;
-        padding: 8px 15px;
-        font-size: 20px;
-        border-radius: 8px;
+        #correct-counter {
+          color: white;
+          background: green;
+          padding: 8px 12px;
+          font-size: 20px;
+          border-radius: 8px;
+        }
+
+        #wrong-counter {
+          color: white;
+          background: red;
+          padding: 8px 15px;
+          font-size: 20px;
+          border-radius: 8px;
+        }
       }
     }
   }
 
   #countdown-container {
-    margin-right: 10px;
+    margin-right: 16px;
     width: 110px;
 
     #countdown-text {
       font-size: 70px;
       font-weight: 600;
       padding: 10px;
-      background: #bb9fc6;
+      background: #374b7b;
+      color: #fff5de;
       border-radius: 8px;
       text-align: center;
       user-select: none;
@@ -305,6 +347,8 @@ section {
 
 #word-container {
   padding: 6px 14px;
+  position: relative;
+  bottom: 38px;
 
   h1 {
     user-select: none;
@@ -344,11 +388,11 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: 360px;
+  width: 400px;
 }
 
 .modal-button {
-  max-width: 120px;
+  max-width: 160px;
 }
 
 #quit-modal {
@@ -380,19 +424,19 @@ section {
     padding: 40px 0;
     border-radius: 8px;
     cursor: pointer;
-    opacity: 0.75;
+    opacity: 0.73;
 
     #button-wrong {
       font-size: 72px;
       color: white;
-      transition: 0.2s;
+      transition: 0.2s ease-in-out;
     }
 
     &:hover {
       opacity: 1;
 
       #button-wrong {
-        transform: scale(1.2, 1.2);
+        transform: scale(1.3, 1.3);
       }
     }
   }
@@ -406,19 +450,19 @@ section {
     padding: 40px 0;
     border-radius: 8px;
     cursor: pointer;
-    opacity: 0.75;
+    opacity: 0.73;
 
     #button-correct {
       font-size: 70px;
       color: white;
-      transition: 0.2s;
+      transition: 0.2s ease-in-out;
     }
 
     &:hover {
       opacity: 1;
 
       #button-correct {
-        transform: scale(1.2, 1.2);
+        transform: scale(1.3, 1.3);
       }
     }
   }

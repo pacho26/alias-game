@@ -145,8 +145,8 @@
       </div>
     </div>
 
-
     <BaseButton
+      id="startBtn"
       v-if="this.currentTeams.length >= 2"
       :buttonText="'Start game'"
       :to="'/game'"
@@ -272,6 +272,10 @@ main {
   align-items: center;
   max-width: 1100px;
   color: #374b7b;
+
+  #startBtn {
+    margin-bottom: 40px;
+  }
 }
 
 main > * {

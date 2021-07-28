@@ -43,7 +43,7 @@ export default {
   fontawesome: {
     component: 'fa',
     icons: {
-      solid: ['faPlus', 'faCheck', 'faTimes'],
+      solid: ['faPlus', 'faCheck', 'faTimes', 'faPause'],
       brands: [],
     },
   },
