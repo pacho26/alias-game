@@ -9,13 +9,18 @@
     "generate": "nuxt generate",
     "test": "jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "node-sass": "^6.0.1",
+    "nuxt": "^2.15.7",
+    "webpack": "^5.44.0",
+    "vue-jest": "^3.0.4"
+  },
   "devDependencies": {
-    "@nuxtjs/axios": "^5.13.6",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/firebase": "^7.6.1",
     "@nuxtjs/fontawesome": "^1.1.2",
     "@vue/test-utils": "^1.2.1",
@@ -28,13 +33,9 @@
     "firebase": "^8.7.1",
     "jest": "^27.0.5",
     "lodash": "^4.17.21",
-    "node-sass": "^6.0.1",
-    "nuxt": "^2.15.7",
     "prettier": "^2.3.2",
     "sass": "^1.35.2",
     "sass-loader": "10.1.1",
-    "vue-jest": "^3.0.4",
-    "vue-lodash": "^2.1.2",
-    "webpack": "^5.44.0"
+    "vue-lodash": "^2.1.2"
   }
 }

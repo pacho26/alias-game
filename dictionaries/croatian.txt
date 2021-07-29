@@ -1623,7 +1623,7 @@ saga
 uzrečica
 suosjećanje
 garažni
-siriti
+širiti
 uzdužan
 avantura
 dosadan
@@ -2231,7 +2231,7 @@ izvještavati
 laik
 pregledan
 zamjeriti
-šaliti
+šaliti se
 podrum
 ispravan
 cjelodnevan
@@ -2464,7 +2464,7 @@ televizor
 brigadir
 nizak
 mehanizam
-radovati
+radovati se
 oborinski
 ojačati
 kontinentalan
@@ -3568,7 +3568,7 @@ intencija
 ambulanta
 obilan
 odgledati
-crtani
+crtani film
 pobačaj
 preuzeti
 prerasti

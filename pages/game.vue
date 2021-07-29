@@ -11,7 +11,7 @@
               <fa icon="check"></fa>
             </div>
             <div class="points-number">
-              <h3>{{ correctWords.length }}</h3>
+              <h3>{{ correctWordsCounter }}</h3>
             </div>
           </div>
           <div class="points-counter">
@@ -19,7 +19,7 @@
               <fa icon="times"></fa>
             </div>
             <div class="points-number">
-              <h3>{{ wrongWords.length }}</h3>
+              <h3>{{ wrongWordsCounter }}</h3>
             </div>
           </div>
         </div>
@@ -110,8 +110,9 @@
       <div
         id="wrong-container"
         @click="
-          wrongWords.push(currentWord);
+          previousWords.push({ word: currentWord, correct: false });
           setNewWord();
+          wrongWordsCounter++;
         "
       >
         <fa id="button-wrong" icon="times"></fa>
@@ -119,8 +120,9 @@
       <div
         id="correct-container"
         @click="
-          correctWords.push(currentWord);
+          previousWords.push({ word: currentWord, correct: true });
           setNewWord();
+          correctWordsCounter++;
         "
       >
         <fa id="button-correct" icon="check"></fa>
@@ -139,8 +141,9 @@ export default {
       remainingSeconds: 60,
       wordsArray: [],
       currentWord: '',
-      correctWords: [],
-      wrongWords: [],
+      previousWords: [],
+      correctWordsCounter: 0,
+      wrongWordsCounter: 0,
       showCurrentWord: false,
       showCheatPicture: false,
       gameModalText: 'Play',
@@ -157,7 +160,11 @@ export default {
     this.$refs['game-modal'].show();
   },
   methods: {
-    ...mapMutations('words', ['addToAppearedIndexes', 'clearAppearedIndexes']),
+    ...mapMutations('words', [
+      'addToAppearedIndexes',
+      'clearAppearedIndexes',
+      'setPreviousRoundWords',
+    ]),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
@@ -211,10 +218,7 @@ export default {
     },
     setNewWord() {
       this.currentWord = this.wordsArray[0];
-      if (
-        !this.currentWord &&
-        (!_.isEmpty(this.correctWords) || !_.isEmpty(this.wrongWords))
-      ) {
+      if (!this.currentWord && !_.isEmpty(this.previousWords)) {
         this.showCheatPicture = true;
       }
       this.wordsArray.shift();
@@ -226,6 +230,8 @@ export default {
 
           if (this.remainingSeconds === 0) {
             clearInterval(interval);
+            this.setPreviousRoundWords(this.previousWords);
+            this.$router.push({ path: 'overview' });
           }
         }.bind(this),
         1000
