@@ -51,7 +51,7 @@
             Explaining:
             <span>{{
               getCurrentTeams[getCurrentTeamIndex].players[
-                getCurrentTeams[getCurrentTeamIndex].explaining
+                getCurrentTeams[getCurrentTeamIndex].explainingPlayerIndex
               ]
             }}</span>
           </h4>

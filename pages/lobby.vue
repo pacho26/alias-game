@@ -200,7 +200,7 @@ export default {
           name: this.newTeamName,
           players: this.names,
           points: 0,
-          explaining: 0,
+          explainingPlayerIndex: 0,
         };
         const idx = this.getCurrentTeams.findIndex(
           (t) => t.name === this.previousTeamName

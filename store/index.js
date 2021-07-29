@@ -6,21 +6,21 @@ export const state = () => ({
       players: ['Kepa', 'Timo'],
       logo: 'https://upload.wikimedia.org/wikipedia/bs/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png',
       points: 0,
-      explaining: 0,
+      explainingPlayerIndex: 0,
     },
     {
       name: 'Manchester United',
       players: ['David', 'Luke'],
       logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png',
       points: 0,
-      explaining: 0,
+      explainingPlayerIndex: 0,
     },
     {
       name: 'Milan',
       players: ['Ante', 'Zlatan'],
       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/1306px-Logo_of_AC_Milan.svg.png',
       points: 0,
-      explaining: 0,
+      explainingPlayerIndex: 0,
     },
   ],
 });
@@ -48,8 +48,8 @@ export const mutations = {
 
     state.currentTeams[state.currentTeamIndex] + 1 ===
     state.currentTeams[state.getCurrentTeamIndex].players.length
-      ? (state.currentTeams[state.currentTeamIndex].explaining = 0)
-      : state.currentTeams[state.currentTeamIndex].explaining++;
+      ? (state.currentTeams[state.currentTeamIndex].explainingPlayerIndex = 0)
+      : state.currentTeams[state.currentTeamIndex].explainingPlayerIndex++;
   },
 };
 
