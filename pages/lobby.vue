@@ -6,7 +6,7 @@
         <div id="teams-table">
           <table style="width: 100%">
             <tr
-              v-for="team in this.currentTeams"
+              v-for="team in this.getCurrentTeams"
               :key="team.name"
               @click="prepareEditing(team.name)"
             >
@@ -147,7 +147,7 @@
 
     <BaseButton
       id="startBtn"
-      v-if="this.currentTeams.length >= 2"
+      v-if="this.getCurrentTeams.length >= 2"
       :buttonText="'Start game'"
       :to="'/game'"
     />
@@ -179,7 +179,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['currentTeams']),
+    ...mapGetters(['getCurrentTeams']),
     ...mapState('colors', ['colors']),
   },
   methods: {
@@ -196,11 +196,13 @@ export default {
         const num = Math.floor(Math.random() * this.colors.length);
         const color = this.colors[num];
         const newTeam = {
+          logo: `https://avatar.oxro.io/avatar.svg?name=${this.newTeamName}&caps=1&fontSize=200&bold=true&background=${color.bg}&color=${color.text}`,
           name: this.newTeamName,
           players: this.names,
-          logo: `https://avatar.oxro.io/avatar.svg?name=${this.newTeamName}&caps=1&fontSize=200&bold=true&background=${color.bg}&color=${color.text}`,
+          points: 0,
+          explaining: 0,
         };
-        const idx = this.currentTeams.findIndex(
+        const idx = this.getCurrentTeams.findIndex(
           (t) => t.name === this.previousTeamName
         );
 
@@ -219,7 +221,7 @@ export default {
     },
     prepareEditing(teamName) {
       const foundTeam = _.cloneDeep(
-        this.currentTeams.find((t) => t.name === teamName)
+        this.getCurrentTeams.find((t) => t.name === teamName)
       );
       this.newTeamName = foundTeam.name;
       this.names = foundTeam.players;

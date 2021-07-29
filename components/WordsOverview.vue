@@ -2,12 +2,14 @@
   <main>
     <div class="words" v-for="word in words" :key="word.word">
       <p>{{ word.word }}</p>
-      <div id="switch-container">
+      <div
+        id="switch-container"
+        @click="setPreviousRoundWords(_.cloneDeep(words))"
+      >
         <b-form-checkbox
           switch
           size="lg"
           v-model="word.correct"
-          class="checkbox"
         ></b-form-checkbox>
       </div>
     </div>
@@ -15,7 +17,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -25,6 +27,9 @@ export default {
   },
   computed: {
     ...mapGetters('words', ['getPreviousRoundWords']),
+  },
+  methods: {
+    ...mapMutations('words', ['setPreviousRoundWords']),
   },
   created() {
     this.words = _.cloneDeep(this.getPreviousRoundWords);
@@ -57,7 +62,6 @@ main {
       position: relative;
       top: 9px;
       transform: scale(1.5, 1.5);
-      margin-left: 10px;
     }
   }
 }

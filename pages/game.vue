@@ -46,8 +46,15 @@
     >
       <div id="game-modal">
         <div>
-          <h1>Current team</h1>
-          <h4>Explaining: <span>Player1</span></h4>
+          <h1>{{ getCurrentTeams[getCurrentTeamIndex].name }}</h1>
+          <h4>
+            Explaining:
+            <span>{{
+              getCurrentTeams[getCurrentTeamIndex].players[
+                getCurrentTeams[getCurrentTeamIndex].explaining
+              ]
+            }}</span>
+          </h4>
         </div>
 
         <div class="modal-buttons">
@@ -151,6 +158,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getCurrentTeams', 'getCurrentTeamIndex']),
     ...mapGetters('words', ['getAppearedIndexes']),
   },
   created() {
