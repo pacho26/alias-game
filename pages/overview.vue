@@ -4,12 +4,30 @@
     <div class="words-container">
       <WordsOverview />
     </div>
-    <BaseButton id="btn" :to="'/standings'" :buttonText="'Continue'" />
+    <div id="btn" @click="addPoints">
+      <BaseButton :to="'/standings'" :buttonText="'Continue'" />
+    </div>
   </main>
 </template>
 
 <script>
-export default {};
+import { mapState, mapMutations } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState('words', ['previousRoundWords']),
+  },
+  methods: {
+    ...mapMutations(['setPoints']),
+    addPoints() {
+      let pointsCounter = 0;
+      for (const word of this.previousRoundWords) {
+        word.correct ? pointsCounter++ : pointsCounter--;
+      }
+      this.setPoints(pointsCounter);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -26,7 +44,7 @@ main {
 
   #btn {
     margin-top: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 }
 </style>

@@ -157,6 +157,24 @@ zdravstvena iskaznica
 biokemičar
 odobravati
 torta
+radnik
+pjega
+žvakanje
+hodočasnik
+veleposlanik
+čips
+psić
+antagonist
+protagonist
+dim
+promućkati
+bubamara
+razmnožavanje
+množenje
+dijeljenje
+raskol
+Maracana
+usta
 baklava
 grozan
 astrologija
@@ -233,6 +251,17 @@ violončelo
 gudalo
 teret
 gnjurac
+lovac
+prijatelj
+istraživanje
+bomba
+darežljivost
+zapad
+istok
+jug
+sjever
+optužba
+Crno more
 poderati
 šampanjac
 alkohol
@@ -507,6 +536,8 @@ kalibar
 strijela
 senzacija
 obraz
+Tokyo
+Peking
 procjenitelj
 zalagaonica
 odijelo
@@ -599,12 +630,53 @@ presaviti
 matematika
 marioneta
 varijabla
+kampiranje
+vrtlog
+zavjesa
+renesansa
+prelaziti
+pljesak
+ljuska od jajeta
+prepad
+zaborav
+trodimenzionalno
+kanu
+uspavanka
+Minotaur
+mraz
+ljekarnik
+babun
 kubični metar
 kvadratni metar
 kraljevstvo
+uplata
+akademik
+apartman
+krhak
+omotati
+pamuk
+sušenje
+pušnica
+ptica selica
+tepati
+drzak
+jednakost
+harem
+uzak
 zid
 sprint
 patuljast
+rešetka
+košnica
+podudaranje
+prebivalište
+boravište
+davatelj kriv
+učiteljski fakultet
+filozofski fakultet
+mana
+nedostatak
+sužavati
 gluhoća
 faraon
 ratovati
@@ -615,11 +687,29 @@ ribnjak
 dostupnost
 stagnirati
 terorizirati
+formalnost
+gustoća
+električna stolica
+vješala
+najbolji
+pješak
+šator
+obeshrabrenje
+polo
 uspjeti
 deformacija
 stisnuti
 bosti
 sinji
+hrast
+nišan
+pratnja
+djeveruša
+praskozorje
+sumrak
+režati
+poslužitelj
+grana
 antioksidans
 nacionalan
 zapis
@@ -848,6 +938,7 @@ majstorski
 dopadati
 tragičan
 spavati
+bežične slušalice
 željan
 seljački
 bračni
@@ -1459,7 +1550,6 @@ agresija
 ključan
 plakati
 prostitutka
-gat
 dvodnevan
 izbjegnuti
 potresan
@@ -1679,6 +1769,10 @@ sletjeti
 bijesan
 upotpunjivati
 trajan
+računati
+sazrijevanje
+proizvoljnost
+mafijaš
 oslobađajući
 dogurati
 dišni
@@ -1978,7 +2072,7 @@ originalan
 jednostavan
 prokomentirati
 mješanac
-sastati
+sastati se
 lijek
 opravdanost
 rat
@@ -2007,6 +2101,7 @@ posvećen
 tetovaža
 pejzaž
 napaliti
+generalna proba
 nanositi
 probuditi
 brodogradilište
@@ -3455,6 +3550,7 @@ tvoriti
 uzbuđenje
 kancelarka
 problematičan
+komponenta
 plakat
 pomutnja
 bakterijski
@@ -3492,7 +3588,7 @@ djevojački
 nedodirljiv
 bolan
 poticajan
-trgovinski
+trgovački lanac
 sjedalica
 glupav
 riješiti
@@ -3501,7 +3597,7 @@ ugljikohidrat
 sitan
 pakirati
 stvar
-očitovanje
+iščekivanje
 ekipni
 vic
 veljača
@@ -3613,7 +3709,6 @@ ožiljak
 pristran
 amaterski
 predgrupa
-usrati
 poguban
 iznenađivati
 potencijal

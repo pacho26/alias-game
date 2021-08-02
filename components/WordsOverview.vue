@@ -2,14 +2,12 @@
   <main>
     <div class="words" v-for="word in words" :key="word.word">
       <p>{{ word.word }}</p>
-      <div
-        id="switch-container"
-        @click="setPreviousRoundWords(_.cloneDeep(words))"
-      >
+      <div id="switch-container">
         <b-form-checkbox
           switch
           size="lg"
           v-model="word.correct"
+          @change="updateCorrectWords"
         ></b-form-checkbox>
       </div>
     </div>
@@ -30,6 +28,10 @@ export default {
   },
   methods: {
     ...mapMutations('words', ['setPreviousRoundWords']),
+
+    updateCorrectWords() {
+      this.setPreviousRoundWords(_.cloneDeep(this.words));
+    },
   },
   created() {
     this.words = _.cloneDeep(this.getPreviousRoundWords);
@@ -50,12 +52,13 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: #3c5186 1px solid;
+
     padding: 0 13px;
 
     p {
       position: relative;
       top: 8px;
+      user-select: none;
     }
 
     #switch-container {
@@ -63,6 +66,10 @@ main {
       top: 9px;
       transform: scale(1.5, 1.5);
     }
+  }
+
+  .words:not(:last-child) {
+    border-bottom: #3c5186 1px solid;
   }
 }
 </style>

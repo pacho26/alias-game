@@ -41,13 +41,16 @@ export const mutations = {
   editTeam(state, { idx, team }) {
     state.currentTeams[idx] = team;
   },
+  setPoints(state, points) {
+    state.currentTeams[state.currentTeamIndex].points = points;
+  },
   continueOnNextTeam(state) {
     state.currentTeamIndex + 1 === state.currentTeams.length
       ? (state.currentTeamIndex = 0)
       : state.currentTeamIndex++;
 
-    state.currentTeams[state.currentTeamIndex] + 1 ===
-    state.currentTeams[state.getCurrentTeamIndex].players.length
+    state.currentTeams[state.currentTeamIndex].explainingPlayerIndex + 1 ===
+    state.currentTeams[state.currentTeamIndex].players.length
       ? (state.currentTeams[state.currentTeamIndex].explainingPlayerIndex = 0)
       : state.currentTeams[state.currentTeamIndex].explainingPlayerIndex++;
   },
