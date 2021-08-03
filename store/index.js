@@ -23,6 +23,9 @@ export const state = () => ({
       explainingPlayerIndex: 0,
     },
   ],
+  targetResult: 60,
+  durationOfRound: 60,
+  chosenLanguage: 'croatian',
 });
 
 export const getters = {
@@ -31,6 +34,15 @@ export const getters = {
   },
   getCurrentTeamIndex(state) {
     return state.currentTeamIndex;
+  },
+  getTargetResult(state) {
+    return state.targetResult;
+  },
+  getDurationOfRound(state) {
+    return state.durationOfRound;
+  },
+  getChosenLanguage(state) {
+    return state.chosenLanguage;
   },
 };
 
@@ -53,6 +65,15 @@ export const mutations = {
     state.currentTeams[state.currentTeamIndex].players.length
       ? (state.currentTeams[state.currentTeamIndex].explainingPlayerIndex = 0)
       : state.currentTeams[state.currentTeamIndex].explainingPlayerIndex++;
+  },
+  setTargetResult(state, res) {
+    state.targetResult = res;
+  },
+  seDurationOfRound(state, duration) {
+    state.durationOfRound = duration;
+  },
+  setLanguage(state, language) {
+    state.chosenLanguage = language;
   },
 };
 

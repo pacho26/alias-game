@@ -158,11 +158,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCurrentTeams', 'getCurrentTeamIndex']),
+    ...mapGetters([
+      'getCurrentTeams',
+      'getCurrentTeamIndex',
+      'getDurationOfRound',
+    ]),
     ...mapGetters('words', ['getAppearedIndexes']),
   },
   created() {
     this.getWords();
+    this.remainingSeconds = this.getDurationOfRound;
   },
   mounted() {
     this.$refs['game-modal'].show();

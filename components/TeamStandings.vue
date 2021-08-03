@@ -2,7 +2,12 @@
   <main>
     <div id="teams-table">
       <table style="width: 100%">
-        <tr v-for="team in this.getCurrentTeams" :key="team.name">
+        <tr
+          v-for="team in _.orderBy(this.getCurrentTeams, (t) => t.points, [
+            'desc',
+          ])"
+          :key="team.name"
+        >
           <td id="logo-container" class="pl-4">
             <img :src="team.logo" id="team-logo" alt="team logo" />
           </td>

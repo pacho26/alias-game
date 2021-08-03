@@ -699,8 +699,6 @@ polo
 uspjeti
 deformacija
 stisnuti
-bosti
-sinji
 hrast
 nišan
 pratnja
@@ -972,7 +970,7 @@ plašiti
 učen
 nepoželjan
 rekordan
-tabela
+tablica
 padobranac
 započinjati
 orijentirati
@@ -1383,7 +1381,7 @@ doslovan
 nježan
 tvorac
 dopuštati
-kompjuterski
+računalni
 preporučiti
 preraditi
 pokupiti
@@ -3634,7 +3632,6 @@ opustiti
 uključenost
 dodijeliti
 licencija
-kompjutor
 odavati
 primiti
 razbijati

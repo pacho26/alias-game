@@ -117,7 +117,11 @@
 
         <div>
           <p id="selected-language" class="mt-4">
-            Selected language: <span>{{ selectedLanguage }}</span>
+            Selected language:
+            <span>{{
+              selectedLanguage.charAt(0).toUpperCase() +
+              selectedLanguage.slice(1)
+            }}</span>
           </p>
           <div class="flags">
             <img
@@ -126,7 +130,7 @@
               id="croatia-flag"
               class="flag"
               @click="
-                selectedLanguage = 'Croatian';
+                selectedLanguage = 'croatian';
                 selectFlag();
               "
             />
@@ -136,7 +140,7 @@
               id="united-kingdom-flag"
               class="flag"
               @click="
-                selectedLanguage = 'English';
+                selectedLanguage = 'english';
                 selectFlag();
               "
             />
@@ -145,12 +149,10 @@
       </div>
     </div>
 
-    <BaseButton
-      id="startBtn"
-      v-if="this.getCurrentTeams.length >= 2"
-      :buttonText="'Start game'"
-      :to="'/game'"
-    />
+    <div v-if="this.getCurrentTeams.length >= 2" @click="setConfiguration">
+      <BaseButton id="startBtn" :buttonText="'Start game'" :to="'/game'" />
+    </div>
+
     <h2 v-else>There must be at least 2 teams!</h2>
   </main>
 </template>
@@ -175,7 +177,7 @@ export default {
       previousTeamName: '',
       targetResult: '60',
       duration: '60',
-      selectedLanguage: 'Croatian',
+      selectedLanguage: 'croatian',
     };
   },
   computed: {
@@ -183,7 +185,13 @@ export default {
     ...mapState('colors', ['colors']),
   },
   methods: {
-    ...mapMutations(['addTeam', 'editTeam']),
+    ...mapMutations([
+      'addTeam',
+      'editTeam',
+      'setTargetResult',
+      'seDurationOfRound',
+      'setLanguage',
+    ]),
 
     addTeamMethod() {
       if (
@@ -251,15 +259,20 @@ export default {
     },
     selectFlag() {
       switch (this.selectedLanguage) {
-        case 'Croatian':
+        case 'croatian':
           document.getElementById('croatia-flag').style.opacity = '1';
           document.getElementById('united-kingdom-flag').style.opacity = '0.5';
           break;
-        case 'English':
+        case 'english':
           document.getElementById('croatia-flag').style.opacity = '0.5';
           document.getElementById('united-kingdom-flag').style.opacity = '1';
           break;
       }
+    },
+    setConfiguration() {
+      this.setTargetResult(+this.targetResult);
+      this.seDurationOfRound(+this.duration);
+      this.setLanguage(this.selectedLanguage);
     },
   },
 };

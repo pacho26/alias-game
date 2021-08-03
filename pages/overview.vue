@@ -19,6 +19,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setPoints']),
+
     addPoints() {
       let pointsCounter = 0;
       for (const word of this.previousRoundWords) {
