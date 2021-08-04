@@ -191,6 +191,7 @@ export default {
       'setTargetResult',
       'seDurationOfRound',
       'setLanguage',
+      'clearPreviousGame'
     ]),
 
     addTeamMethod() {
@@ -273,6 +274,7 @@ export default {
       this.setTargetResult(+this.targetResult);
       this.seDurationOfRound(+this.duration);
       this.setLanguage(this.selectedLanguage);
+      this.clearPreviousGame();
     },
   },
 };

@@ -1,5 +1,4 @@
 export const state = () => ({
-  currentTeamIndex: 0,
   currentTeams: [
     {
       name: 'Chelsea',
@@ -23,6 +22,8 @@ export const state = () => ({
       explainingPlayerIndex: 0,
     },
   ],
+  hasWiner: false,
+  currentTeamIndex: 0,
   targetResult: 60,
   durationOfRound: 60,
   chosenLanguage: 'croatian',
@@ -44,6 +45,9 @@ export const getters = {
   getChosenLanguage(state) {
     return state.chosenLanguage;
   },
+  getHasWinner(state) {
+    return state.hasWiner;
+  },
 };
 
 export const mutations = {
@@ -61,6 +65,16 @@ export const mutations = {
       ? (state.currentTeamIndex = 0)
       : state.currentTeamIndex++;
 
+    if (state.currentTeamIndex === 0) {
+      const winners = _.filter(state.currentTeams, function (t) {
+        return t.points >= state.targetResult;
+      });
+
+      if (winners.length > 0) {
+        state.hasWiner = true;
+      }
+    }
+
     state.currentTeams[state.currentTeamIndex].explainingPlayerIndex + 1 ===
     state.currentTeams[state.currentTeamIndex].players.length
       ? (state.currentTeams[state.currentTeamIndex].explainingPlayerIndex = 0)
@@ -74,6 +88,14 @@ export const mutations = {
   },
   setLanguage(state, language) {
     state.chosenLanguage = language;
+  },
+  clearPreviousGame(state) {
+    state.currentTeamIndex = 0;
+    state.hasWiner = false;
+    for (const team of state.currentTeams) {
+      team.points = 0;
+      team.explainingPlayerIndex = 0;
+    }
   },
 };
 
