@@ -20,6 +20,14 @@
         </div>
 
         <div
+          v-if="mobileScreen"
+          class="icon-plus-container"
+          @click="openEmptyTeamModal"
+        >
+          <fa class="icon-plus" icon="plus"></fa>
+        </div>
+        <div
+          v-else
           class="icon-plus-container"
           v-b-tooltip.hover.right="'Add a new team!'"
           @click="openEmptyTeamModal"
@@ -82,11 +90,15 @@
             </div>
 
             <div v-if="!editingTeam" @click="addTeamMethod">
-              <BaseButton id="add-team-button" :buttonText="'Add team'" />
+              <BaseButton class="add-team-button" :buttonText="'Add team'" />
             </div>
             <div v-else @click="addTeamMethod">
-              <BaseButton id="add-team-button" :buttonText="'Confirm'" />
+              <BaseButton class="add-team-button" :buttonText="'Confirm'" />
             </div>
+          </div>
+
+          <div v-if="editingTeam" id="delete-team-container">
+            <BaseButton id="delete-team-button" :buttonText="'Delete team'" />
           </div>
         </b-modal>
       </div>
@@ -178,11 +190,15 @@ export default {
       targetResult: '60',
       duration: '60',
       selectedLanguage: 'croatian',
+      mobileScreen: false,
     };
   },
   computed: {
     ...mapGetters(['getCurrentTeams']),
     ...mapState('colors', ['colors']),
+  },
+  created() {
+    this.mobileScreen = screen.width < 1000 ? true : false;
   },
   methods: {
     ...mapMutations([
@@ -191,7 +207,7 @@ export default {
       'setTargetResult',
       'seDurationOfRound',
       'setLanguage',
-      'clearPreviousGame'
+      'clearPreviousGame',
     ]),
 
     addTeamMethod() {
@@ -397,7 +413,7 @@ main > * {
   }
 }
 
-#add-team-button {
+.add-team-button {
   font-size: 15px;
   font-weight: 700;
   max-width: 110px;
@@ -414,6 +430,28 @@ main > * {
   &:hover {
     color: #fff5de;
     background: #8e609f;
+  }
+}
+
+#delete-team-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+
+  #delete-team-button {
+    background: #fff5de;
+    color: #e05260;
+    border-color: #e05260;
+    font-size: 15px;
+    font-weight: 700;
+    max-width: 250px;
+    min-width: 130px;
+
+    &:hover {
+      color: #fff5de;
+      background: #e05260;
+    }
   }
 }
 
