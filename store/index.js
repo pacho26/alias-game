@@ -58,7 +58,7 @@ export const mutations = {
     state.currentTeams[idx] = team;
   },
   setPoints(state, points) {
-    state.currentTeams[state.currentTeamIndex].points = points;
+    state.currentTeams[state.currentTeamIndex].points += points;
   },
   continueOnNextTeam(state) {
     state.currentTeamIndex + 1 === state.currentTeams.length
