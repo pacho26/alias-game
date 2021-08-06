@@ -97,7 +97,11 @@
             </div>
           </div>
 
-          <div v-if="editingTeam" id="delete-team-container">
+          <div
+            v-if="editingTeam"
+            id="delete-team-container"
+            @click="deleteTeam"
+          >
             <BaseButton id="delete-team-button" :buttonText="'Delete team'" />
           </div>
         </b-modal>
@@ -176,6 +180,7 @@ export default {
   data() {
     return {
       newTeamName: '',
+      currentTeamIndex: '',
       numberOfPlayers: null,
       options: [
         { value: null, text: 'Select number of players', disabled: true },
@@ -208,6 +213,7 @@ export default {
       'setDurationOfRound',
       'setLanguage',
       'clearPreviousGame',
+      'deleteTeamByIndex',
     ]),
 
     addTeamMethod() {
@@ -244,9 +250,16 @@ export default {
         this.clearForm();
       }
     },
+    deleteTeam() {
+      this.deleteTeamByIndex(this.currentTeamIndex);
+      this.$refs['team-modal'].hide();
+    },
     prepareEditing(teamName) {
       const foundTeam = _.cloneDeep(
         this.getCurrentTeams.find((t) => t.name === teamName)
+      );
+      this.currentTeamIndex = this.getCurrentTeams.findIndex(
+        (t) => t.name === teamName
       );
       this.newTeamName = foundTeam.name;
       this.names = foundTeam.players;
@@ -335,17 +348,13 @@ main > * {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  max-width: 600px;
 
   h3 {
     color: #374b7b;
     font-weight: 600;
     margin-bottom: 14px;
   }
-}
-
-.table {
-  background: #dcd1e1;
-  color: #2f406a;
 }
 
 .name-input {
@@ -437,7 +446,7 @@ main > * {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 8px;
+  margin: 6px 0;
 
   #delete-team-button {
     background: #fff5de;
@@ -445,7 +454,7 @@ main > * {
     border-color: #e05260;
     font-size: 15px;
     font-weight: 700;
-    max-width: 250px;
+    max-width: 280px;
     min-width: 130px;
 
     &:hover {
@@ -468,6 +477,7 @@ main > * {
   border-radius: 8px;
   font-size: 24px;
   color: #2f406a;
+  max-width: 600px;
 
   tr:hover {
     background: #cad2e7;

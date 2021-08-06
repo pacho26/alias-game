@@ -77,6 +77,9 @@ export const mutations = {
   editTeam(state, { idx, team }) {
     state.currentTeams[idx] = team;
   },
+  deleteTeamByIndex(state, index) {
+    state.currentTeams.splice(index, 1);
+  },
   setPoints(state, points) {
     state.currentTeams[state.currentTeamIndex].points += points;
   },
