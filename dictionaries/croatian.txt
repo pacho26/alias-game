@@ -729,7 +729,7 @@ izbaviti
 prosuđivati
 general
 aktualizirati
-reproduktivan
+reprodukcija
 vlas
 oblačiti
 provincijski
@@ -1773,7 +1773,6 @@ podni
 pojavljivati
 uhićen
 ekosustav
-lišiti
 homogen
 sjajan
 sletjeti

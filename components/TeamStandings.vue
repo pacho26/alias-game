@@ -3,9 +3,7 @@
     <div id="teams-table">
       <table style="width: 100%">
         <tr
-          v-for="team in _.orderBy(this.getCurrentTeams, (t) => t.points, [
-            'desc',
-          ])"
+          v-for="team in _.orderBy(this.getAllTeams, (t) => t.points, ['desc'])"
           :key="team.name"
         >
           <td id="logo-container" class="pl-4">
@@ -30,7 +28,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCurrentTeams']),
+    ...mapGetters(['getAllTeams']),
   },
 };
 </script>

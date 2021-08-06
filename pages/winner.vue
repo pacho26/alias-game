@@ -3,12 +3,14 @@
     <h1 id="team-name">{{ winningTeam.name.toUpperCase() }}</h1>
     <img id="trophy" src="../assets/trophy.svg" alt="Trophy" />
     <img id="team-logo" :src="winningTeam.logo" alt="Team logo" />
-    <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
+    <div @click="setPreviousTeams">
+      <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
+    </div>
   </main>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -17,12 +19,19 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCurrentTeams']),
+    ...mapGetters(['getAllTeams']),
   },
   created() {
-    this.winningTeam = this.getCurrentTeams.reduce((prev, current) =>
+    this.winningTeam = this.getAllTeams.reduce((prev, current) =>
       prev.points > current.points ? prev : current
     );
+  },
+  methods: {
+    ...mapMutations(['setCurrentTeams']),
+
+    setPreviousTeams() {
+      this.setCurrentTeams(this.getAllTeams);
+    },
   },
 };
 </script>

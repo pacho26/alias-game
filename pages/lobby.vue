@@ -205,7 +205,7 @@ export default {
       'addTeam',
       'editTeam',
       'setTargetResult',
-      'seDurationOfRound',
+      'setDurationOfRound',
       'setLanguage',
       'clearPreviousGame',
     ]),
@@ -288,7 +288,7 @@ export default {
     },
     setConfiguration() {
       this.setTargetResult(+this.targetResult);
-      this.seDurationOfRound(+this.duration);
+      this.setDurationOfRound(+this.duration);
       this.setLanguage(this.selectedLanguage);
       this.clearPreviousGame();
     },

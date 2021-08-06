@@ -1,4 +1,5 @@
 export const state = () => ({
+  loserTeams: [],
   currentTeams: [
     {
       name: 'Chelsea',
@@ -22,7 +23,7 @@ export const state = () => ({
       explainingPlayerIndex: 0,
     },
   ],
-  hasWiner: false,
+  hasWinner: false,
   currentTeamIndex: 0,
   targetResult: 60,
   durationOfRound: 60,
@@ -36,6 +37,25 @@ export const getters = {
   getCurrentTeamIndex(state) {
     return state.currentTeamIndex;
   },
+  getAllTeams(state) {
+    let allNames = [];
+    let allTeams = [];
+    for (const team of state.currentTeams) {
+      if (!allNames.includes(team.name)) {
+        allNames.push(team.name);
+        allTeams.push(team);
+      }
+    }
+
+    for (const team of state.loserTeams) {
+      if (!allNames.includes(team.name)) {
+        allNames.push(team.name);
+        allTeams.push(team);
+      }
+    }
+
+    return allTeams;
+  },
   getTargetResult(state) {
     return state.targetResult;
   },
@@ -46,7 +66,7 @@ export const getters = {
     return state.chosenLanguage;
   },
   getHasWinner(state) {
-    return state.hasWiner;
+    return state.hasWinner;
   },
 };
 
@@ -66,15 +86,30 @@ export const mutations = {
       : state.currentTeamIndex++;
 
     if (state.currentTeamIndex === 0) {
-      const winners = _.filter(state.currentTeams, function (t) {
-        return t.points >= state.targetResult;
-      });
+      const maxPoints = state.currentTeams.reduce((prev, current) =>
+        prev.points > current.points ? prev : current
+      ).points;
 
-      if (winners.length > 0) {
-        state.hasWiner = true;
+      if (maxPoints >= state.targetResult) {
+        let teamsWithMaxPoints = [];
+        for (const team of state.currentTeams) {
+          team.points === maxPoints
+            ? teamsWithMaxPoints.push(team)
+            : state.loserTeams.push(team);
+        }
+
+        if (teamsWithMaxPoints.length === 1) {
+          state.hasWinner = true;
+          for (const team of state.currentTeams) {
+            state.loserTeams.push(team);
+          }
+        } else if (teamsWithMaxPoints.length > 1) {
+          state.currentTeams = teamsWithMaxPoints;
+        }
       }
     }
 
+    // set the next player who explains
     state.currentTeams[state.currentTeamIndex].explainingPlayerIndex + 1 ===
     state.currentTeams[state.currentTeamIndex].players.length
       ? (state.currentTeams[state.currentTeamIndex].explainingPlayerIndex = 0)
@@ -83,7 +118,7 @@ export const mutations = {
   setTargetResult(state, res) {
     state.targetResult = res;
   },
-  seDurationOfRound(state, duration) {
+  setDurationOfRound(state, duration) {
     state.durationOfRound = duration;
   },
   setLanguage(state, language) {
@@ -91,11 +126,14 @@ export const mutations = {
   },
   clearPreviousGame(state) {
     state.currentTeamIndex = 0;
-    state.hasWiner = false;
+    state.hasWinner = false;
     for (const team of state.currentTeams) {
       team.points = 0;
       team.explainingPlayerIndex = 0;
     }
+  },
+  setCurrentTeams(state, teams) {
+    state.currentTeams = teams;
   },
 };
 
