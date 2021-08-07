@@ -5,6 +5,9 @@
         <h3>CURRENT TEAMS</h3>
         <div id="teams-table">
           <table style="width: 100%">
+            <tr id="team-placeholder" v-if="this.getCurrentTeams.length === 0">
+              Add teams to start the game.
+            </tr>
             <tr
               v-for="team in this.getCurrentTeams"
               :key="team.name"
@@ -348,7 +351,8 @@ main > * {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  max-width: 600px;
+  max-width: 570px;
+  min-width: 430px;
 
   h3 {
     color: #374b7b;
@@ -477,7 +481,20 @@ main > * {
   border-radius: 8px;
   font-size: 24px;
   color: #2f406a;
-  max-width: 600px;
+  max-width: 570px;
+  min-width: 430px;
+  padding: 10px 0;
+
+  #team-placeholder {
+    user-select: none;
+    color: #374b7b;
+    text-align: center;
+
+    &:hover {
+      background: none;
+      cursor: auto;
+    }
+  }
 
   tr:hover {
     background: #cad2e7;
