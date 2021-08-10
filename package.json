@@ -12,8 +12,8 @@
   "dependencies": {
     "node-sass": "^6.0.1",
     "nuxt": "^2.15.7",
-    "webpack": "^5.44.0",
-    "vue-jest": "^3.0.4"
+    "vue-jest": "^3.0.4",
+    "webpack": "^5.44.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container">
+  <main>
     <section>
       <div id="pause-and-points">
         <div id="pause-container" @click="openGameModal">
@@ -120,6 +120,7 @@
           previousWords.push({ word: currentWord, correct: false });
           setNewWord();
           wrongWordsCounter++;
+          playSound(false);
         "
       >
         <fa id="button-wrong" icon="times"></fa>
@@ -130,17 +131,24 @@
           previousWords.push({ word: currentWord, correct: true });
           setNewWord();
           correctWordsCounter++;
+          playSound(true);
         "
       >
         <fa id="button-correct" icon="check"></fa>
       </div>
     </div>
     <!-- <input type="file" @change="setWordsInDatabase" /> -->
-  </div>
+    <audio id="myAudio">
+      <source
+        src="https://dm0qx8t0i9gc9.cloudfront.net/previews/audio/BsTwCwBHBjzwub4i4/audioblocks-game-race-start-countdown-timer-5_BWMf4_mYPL_NWM.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+  </main>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters, mapState } from 'vuex';
 
 export default {
   data() {
@@ -155,6 +163,7 @@ export default {
       showCheatPicture: false,
       gameModalText: 'Play',
       openedModal: false,
+      pausedCountdownSound: false,
     };
   },
   computed: {
@@ -164,6 +173,7 @@ export default {
       'getDurationOfRound',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
+    ...mapState(['gameInProgress']),
   },
   created() {
     this.getWords();
@@ -241,6 +251,25 @@ export default {
         function () {
           this.openedModal ? clearInterval(interval) : this.remainingSeconds--;
 
+          if (this.$router.currentRoute.path !== '/game') {
+            clearInterval(interval);
+            document.getElementById('myAudio').pause();
+            document.getElementById('myAudio').currentTime = 0;
+          }
+
+          if (this.openedModal && this.remainingSeconds < 10) {
+            document.getElementById('myAudio').pause();
+            this.pausedCountdownSound = true;
+          }
+
+          if (!this.openedModal && this.pausedCountdownSound) {
+            document.getElementById('myAudio').play();
+          }
+
+          if (this.remainingSeconds === 10) {
+            document.getElementById('myAudio').play();
+          }
+
           if (this.remainingSeconds === 0) {
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
@@ -255,12 +284,23 @@ export default {
       this.gameModalText = 'Continue';
       this.$refs['game-modal'].show();
     },
+    playSound(correct) {
+      if (correct) {
+        new Audio(
+          'https://www.myinstants.com/media/sounds/ding-sound-effect_1.mp3'
+        ).play();
+      } else {
+        new Audio(
+          'https://orangefreesounds.com/wp-content/uploads/2014/08/Wrong-answer-sound-effect.mp3?_=1'
+        ).play();
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.main-container {
+main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
