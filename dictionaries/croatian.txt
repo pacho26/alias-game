@@ -1357,7 +1357,7 @@ pozivni
 fotografski
 skoknuti
 izvaditi
-presudan
+presuda
 obožavatelj
 prekid
 čupati
@@ -1475,16 +1475,14 @@ otopina
 ugodan
 prizeman
 poboljšati
-remont
 sramota
 zemljišni
 glazura
-decembar
-pokusni
+prosinac
+pokus
 sram
-neuspješan
+neuspjeh
 predškolski
-vrijednosan
 usavršiti
 petrokemija
 lanjski
@@ -1519,7 +1517,6 @@ epski
 dvorski
 nezaustavljiv
 privući
-etabliran
 nebo
 ugurati
 odvojiti
@@ -1552,7 +1549,7 @@ podučavati
 pretrčati
 uključiti
 poštedjeti
-neistomišljenik
+istomišljenik
 tipičan
 dekolte
 nadvladati
@@ -1568,12 +1565,10 @@ tečaj
 rizičan
 operirati
 nizati
-neumoljiv
 beton
 miriti
 smijati
 okruženje
-svojevrstan
 infuzija
 dinamički
 šokirati
@@ -1587,7 +1582,7 @@ proučavati
 rasipati
 travnat
 tolerirati
-saslušati
+slušati
 odrednica
 strijela
 obrađivati
@@ -1602,7 +1597,7 @@ plastičan
 arhitektura
 kolač
 naići
-rafiniran
+rafinerija
 slikovit
 metalan
 dvojben
@@ -1624,7 +1619,6 @@ dominantan
 virtualan
 pretočiti
 poremećaj
-izvozan
 kemoterapija
 izrasti
 raskrižje
@@ -1642,7 +1636,7 @@ pridodati
 tajanstven
 klizni
 prostranstvo
-uposliti
+zaposlenik
 optuženi
 izabran
 naletjeti
@@ -1653,9 +1647,10 @@ ugljik
 korištenje
 zračan
 ograničiti
-efektan
+efekt
 crtica
 razjasniti
+leptir
 pamučan
 mišljenje
 biciklistički
@@ -1676,7 +1671,6 @@ skratiti
 sladak
 paravan
 infracrven
-uvozan
 krvni
 razuvjeriti
 početnik
@@ -1761,7 +1755,6 @@ kunić
 besprijekoran
 raščistiti
 predvidjeti
-naznačiti
 konzumirati
 autoput
 prerađivački
@@ -1804,7 +1797,7 @@ veslati
 bespotreban
 temperamentan
 popravljanje
-zaljubljivati
+zaljubiti se
 pridavati
 izražajan
 sipati
@@ -1867,7 +1860,7 @@ sklizak
 čunj
 ulaz
 bočni
-voljan
+volja
 doktrina
 prodavačica
 zaslužen
@@ -2208,7 +2201,7 @@ plemenit
 ustrojiti
 kloniranje
 reguliranje
-bilijun
+milijarda
 popunjavati
 prekrižiti
 zdravstven
@@ -3034,7 +3027,6 @@ odbacivanje
 prisustvo
 uzeti
 stupiti
-zaključni
 plaćati
 interpretirati
 gledanost
@@ -3059,7 +3051,6 @@ dječak
 ocijediti
 ostvarivati
 patnja
-tematski
 osmina
 skinuti
 insekt
@@ -3186,7 +3177,6 @@ selidba
 klicati
 svijet
 naštetiti
-uvoditi
 zid
 pješački
 zakonodavan
@@ -3451,7 +3441,7 @@ informirati
 instinkt
 razočarati
 bodovati
-tankerski
+tanker
 cifra
 sterilan
 putovnica
@@ -3459,6 +3449,7 @@ nesavršen
 nenametljiv
 osvanuti
 zapaliti
+proglašenje
 nosivost
 lutrija
 grijač
@@ -3891,9 +3882,119 @@ nitko
 parada
 sila
 aristokrat
-koprcati se
 harfa
 tuba
 prekidač
 naljepnica
 sličica
+rub
+carica
+rasprava
+blokiranje
+kolica
+Mississippi
+sigurnost
+katamaran
+ruka
+vrijednost
+gramofonska ploča
+frizerka
+leglo
+kazna
+akrobacija
+drvosječa
+keramičar
+neposlušnost
+prorok
+guverner
+ambijent
+Koloseum
+narukvica
+Justin Bieber
+Bijela kuća
+dostava
+carstvo
+Kijev
+ljudožder
+punjenje
+želatina
+klima uređaj
+horda
+valuta
+kočnica
+kola
+popust
+predsjednica
+tepih
+mudrost
+branik
+kapetan
+kolaps
+sjećanje
+bravar
+prigovor
+ilustracija
+marmelada
+maglovitost
+crni papar
+komičar
+nalijepiti
+duh
+prizivanja
+trojke
+grč
+mačić
+spasilac
+puzati
+nokautirati
+potraga
+potreba
+popravak
+propuh
+astrofizičar
+držati
+nasloniti se
+uvoznik
+izvoznik
+zaključak
+uvod
+spletkar
+inovator
+Clint Eastwood
+kikiriki
+mrmljati
+likvidacije
+gnjev
+hijena
+ništa
+janje
+jaje
+punica
+svekrva
+šogor
+kvasac
+hrvanje
+sidro
+mrcina
+veseo
+vizija
+grkljan
+zaručnica
+zahvat
+odjeća
+obuća
+konobar
+zatvorenik
+tjelohranitelj
+rođak
+spirala
+paleta
+poslanica
+tema
+zlatna ribica
+oholost
+brojilo
+spužva
+glasanje
+ironija
+zviježđe

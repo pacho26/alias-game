@@ -138,9 +138,9 @@
       </div>
     </div>
     <!-- <input type="file" @change="setWordsInDatabase" /> -->
-    <audio id="myAudio">
+    <audio id="countdown-audio">
       <source
-        src="https://dm0qx8t0i9gc9.cloudfront.net/previews/audio/BsTwCwBHBjzwub4i4/audioblocks-game-race-start-countdown-timer-5_BWMf4_mYPL_NWM.mp3"
+        src="https://assets.mixkit.co/sfx/preview/mixkit-start-countdown-927.mp3"
         type="audio/mpeg"
       />
     </audio>
@@ -173,7 +173,6 @@ export default {
       'getDurationOfRound',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
-    ...mapState(['gameInProgress']),
   },
   created() {
     this.getWords();
@@ -249,31 +248,33 @@ export default {
     startCountdown() {
       const interval = setInterval(
         function () {
-          this.openedModal ? clearInterval(interval) : this.remainingSeconds--;
-
-          if (this.$router.currentRoute.path !== '/game') {
-            clearInterval(interval);
-            document.getElementById('myAudio').pause();
-            document.getElementById('myAudio').currentTime = 0;
-          }
-
-          if (this.openedModal && this.remainingSeconds < 10) {
-            document.getElementById('myAudio').pause();
-            this.pausedCountdownSound = true;
-          }
-
-          if (!this.openedModal && this.pausedCountdownSound) {
-            document.getElementById('myAudio').play();
-          }
-
-          if (this.remainingSeconds === 10) {
-            document.getElementById('myAudio').play();
-          }
-
           if (this.remainingSeconds === 0) {
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
             this.$router.push({ path: 'overview' });
+          }
+
+          this.openedModal || this.remainingSeconds < 1
+            ? clearInterval(interval)
+            : this.remainingSeconds--;
+
+          if (this.$router.currentRoute.path !== '/game') {
+            clearInterval(interval);
+            document.getElementById('countdown-audio').pause();
+            document.getElementById('countdown-audio').currentTime = 0;
+          }
+
+          if (this.openedModal && this.remainingSeconds < 10) {
+            document.getElementById('countdown-audio').pause();
+            this.pausedCountdownSound = true;
+          }
+
+          if (!this.openedModal && this.pausedCountdownSound) {
+            document.getElementById('countdown-audio').play();
+          }
+
+          if (this.remainingSeconds === 8) {
+            document.getElementById('countdown-audio').play();
           }
         }.bind(this),
         1000

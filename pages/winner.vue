@@ -1,11 +1,19 @@
 <template>
   <main>
-    <h1 id="team-name">{{ winningTeam.name.toUpperCase() }}</h1>
+    <h1 id="team-name">
+      {{ winningTeam.name.toUpperCase() }}
+    </h1>
     <img id="trophy" src="../assets/trophy.svg" alt="Trophy" />
     <img id="team-logo" :src="winningTeam.logo" alt="Team logo" />
     <div @click="setPreviousTeams">
       <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
     </div>
+    <audio id="champions-audio">
+      <source
+        src="https://www.myinstants.com/media/sounds/we-are-the-champions-copia.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
   </main>
 </template>
 
@@ -25,6 +33,9 @@ export default {
     this.winningTeam = this.getAllTeams.reduce((prev, current) =>
       prev.points > current.points ? prev : current
     );
+  },
+  mounted() {
+    document.getElementById('champions-audio').play();
   },
   methods: {
     ...mapMutations(['setCurrentTeams']),
