@@ -716,7 +716,6 @@ poluprazan
 dobni
 upraviti
 kvadrat
-presedan
 zapremnina
 kalkulirati
 posvađati
@@ -733,7 +732,6 @@ reprodukcija
 vlas
 oblačiti
 provincijski
-pristojba
 prilazni
 odložiti
 odnositi
@@ -755,7 +753,7 @@ glavnica
 stožerni
 ponijeti
 odijelo
-hormonalan
+hormoni
 nezamjenjiv
 hitan
 alkoholizam
@@ -850,11 +848,11 @@ ispisati
 mrvica
 nadmoćan
 protivnica
-kaotičan
+kaos
 esencijalan
 editorijal
 štovatelj
-neizlječiv
+neizlječivo
 pozadina
 donijeti
 ispiti
@@ -873,7 +871,7 @@ mačji
 prijenos
 sebičan
 zamolba
-marginalan
+margine
 sastaviti
 disk
 uspjeh
@@ -903,7 +901,6 @@ ograničavati
 fobija
 novčić
 ošišati
-rejting
 potrošnja
 brzinski
 lončar
@@ -1112,7 +1109,6 @@ zapitati
 kostim
 rosa
 erotski
-uvjerljivost
 neuspio
 mirovni
 nepopularan
@@ -1120,7 +1116,6 @@ prepričati
 ubijati
 redovan
 pametovati
-opstrukcija
 monetaran
 kamen
 drag
@@ -1175,7 +1170,6 @@ poslovnik
 napuštanje
 doktorirati
 priznavati
-infrastruktura
 plijen
 slabašan
 kontroler
@@ -1188,7 +1182,7 @@ panj
 zastarjeti
 uživanje
 jestiv
-urnebesan
+urnebes
 ispoštovati
 talog
 mučenje
@@ -1401,7 +1395,7 @@ pokupiti
 križarski
 precizan
 donji
-čitljiv
+čitko
 ženiti
 školovati
 skijaški
@@ -1459,7 +1453,6 @@ zjapiti
 šokiran
 nepostojeći
 raniji
-prinos
 točan
 manjkav
 izložbeni
@@ -1507,7 +1500,6 @@ smrdjeti
 mir
 nezreo
 velikodušan
-prinositi
 poredak
 protuzakonit
 zahvaćati
@@ -1610,7 +1602,7 @@ zabaviti
 ispreplitati
 stambeni
 spuštanje
-duševan
+emocija
 prikloniti
 izvršan
 diplomatski
@@ -1645,7 +1637,7 @@ termostat
 drogirati
 ugljik
 korištenje
-zračan
+zračni
 ograničiti
 efekt
 crtica
@@ -1817,7 +1809,6 @@ konstantan
 nošnja
 potvrditi
 kandidirati
-zaživjeti
 dovoljan
 izgrađivati
 nosač
@@ -1966,7 +1957,7 @@ napredan
 stezati
 valcer
 izazvati
-priložen
+priložiti
 oderati
 ljestvica
 ostatak
@@ -1974,7 +1965,6 @@ opruga
 brdski
 islam
 gorjeti
-havarija
 zabavan
 podešavati
 neminovan
@@ -2108,7 +2098,6 @@ generalna proba
 nanositi
 probuditi
 brodogradilište
-izmaći
 mito
 kupovanje
 isprobati
@@ -2270,7 +2259,7 @@ srijeda
 bijedan
 kvantitativan
 truditi
-zadovoljština
+zadovoljstvo
 stolni
 prostoran
 upiti
@@ -2365,7 +2354,6 @@ odsvirati
 zaliti
 proteći
 leukemija
-autohton
 pidžama
 potpun
 spasiti
@@ -2438,7 +2426,7 @@ psihoza
 alarm
 higijenski
 pojačavati
-manjinski
+manjina
 opažati
 grudnjak
 napon
@@ -2474,12 +2462,11 @@ nemjerljiv
 otpad
 ludost
 radnički
-razvojan
+razvoj
 silovanje
 sprint
 srdela
 ustrajan
-kontrakcija
 moći
 trpjeti
 sirot
@@ -2751,7 +2738,7 @@ momčadski
 bojkotirati
 svibanjski
 vrećica
-operni
+opera
 filtriranje
 polovica
 premjestiti
@@ -2924,7 +2911,6 @@ kupati
 civil
 nestvaran
 turist
-uticati
 birati
 dvosatni
 brijati
@@ -2956,7 +2942,6 @@ međuljudski
 indirektan
 liječnički
 opsežan
-aplicirati
 izostati
 konstruktor
 razapeti
@@ -2986,7 +2971,7 @@ sveobuhvatan
 oboljeti
 kotačić
 predstaviti
-odziv
+odaziv
 intenzivirati
 legitiman
 sredina
@@ -3006,7 +2991,6 @@ hokejaš
 zagledati
 uliti
 ratnik
-inicirati
 nebitan
 ispraviti
 zaobljen
@@ -3108,7 +3092,6 @@ prisiliti
 suosnivač
 preimenovati
 dijamantan
-stegovni
 specijalistički
 mrzak
 požaliti
@@ -3138,11 +3121,10 @@ neprihvatljiv
 pridržavati
 dvosmjeran
 teškoća
-proslavljen
+proslaviti
 nestati
 prosvjetitelji
 pričanje
-nadomjestiti
 projekt
 pučanstvo
 štediša
@@ -3170,7 +3152,6 @@ velik
 doživotan
 upisati
 grad
-poteći
 tjeranje
 odraditi
 selidba
@@ -3210,7 +3191,7 @@ prijetnja
 puč
 željezo
 morski
-homoseksualnost
+homoseksualac
 neljudski
 lansirati
 nadmetati
@@ -3258,7 +3239,6 @@ vježbati
 neostvaren
 zaduživati
 bombardirati
-uvažen
 spajati
 parfem
 rađati
@@ -3353,7 +3333,6 @@ dohvatiti
 suradnja
 jednostran
 bacati
-aludirati
 vanjski
 ručati
 obećavajući
@@ -3530,7 +3509,7 @@ umoran
 eteričan
 ostvarivanje
 novinarski
-rashladni
+rashladiti
 autizam
 tekstilan
 revolucionar
@@ -3578,7 +3557,6 @@ kontracepcijski
 prevariti
 preusmjeriti
 nestanak
-pogodovati
 budan
 postojan
 stanka
@@ -3664,7 +3642,7 @@ implicirati
 koncert
 rijeka
 okrutan
-glazben
+glazbenik
 mozaik
 odlaziti
 neodređen
@@ -3689,7 +3667,6 @@ vodovodni
 bahatost
 porasti
 proza
-fundamentalan
 multimedijski
 projekcija
 posjetilac
@@ -3736,6 +3713,7 @@ Obala Bjelokosti
 oklop
 vozačica
 nit
+bjelančevine
 aforizam
 glagolska imenica
 pobuna

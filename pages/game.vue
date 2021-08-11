@@ -213,7 +213,7 @@ export default {
       reader.readAsText(file);
     },
     async getWords() {
-      this.wordsArray = await this.getRandomWordsFromDatabase(40);
+      this.wordsArray = await this.getRandomWordsFromDatabase(50);
       this.setNewWord();
     },
     async getRandomWordsFromDatabase(amount) {
