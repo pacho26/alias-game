@@ -1,19 +1,31 @@
 <template>
   <div>
-    <div id="desc">
-      <h1>Explain using other words!</h1>
-    </div>
-    <main>
-      <div class="buttons">
-        <BaseButton class="btn" :to="'/lobby'" :buttonText="'New game'" />
-        <BaseButton class="btn" :to="'/rules'" :buttonText="'Rules'" />
+    <BaseLoader v-if="isLoading" />
+    <div>
+      <div id="desc">
+        <h1>Explain using other words!</h1>
       </div>
-    </main>
+      <main>
+        <div class="buttons">
+          <BaseButton class="btn" :to="'/lobby'" :buttonText="'New game'" />
+          <BaseButton class="btn" :to="'/rules'" :buttonText="'Rules'" />
+        </div>
+      </main>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
+  mounted() {
+    this.isLoading = false;
+  },
+};
 </script>
 
 <style lang="scss" scoped>

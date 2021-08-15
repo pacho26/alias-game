@@ -1,154 +1,158 @@
 <template>
-  <main>
-    <section>
-      <div id="pause-and-points">
-        <div id="pause-container" @click="openGameModal">
-          <fa id="pause-icon" icon="pause"></fa>
-        </div>
-        <div id="points-container">
-          <div class="points-counter">
-            <div id="correct-counter">
-              <fa icon="check"></fa>
+  <div>
+    <BaseLoader v-if="isLoading" />
+
+    <main>
+      <section>
+        <div id="pause-and-points">
+          <div id="pause-container" @click="openGameModal">
+            <fa id="pause-icon" icon="pause"></fa>
+          </div>
+          <div id="points-container">
+            <div class="points-counter">
+              <div id="correct-counter">
+                <fa icon="check"></fa>
+              </div>
+              <div class="points-number">
+                <h3>{{ correctWordsCounter }}</h3>
+              </div>
             </div>
-            <div class="points-number">
-              <h3>{{ correctWordsCounter }}</h3>
-            </div>
-          </div>
-          <div class="points-counter">
-            <div id="wrong-counter">
-              <fa icon="times"></fa>
-            </div>
-            <div class="points-number">
-              <h3>{{ wrongWordsCounter }}</h3>
+            <div class="points-counter">
+              <div id="wrong-counter">
+                <fa icon="times"></fa>
+              </div>
+              <div class="points-number">
+                <h3>{{ wrongWordsCounter }}</h3>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div id="countdown-container">
-        <h1 id="countdown-text">{{ remainingSeconds }}</h1>
-      </div>
-    </section>
-
-    <img
-      v-if="showCheatPicture"
-      id="cheat-pic"
-      src="../assets/no-cheating.png"
-      alt="cheating"
-    />
-
-    <b-modal
-      ref="game-modal"
-      hide-footer
-      hide-header
-      no-close-on-backdrop
-      centered
-    >
-      <div id="game-modal">
-        <div>
-          <h1>{{ getCurrentTeams[getCurrentTeamIndex].name }}</h1>
-          <h4>
-            Explaining:
-            <span>{{
-              getCurrentTeams[getCurrentTeamIndex].players[
-                getCurrentTeams[getCurrentTeamIndex].explainingPlayerIndex
-              ]
-            }}</span>
-          </h4>
+        <div id="countdown-container">
+          <h1 id="countdown-text">{{ remainingSeconds }}</h1>
         </div>
+      </section>
 
-        <div class="modal-buttons">
-          <div
-            @click="
-              $refs['game-modal'].hide();
-              $refs['quit-modal'].show();
-            "
-          >
-            <BaseButton class="modal-button" :buttonText="'Quit'" />
-          </div>
-          <div
-            @click="
-              startCountdown();
-              openedModal = false;
-              showCurrentWord = true;
-              $refs['game-modal'].hide();
-            "
-          >
-            <BaseButton class="modal-button" :buttonText="gameModalText" />
-          </div>
-        </div>
-      </div>
-    </b-modal>
-
-    <b-modal
-      ref="quit-modal"
-      hide-footer
-      hide-header
-      no-close-on-backdrop
-      centered
-    >
-      <div id="quit-modal">
-        <h2>Are you sure?</h2>
-        <div class="modal-buttons">
-          <div
-            @click="
-              $refs['quit-modal'].hide();
-              $refs['game-modal'].show();
-            "
-          >
-            <BaseButton class="modal-button" :buttonText="'No'" />
-          </div>
-          <div>
-            <BaseButton
-              class="modal-button"
-              :buttonText="'Yes'"
-              :to="'/lobby'"
-            />
-          </div>
-        </div>
-      </div>
-    </b-modal>
-
-    <div v-if="showCurrentWord" id="word-container">
-      <h1>{{ currentWord }}</h1>
-    </div>
-
-    <div id="points-buttons" v-if="!showCheatPicture">
-      <div
-        id="wrong-container"
-        @click="
-          previousWords.push({ word: currentWord, correct: false });
-          setNewWord();
-          wrongWordsCounter++;
-          playSound(false);
-        "
-      >
-        <fa id="button-wrong" icon="times"></fa>
-      </div>
-      <div
-        id="correct-container"
-        @click="
-          previousWords.push({ word: currentWord, correct: true });
-          setNewWord();
-          correctWordsCounter++;
-          playSound(true);
-        "
-      >
-        <fa id="button-correct" icon="check"></fa>
-      </div>
-    </div>
-    <!-- <input type="file" @change="setWordsInDatabase" /> -->
-    <audio id="countdown-audio">
-      <source
-        src="https://assets.mixkit.co/sfx/preview/mixkit-start-countdown-927.mp3"
-        type="audio/mpeg"
+      <img
+        v-if="showCheatPicture"
+        id="cheat-pic"
+        src="../assets/no-cheating.png"
+        alt="cheating"
       />
-    </audio>
-  </main>
+
+      <b-modal
+        ref="game-modal"
+        hide-footer
+        hide-header
+        no-close-on-backdrop
+        centered
+      >
+        <div id="game-modal">
+          <div>
+            <h1>{{ getCurrentTeams[getCurrentTeamIndex].name }}</h1>
+            <h4>
+              Explaining:
+              <span>{{
+                getCurrentTeams[getCurrentTeamIndex].players[
+                  getCurrentTeams[getCurrentTeamIndex].explainingPlayerIndex
+                ]
+              }}</span>
+            </h4>
+          </div>
+
+          <div class="modal-buttons">
+            <div
+              @click="
+                $refs['game-modal'].hide();
+                $refs['quit-modal'].show();
+              "
+            >
+              <BaseButton class="modal-button" :buttonText="'Quit'" />
+            </div>
+            <div
+              @click="
+                startCountdown();
+                openedModal = false;
+                showCurrentWord = true;
+                $refs['game-modal'].hide();
+              "
+            >
+              <BaseButton class="modal-button" :buttonText="gameModalText" />
+            </div>
+          </div>
+        </div>
+      </b-modal>
+
+      <b-modal
+        ref="quit-modal"
+        hide-footer
+        hide-header
+        no-close-on-backdrop
+        centered
+      >
+        <div id="quit-modal">
+          <h2>Are you sure?</h2>
+          <div class="modal-buttons">
+            <div
+              @click="
+                $refs['quit-modal'].hide();
+                $refs['game-modal'].show();
+              "
+            >
+              <BaseButton class="modal-button" :buttonText="'No'" />
+            </div>
+            <div>
+              <BaseButton
+                class="modal-button"
+                :buttonText="'Yes'"
+                :to="'/lobby'"
+              />
+            </div>
+          </div>
+        </div>
+      </b-modal>
+
+      <div v-if="showCurrentWord" id="word-container">
+        <h1>{{ currentWord }}</h1>
+      </div>
+
+      <div id="points-buttons" v-if="!showCheatPicture">
+        <div
+          id="wrong-container"
+          @click="
+            previousWords.push({ word: currentWord, correct: false });
+            setNewWord();
+            wrongWordsCounter++;
+            playSound(false);
+          "
+        >
+          <fa id="button-wrong" icon="times"></fa>
+        </div>
+        <div
+          id="correct-container"
+          @click="
+            previousWords.push({ word: currentWord, correct: true });
+            setNewWord();
+            correctWordsCounter++;
+            playSound(true);
+          "
+        >
+          <fa id="button-correct" icon="check"></fa>
+        </div>
+      </div>
+      <!-- <input type="file" @change="setWordsInDatabase" /> -->
+      <audio id="countdown-audio">
+        <source
+          src="https://assets.mixkit.co/sfx/preview/mixkit-start-countdown-927.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+    </main>
+  </div>
 </template>
 
 <script>
-import { mapMutations, mapGetters, mapState } from 'vuex';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -164,6 +168,7 @@ export default {
       gameModalText: 'Play',
       openedModal: false,
       pausedCountdownSound: false,
+      isLoading: true,
     };
   },
   computed: {
@@ -215,6 +220,9 @@ export default {
     async getWords() {
       this.wordsArray = await this.getRandomWordsFromDatabase(50);
       this.setNewWord();
+
+      // to prevent black screen for a moment
+      setTimeout(() => (this.isLoading = false), 600);
     },
     async getRandomWordsFromDatabase(amount) {
       const wordsRef = this.$fire.firestore
