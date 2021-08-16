@@ -68,13 +68,13 @@ main {
   height: 100vh;
 
   #trophy {
-    max-width: 47vh;
+    max-width: 46vh;
   }
 
   #team-logo {
     max-width: 14vh;
     position: relative;
-    bottom: 47vh;
+    bottom: 46vh;
     opacity: 0.7;
     padding: 10px 0;
     background: #fac809;
