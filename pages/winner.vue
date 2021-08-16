@@ -44,9 +44,6 @@ export default {
       prev.points > current.points ? prev : current
     );
   },
-  mounted() {
-    document.getElementById('champions-audio').play();
-  },
   methods: {
     ...mapMutations(['setCurrentTeams']),
 
@@ -55,6 +52,7 @@ export default {
     },
     stopLoading() {
       this.isLoading = false;
+      document.getElementById('champions-audio').play();
     },
   },
 };
@@ -70,13 +68,13 @@ main {
   height: 100vh;
 
   #trophy {
-    max-width: 50vh;
+    max-width: 47vh;
   }
 
   #team-logo {
-    max-width: 14vh;
+    max-width: 13vh;
     position: relative;
-    bottom: 49vh;
+    bottom: 48vh;
     opacity: 0.7;
     padding: 10px 0;
     background: #fac809;

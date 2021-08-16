@@ -226,7 +226,7 @@ export default {
       'addTeam',
       'editTeam',
       'setTargetResult',
-      'setDurationOfRound',
+    'setDurationOfRound',
       'setLanguage',
       'clearPreviousGame',
       'deleteTeamByIndex',

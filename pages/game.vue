@@ -538,5 +538,15 @@ section {
       }
     }
   }
+
+  @media only screen and (max-width: 1000px) {
+    #wrong-container {
+      height: 22vw;
+    }
+
+    #correct-container {
+      height: 22vw;
+    }
+  }
 }
 </style>

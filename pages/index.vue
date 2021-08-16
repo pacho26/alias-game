@@ -24,7 +24,8 @@ export default {
     };
   },
   mounted() {
-    this.isLoading = false;
+    // to prevent black screen for a moment
+    setTimeout(() => (this.isLoading = false), 150);
   },
 };
 </script>
