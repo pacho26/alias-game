@@ -72,9 +72,9 @@ main {
   }
 
   #team-logo {
-    max-width: 13vh;
+    max-width: 14vh;
     position: relative;
-    bottom: 48vh;
+    bottom: 47vh;
     opacity: 0.7;
     padding: 10px 0;
     background: #fac809;
