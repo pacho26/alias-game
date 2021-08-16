@@ -7,7 +7,12 @@
           :key="team.name"
         >
           <td id="logo-container" class="pl-4">
-            <img :src="team.logo" id="team-logo" alt="team logo" />
+            <img
+              :src="team.logo"
+              id="team-logo"
+              alt="team logo"
+              @load="$emit('stopLoading')"
+            />
           </td>
           <td id="team-name">{{ team.name }}</td>
           <td class="px-4">{{ team.players.join(', ') }}</td>
@@ -27,6 +32,7 @@ export default {
       sortedTeams: [],
     };
   },
+  emits: ['stopLoading'],
   computed: {
     ...mapGetters(['getAllTeams']),
   },

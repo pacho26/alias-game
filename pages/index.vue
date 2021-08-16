@@ -1,6 +1,7 @@
 <template>
   <div>
     <BaseLoader v-if="isLoading" />
+
     <div>
       <div id="desc">
         <h1>Explain using other words!</h1>

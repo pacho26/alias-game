@@ -1,179 +1,191 @@
 <template>
-  <main>
-    <div class="settings">
-      <div class="teams-container">
-        <h3>CURRENT TEAMS</h3>
-        <div id="teams-table">
-          <table style="width: 100%">
-            <tr id="team-placeholder" v-if="this.getCurrentTeams.length === 0">
-              Add teams to start the game.
-            </tr>
-            <tr
-              v-for="team in this.getCurrentTeams"
-              :key="team.name"
-              @click="prepareEditing(team.name)"
-            >
-              <td id="logo-container" class="pl-4">
-                <img :src="team.logo" id="team-logo" alt="team logo" />
-              </td>
-              <td id="team-name">{{ team.name }}</td>
-              <td class="px-4">{{ team.players.join(', ') }}</td>
-            </tr>
-          </table>
-        </div>
+  <div>
+    <BaseLoader v-if="isLoading" />
 
-        <div
-          v-if="mobileScreen"
-          class="icon-plus-container"
-          @click="openEmptyTeamModal"
-        >
-          <fa class="icon-plus" icon="plus"></fa>
-        </div>
-        <div
-          v-else
-          class="icon-plus-container"
-          v-b-tooltip.hover.right="'Add a new team!'"
-          @click="openEmptyTeamModal"
-        >
-          <fa class="icon-plus" icon="plus"></fa>
-        </div>
-
-        <b-modal
-          id="add-team-modal"
-          ref="team-modal"
-          title="New team"
-          hide-footer
-          hide-header
-          centered
-        >
-          <div id="add-team-form">
-            <b-form-input
-              class="mb-3 team-name-input"
-              v-model.trim="newTeamName"
-              placeholder="Enter team name"
-              autocomplete="off"
-            ></b-form-input>
-
-            <b-form-select
-              class="select-form"
-              v-model="numberOfPlayers"
-              :options="options"
-            ></b-form-select>
-
-            <div class="players-container">
-              <div
-                class="players-list"
-                v-for="index in numberOfPlayers"
-                :key="index"
+    <main>
+      <div class="settings">
+        <div class="teams-container">
+          <h3>CURRENT TEAMS</h3>
+          <div id="teams-table">
+            <table style="width: 100%">
+              <tr
+                id="team-placeholder"
+                v-if="this.getCurrentTeams.length === 0"
               >
-                <p class="pr-2 mt-3">Player {{ index }}:</p>
-                <b-form-input
-                  class="name-input"
-                  v-model.trim="names[index - 1]"
-                  @keyup.enter="addTeamMethod()"
-                  placeholder="Enter player's name"
-                  autocomplete="off"
-                ></b-form-input>
-              </div>
-            </div>
-          </div>
-
-          <p id="error-message" v-if="unfinishedForm">
-            You have some empty values!
-          </p>
-
-          <div class="modal-buttons">
-            <div
-              @click="
-                $bvModal.hide('add-team-modal');
-                clearForm();
-              "
-            >
-              <BaseButton id="close-form-button" :buttonText="'Cancel'" />
-            </div>
-
-            <div v-if="!editingTeam" @click="addTeamMethod">
-              <BaseButton class="add-team-button" :buttonText="'Add team'" />
-            </div>
-            <div v-else @click="addTeamMethod">
-              <BaseButton class="add-team-button" :buttonText="'Confirm'" />
-            </div>
+                Add teams to start the game.
+              </tr>
+              <tr
+                v-for="team in this.getCurrentTeams"
+                :key="team.name"
+                @click="prepareEditing(team.name)"
+              >
+                <td id="logo-container" class="pl-4">
+                  <img
+                    :src="team.logo"
+                    id="team-logo"
+                    alt="team logo"
+                    @load="onImageLoad"
+                  />
+                </td>
+                <td id="team-name">{{ team.name }}</td>
+                <td class="px-4">{{ team.players.join(', ') }}</td>
+              </tr>
+            </table>
           </div>
 
           <div
-            v-if="editingTeam"
-            id="delete-team-container"
-            @click="deleteTeam"
+            v-if="mobileScreen"
+            class="icon-plus-container"
+            @click="openEmptyTeamModal"
           >
-            <BaseButton id="delete-team-button" :buttonText="'Delete team'" />
+            <fa class="icon-plus" icon="plus"></fa>
           </div>
-        </b-modal>
+          <div
+            v-else
+            class="icon-plus-container"
+            v-b-tooltip.hover.right="'Add a new team!'"
+            @click="openEmptyTeamModal"
+          >
+            <fa class="icon-plus" icon="plus"></fa>
+          </div>
+
+          <b-modal
+            id="add-team-modal"
+            ref="team-modal"
+            title="New team"
+            hide-footer
+            hide-header
+            centered
+          >
+            <div id="add-team-form">
+              <b-form-input
+                class="mb-3 team-name-input"
+                v-model.trim="newTeamName"
+                placeholder="Enter team name"
+                autocomplete="off"
+              ></b-form-input>
+
+              <b-form-select
+                class="select-form"
+                v-model="numberOfPlayers"
+                :options="options"
+              ></b-form-select>
+
+              <div class="players-container">
+                <div
+                  class="players-list"
+                  v-for="index in numberOfPlayers"
+                  :key="index"
+                >
+                  <p class="pr-2 mt-3">Player {{ index }}:</p>
+                  <b-form-input
+                    class="name-input"
+                    v-model.trim="names[index - 1]"
+                    @keyup.enter="addTeamMethod()"
+                    placeholder="Enter player's name"
+                    autocomplete="off"
+                  ></b-form-input>
+                </div>
+              </div>
+            </div>
+
+            <p id="error-message" v-if="unfinishedForm">
+              You have some empty values!
+            </p>
+
+            <div class="modal-buttons">
+              <div
+                @click="
+                  $bvModal.hide('add-team-modal');
+                  clearForm();
+                "
+              >
+                <BaseButton id="close-form-button" :buttonText="'Cancel'" />
+              </div>
+
+              <div v-if="!editingTeam" @click="addTeamMethod">
+                <BaseButton class="add-team-button" :buttonText="'Add team'" />
+              </div>
+              <div v-else @click="addTeamMethod">
+                <BaseButton class="add-team-button" :buttonText="'Confirm'" />
+              </div>
+            </div>
+
+            <div
+              v-if="editingTeam"
+              id="delete-team-container"
+              @click="deleteTeam"
+            >
+              <BaseButton id="delete-team-button" :buttonText="'Delete team'" />
+            </div>
+          </b-modal>
+        </div>
+
+        <div class="sliders">
+          <h3>SETTINGS</h3>
+          <div class="slider">
+            Target result: <span>{{ targetResult }}</span>
+          </div>
+          <b-form-input
+            v-model="targetResult"
+            type="range"
+            min="30"
+            max="120"
+            step="5"
+          ></b-form-input>
+
+          <div class="slider mt-4">
+            Duration of the round: <span>{{ duration }}</span>
+          </div>
+          <b-form-input
+            v-model="duration"
+            type="range"
+            min="30"
+            max="90"
+            step="10"
+          ></b-form-input>
+
+          <div>
+            <p id="selected-language" class="mt-4">
+              Selected language:
+              <span>{{
+                selectedLanguage.charAt(0).toUpperCase() +
+                selectedLanguage.slice(1)
+              }}</span>
+            </p>
+            <div class="flags">
+              <img
+                src="../assets/countryFlags/croatia.svg"
+                alt="Croatia flag"
+                id="croatia-flag"
+                class="flag"
+                @click="
+                  selectedLanguage = 'croatian';
+                  selectFlag();
+                "
+              />
+              <img
+                src="../assets/countryFlags/united-kingdom.svg"
+                alt="United Kingdom flag"
+                id="united-kingdom-flag"
+                class="flag"
+                @click="
+                  selectedLanguage = 'english';
+                  selectFlag();
+                "
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="sliders">
-        <h3>SETTINGS</h3>
-        <div class="slider">
-          Target result: <span>{{ targetResult }}</span>
-        </div>
-        <b-form-input
-          v-model="targetResult"
-          type="range"
-          min="30"
-          max="120"
-          step="5"
-        ></b-form-input>
-
-        <div class="slider mt-4">
-          Duration of the round: <span>{{ duration }}</span>
-        </div>
-        <b-form-input
-          v-model="duration"
-          type="range"
-          min="30"
-          max="90"
-          step="10"
-        ></b-form-input>
-
-        <div>
-          <p id="selected-language" class="mt-4">
-            Selected language:
-            <span>{{
-              selectedLanguage.charAt(0).toUpperCase() +
-              selectedLanguage.slice(1)
-            }}</span>
-          </p>
-          <div class="flags">
-            <img
-              src="../assets/countryFlags/croatia.svg"
-              alt="Croatia flag"
-              id="croatia-flag"
-              class="flag"
-              @click="
-                selectedLanguage = 'croatian';
-                selectFlag();
-              "
-            />
-            <img
-              src="../assets/countryFlags/united-kingdom.svg"
-              alt="United Kingdom flag"
-              id="united-kingdom-flag"
-              class="flag"
-              @click="
-                selectedLanguage = 'english';
-                selectFlag();
-              "
-            />
-          </div>
-        </div>
+      <div v-if="this.getCurrentTeams.length >= 2" @click="setConfiguration">
+        <BaseButton id="startBtn" :buttonText="'Start game'" :to="'/game'" />
       </div>
-    </div>
 
-    <div v-if="this.getCurrentTeams.length >= 2" @click="setConfiguration">
-      <BaseButton id="startBtn" :buttonText="'Start game'" :to="'/game'" />
-    </div>
-
-    <h2 v-else>There must be at least 2 teams!</h2>
-  </main>
+      <h2 v-else>There must be at least 2 teams!</h2>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -199,6 +211,7 @@ export default {
       duration: '60',
       selectedLanguage: 'croatian',
       mobileScreen: false,
+      isLoading: true,
     };
   },
   computed: {
@@ -227,6 +240,7 @@ export default {
       ) {
         this.unfinishedForm = true;
       } else {
+        this.isLoading = true;
         const num = Math.floor(Math.random() * this.colors.length);
         const color = this.colors[num];
         const newTeam = {
@@ -254,8 +268,10 @@ export default {
       }
     },
     deleteTeam() {
+      this.isLoading = true;
       this.deleteTeamByIndex(this.currentTeamIndex);
       this.$refs['team-modal'].hide();
+      this.isLoading = false;
     },
     prepareEditing(teamName) {
       const foundTeam = _.cloneDeep(
@@ -307,6 +323,9 @@ export default {
       this.setDurationOfRound(+this.duration);
       this.setLanguage(this.selectedLanguage);
       this.clearPreviousGame();
+    },
+    onImageLoad() {
+      this.isLoading = false;
     },
   },
 };

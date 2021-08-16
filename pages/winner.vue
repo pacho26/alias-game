@@ -1,20 +1,29 @@
 <template>
-  <main>
-    <h1 id="team-name">
-      {{ winningTeam.name.toUpperCase() }}
-    </h1>
-    <img id="trophy" src="../assets/trophy.svg" alt="Trophy" />
-    <img id="team-logo" :src="winningTeam.logo" alt="Team logo" />
-    <div @click="setPreviousTeams">
-      <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
-    </div>
-    <audio id="champions-audio">
-      <source
-        src="https://www.myinstants.com/media/sounds/we-are-the-champions-copia.mp3"
-        type="audio/mpeg"
+  <div>
+    <BaseLoader v-if="isLoading" />
+
+    <main>
+      <h1 id="team-name">
+        {{ winningTeam.name.toUpperCase() }}
+      </h1>
+      <img
+        id="trophy"
+        src="../assets/trophy.svg"
+        alt="Trophy"
+        @load="stopLoading"
       />
-    </audio>
-  </main>
+      <img id="team-logo" :src="winningTeam.logo" alt="Team logo" />
+      <div @click="setPreviousTeams">
+        <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
+      </div>
+      <audio id="champions-audio">
+        <source
+          src="https://www.myinstants.com/media/sounds/we-are-the-champions-copia.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -24,6 +33,7 @@ export default {
   data() {
     return {
       winningTeam: {},
+      isLoading: true,
     };
   },
   computed: {
@@ -42,6 +52,9 @@ export default {
 
     setPreviousTeams() {
       this.setCurrentTeams(this.getAllTeams);
+    },
+    stopLoading() {
+      this.isLoading = false;
     },
   },
 };

@@ -222,7 +222,7 @@ export default {
       this.setNewWord();
 
       // to prevent black screen for a moment
-      setTimeout(() => (this.isLoading = false), 600);
+      setTimeout(() => (this.isLoading = false), 250);
     },
     async getRandomWordsFromDatabase(amount) {
       const wordsRef = this.$fire.firestore
