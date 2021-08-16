@@ -508,7 +508,7 @@ section {
       opacity: 1;
 
       #button-wrong {
-        transform: scale(1.3, 1.3);
+        transform: scale(1.25, 1.25);
       }
     }
   }
@@ -534,7 +534,7 @@ section {
       opacity: 1;
 
       #button-correct {
-        transform: scale(1.3, 1.3);
+        transform: scale(1.25, 1.25);
       }
     }
   }

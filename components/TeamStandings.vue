@@ -15,7 +15,7 @@
             />
           </td>
           <td id="team-name">{{ team.name }}</td>
-          <td class="px-4">{{ team.players.join(', ') }}</td>
+          <td id="team-players">{{ team.players.join(', ') }}</td>
           <td id="team-points" class="px-5">{{ team.points }}</td>
         </tr>
       </table>
@@ -49,11 +49,6 @@ main {
   border-radius: 8px;
 }
 
-.table {
-  background: #dcd1e1;
-  color: #2f406a;
-}
-
 #teams-table {
   border-radius: 8px;
   font-size: 24px;
@@ -61,29 +56,33 @@ main {
 
   tr {
     border-radius: 8px;
-  }
+    width: 100vw;
 
-  #team-name {
-    font-weight: 600;
-    padding-right: 36px;
-    padding-left: 4px;
-  }
+    #logo-container {
+      padding: 10px 1px 10px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  #team-points {
-    font-weight: 700;
-  }
+      #team-logo {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 8px;
+      }
+    }
 
-  #logo-container {
-    padding-right: 10px;
-    padding: 10px 10px 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    #team-name {
+      font-weight: 600;
+      padding-right: 2vw;
+      padding-left: 2vw;
+    }
 
-    #team-logo {
-      max-width: 80px;
-      max-height: 80px;
-      border-radius: 8px;
+    #team-points {
+      font-weight: 700;
+    }
+
+    #team-players {
+      padding-left: 10px;
     }
   }
 }
