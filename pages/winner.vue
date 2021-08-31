@@ -75,7 +75,7 @@ main {
     max-width: 14vh;
     position: relative;
     bottom: 46vh;
-    opacity: 0.7;
+    opacity: 0.77;
     padding: 10px 0;
     background: #fac809;
     border-radius: 8px;

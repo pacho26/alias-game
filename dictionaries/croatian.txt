@@ -794,7 +794,6 @@ karizma
 kalvarija
 građanski
 izmišljati
-omalovažavati
 prijaviti
 milja
 primamljiv
@@ -809,7 +808,7 @@ postojanje
 pretjeran
 buđenje
 priključiti
-omalovažavanje
+zanemariti
 nabrojati
 nespojiv
 vrijeđati
@@ -824,7 +823,7 @@ prijavljivanje
 koristan
 izvanjski
 štala
-patrola
+patrolac
 razbiti
 šivanje
 sekcija
@@ -865,7 +864,6 @@ dušik
 destruktivan
 zapjevati
 pomisliti
-pravljenje
 pripisati
 mačji
 prijenos
@@ -891,7 +889,7 @@ gnijezdo
 prisilan
 nakupiti
 odsjesti
-pripovijest
+prapovijest
 muzički
 krvarenje
 uništiti
@@ -971,7 +969,7 @@ tablica
 padobranac
 započinjati
 orijentirati
-dojmiti
+dojam
 violinist
 uvježbavanje
 monoton
@@ -1128,7 +1126,9 @@ akustičan
 pojačanje
 porijeklo
 rajski
-skrbiti
+brinuti se
+obaveza
+briga
 recikliranje
 nasilnički
 mračan
@@ -1206,10 +1206,8 @@ neposredan
 raznorazni
 kokos
 gramatički
-posjećivati
-financirati
-dovoditi
-snaći
+posjet
+financije
 namazati
 razlikovanje
 štrajkati
@@ -1218,8 +1216,6 @@ pušiti
 prazan
 simptom
 parlament
-minuti
-sanacija
 nedostajati
 provozati
 prijetiti
@@ -1290,7 +1286,6 @@ potražiti
 solidarnost
 ubosti
 stručan
-založiti
 svetiti
 kultan
 učesnik
@@ -1454,7 +1449,6 @@ zjapiti
 nepostojeći
 raniji
 točan
-manjkav
 izložbeni
 zemaljski
 produljiti
@@ -1513,7 +1507,7 @@ nebo
 ugurati
 odvojiti
 breza
-genocidan
+genocid
 rasistički
 pješačenje
 operacija
@@ -1641,7 +1635,6 @@ zračni
 ograničiti
 efekt
 crtica
-razjasniti
 leptir
 pamučan
 mišljenje
@@ -1770,9 +1763,9 @@ proizvoljnost
 mafijaš
 oslobađajući
 dogurati
-dišni
 čudan
 čitati
+udah
 košarkaš
 podnožje
 upečatljiv
@@ -1867,7 +1860,6 @@ rasteretiti
 forsirati
 kuhar
 uvjeriti
-prvoplasirani
 futuristički
 primjenjivati
 sob
@@ -1928,7 +1920,6 @@ zastrašujući
 migrena
 obnoviti
 plućni
-trećeplasiran
 botanički
 kititi
 upozoriti
@@ -2025,7 +2016,6 @@ građevni
 ženstvenost
 odbaciti
 uredski
-ispostava
 prikupljati
 školjka
 volan
@@ -2075,7 +2065,6 @@ potrošački
 državljanstvo
 križaljka
 krstiti
-obarati
 pokrivanje
 primitivan
 ugroziti
@@ -2261,7 +2250,6 @@ kvantitativan
 truditi
 zadovoljstvo
 stolni
-prostoran
 upiti
 profesionalan
 prozračan
@@ -2270,7 +2258,7 @@ pipa
 riskirati
 izvaliti
 ofenzivan
-preplaviti
+poplava
 biolog
 policija
 epoha
@@ -2334,7 +2322,7 @@ udebljati
 strojni
 steći
 obred
-zavući
+zavlačiti
 planetaran
 šapnuti
 boljeti
@@ -2483,7 +2471,7 @@ podmukao
 suvenir
 šljiva
 svadba
-uravnotežen
+ravnoteža
 iskren
 namještanje
 običan
@@ -2530,7 +2518,7 @@ pčelarski
 olakšati
 skupni
 fluid
-aktivacija
+aktivirati
 izgovoriti
 mlađahan
 počinjati
@@ -2559,7 +2547,7 @@ nizak
 mehanizam
 radovati se
 oborinski
-ojačati
+šipka
 kontinentalan
 naručivanje
 human
@@ -2586,7 +2574,6 @@ hidratantan
 naivan
 ravnodušan
 inozemstvo
-transportni
 postati
 nadoknaditi
 mehanika
@@ -2595,7 +2582,7 @@ odvjetništvo
 dežuran
 proteinski
 pogled
-oplemeniti
+pleme
 dječji
 sestrična
 opaziti
@@ -2622,7 +2609,8 @@ vizionar
 konzulat
 živjeti
 genetski
-pobuda
+java
+san
 zavidjeti
 nacrtati
 domena
@@ -2651,6 +2639,7 @@ napiti
 loptati
 oformiti
 alibi
+laboratorij
 usporavati
 čovječanstvo
 pretući
@@ -2679,7 +2668,7 @@ harati
 instrumentalan
 zavođenje
 varanje
-sprovoditi
+sprovod
 dobar
 lopovski
 kupoprodaja
@@ -2764,7 +2753,6 @@ zaletjeti
 tvornički
 dopuštenje
 utvrditi
-izliti
 posmrtni
 kriti
 odsutan
@@ -2787,7 +2775,6 @@ vodoravan
 popriličan
 tješiti
 oprostiti
-ugrađivati
 udaljiti
 poljubac
 graničiti
@@ -2831,12 +2818,10 @@ rukometašica
 spadati
 poduprijeti
 zaštititi
-poplaviti
 očajan
 zgaditi
 super
 minimalan
-podesiti
 nastojanje
 peglati
 nasljedan
@@ -2894,8 +2879,6 @@ jedro
 astronomija
 voziti
 obećati
-podmiriti
-prouzročiti
 useljenje
 urlati
 sobni
@@ -3202,7 +3185,6 @@ geološki
 živac
 turnir
 zaplijeniti
-demantirati
 magistrirati
 grešan
 tugovati
@@ -3297,7 +3279,6 @@ zapamtiti
 hoditi
 stan
 pouzdati
-nebrojen
 privatan
 farsa
 povjerenik
@@ -3340,7 +3321,6 @@ obećavajući
 hlađenje
 braniteljski
 remen
-magistarski
 poludjeti
 usamljen
 predložiti
@@ -3476,7 +3456,6 @@ zločinac
 elitan
 telefonski
 rukometni
-plasirati
 razbojnik
 zavezati
 krzno
@@ -3553,7 +3532,7 @@ prosudba
 vizualizacija
 uputiti
 tijesan
-kontracepcijski
+kontracepcija
 prevariti
 preusmjeriti
 nestanak
@@ -3604,7 +3583,6 @@ mesti
 uzimanje
 ovotjedni
 ušće
-parlamentaran
 hobi
 ugođaj
 srednji
@@ -3612,6 +3590,7 @@ tinejdžerski
 opustiti
 uključenost
 dodijeliti
+delta
 licencija
 odavati
 primiti

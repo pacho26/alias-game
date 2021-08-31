@@ -169,6 +169,12 @@ export default {
       openedModal: false,
       pausedCountdownSound: false,
       isLoading: true,
+      correctSound: new Audio(
+        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/correct-sfx.mp3?alt=media&token=5b001661-a66d-4d9f-873b-867a60c8adb4'
+      ),
+      wrongSound: new Audio(
+        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/wrong-sfx.mp3?alt=media&token=580ce8ea-4b85-447e-a6b6-2ea277295aaa'
+      ),
     };
   },
   computed: {
@@ -222,7 +228,7 @@ export default {
       this.setNewWord();
 
       // to prevent black screen for a moment
-      setTimeout(() => (this.isLoading = false), 250);
+      setTimeout(() => (this.isLoading = false), 200);
     },
     async getRandomWordsFromDatabase(amount) {
       const wordsRef = this.$fire.firestore
@@ -295,13 +301,11 @@ export default {
     },
     playSound(correct) {
       if (correct) {
-        new Audio(
-          'https://www.myinstants.com/media/sounds/ding-sound-effect_1.mp3'
-        ).play();
+        this.correctSound.currentTime = 0;
+        this.correctSound.play();
       } else {
-        new Audio(
-          'https://orangefreesounds.com/wp-content/uploads/2014/08/Wrong-answer-sound-effect.mp3?_=1'
-        ).play();
+        this.wrongSound.currentTime = 0;
+        this.wrongSound.play();
       }
     },
   },
