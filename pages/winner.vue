@@ -18,7 +18,7 @@
       </div>
       <audio id="champions-audio">
         <source
-          src="https://www.myinstants.com/media/sounds/we-are-the-champions-copia.mp3"
+          src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwe-are-the-champions-sfx.mp3?alt=media&token=7a029d8b-6ade-4e4e-9809-5a6a629cca84"
           type="audio/mpeg"
         />
       </audio>

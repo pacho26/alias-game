@@ -143,7 +143,7 @@
       <!-- <input type="file" @change="setWordsInDatabase" /> -->
       <audio id="countdown-audio">
         <source
-          src="https://assets.mixkit.co/sfx/preview/mixkit-start-countdown-927.mp3"
+          src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=d4c41274-1273-433c-9fb3-e61718fa8969"
           type="audio/mpeg"
         />
       </audio>
@@ -170,10 +170,10 @@ export default {
       pausedCountdownSound: false,
       isLoading: true,
       correctSound: new Audio(
-        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/correct-sfx.mp3?alt=media&token=5b001661-a66d-4d9f-873b-867a60c8adb4'
+        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fcorrect-sfx.mp3?alt=media&token=13f14255-18dc-491e-9908-95e7d74cef22'
       ),
       wrongSound: new Audio(
-        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/wrong-sfx.mp3?alt=media&token=580ce8ea-4b85-447e-a6b6-2ea277295aaa'
+        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwrong-sfx.mp3?alt=media&token=247dddd5-665c-4405-b9c4-ea943a1b039c'
       ),
     };
   },
@@ -287,7 +287,7 @@ export default {
             document.getElementById('countdown-audio').play();
           }
 
-          if (this.remainingSeconds === 8) {
+          if (this.remainingSeconds === 10) {
             document.getElementById('countdown-audio').play();
           }
         }.bind(this),
