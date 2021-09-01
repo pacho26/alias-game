@@ -29,9 +29,7 @@
         </div>
 
         <div id="countdown-container">
-          <h1 id="countdown-text">
-            {{ remainingSeconds }}
-          </h1>
+          <h1 id="countdown-text">{{ remainingSeconds }}</h1>
         </div>
       </section>
 
@@ -146,7 +144,7 @@
       <!-- <input type="file" @change="setWordsInDatabase" /> -->
       <audio id="countdown-audio">
         <source
-          src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=d4c41274-1273-433c-9fb3-e61718fa8969"
+          src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=1de94261-6906-48b1-a67c-11d63be6df33"
           type="audio/mpeg"
         />
       </audio>
