@@ -1,15 +1,34 @@
 <template>
   <div>
     <header>
-      <nuxt-link to="/" id="logo-link">Alias<span>Game</span> </nuxt-link>
+      <nuxt-link v-if="!this.gameInProgress" to="/" id="logo-link"
+        >Alias<span>Game</span>
+      </nuxt-link>
+      <nuxt-link v-else to="/" id="logo-link" class="no-click"
+        >Alias<span>Game</span>
+      </nuxt-link>
     </header>
     <Nuxt />
   </div>
 </template>
 
+<script>
+import { mapState } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState(['gameInProgress']),
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 * {
   font-family: 'Poppins', sans-serif;
+}
+
+.no-click {
+  pointer-events: none;
 }
 
 #logo-link {

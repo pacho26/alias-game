@@ -220,16 +220,18 @@ export default {
   },
   created() {
     this.mobileScreen = screen.width < 1000 ? true : false;
+    this.setGameInProgress(false);
   },
   methods: {
     ...mapMutations([
       'addTeam',
       'editTeam',
       'setTargetResult',
-    'setDurationOfRound',
+      'setDurationOfRound',
       'setLanguage',
       'clearPreviousGame',
       'deleteTeamByIndex',
+      'setGameInProgress',
     ]),
 
     addTeamMethod() {

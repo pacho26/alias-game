@@ -43,9 +43,10 @@ export default {
     this.winningTeam = this.getAllTeams.reduce((prev, current) =>
       prev.points > current.points ? prev : current
     );
+    this.setGameInProgress(false);
   },
   methods: {
-    ...mapMutations(['setCurrentTeams']),
+    ...mapMutations(['setCurrentTeams', 'setGameInProgress']),
 
     setPreviousTeams() {
       this.setCurrentTeams(this.getAllTeams);

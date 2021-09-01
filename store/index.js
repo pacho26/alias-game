@@ -28,6 +28,7 @@ export const state = () => ({
   targetResult: 60,
   durationOfRound: 60,
   chosenLanguage: 'croatian',
+  gameInProgress: false,
 });
 
 export const getters = {
@@ -111,7 +112,6 @@ export const mutations = {
         }
       }
     }
-
     // set the next player who explains
     state.currentTeams[state.currentTeamIndex].explainingPlayerIndex + 1 ===
     state.currentTeams[state.currentTeamIndex].players.length
@@ -137,6 +137,9 @@ export const mutations = {
   },
   setCurrentTeams(state, teams) {
     state.currentTeams = teams;
+  },
+  setGameInProgress(state, isInProgress) {
+    state.gameInProgress = isInProgress;
   },
 };
 

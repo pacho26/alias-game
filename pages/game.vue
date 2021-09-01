@@ -76,6 +76,7 @@
                 showCurrentWord = true;
                 $refs['game-modal'].hide();
                 startCountdownSound();
+                setGameInProgress(true);
               "
             >
               <BaseButton class="modal-button" :buttonText="gameModalText" />
@@ -199,6 +200,7 @@ export default {
       'clearAppearedIndexes',
       'setPreviousRoundWords',
     ]),
+    ...mapMutations(['setGameInProgress']),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
