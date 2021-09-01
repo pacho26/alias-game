@@ -3647,7 +3647,6 @@ porasti
 proza
 multimedijski
 projekcija
-posjetilac
 razlaz
 keramika
 smješten

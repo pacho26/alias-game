@@ -29,7 +29,9 @@
         </div>
 
         <div id="countdown-container">
-          <h1 id="countdown-text">{{ remainingSeconds }}</h1>
+          <h1 id="countdown-text">
+            {{ remainingSeconds }}
+          </h1>
         </div>
       </section>
 
@@ -75,6 +77,7 @@
                 openedModal = false;
                 showCurrentWord = true;
                 $refs['game-modal'].hide();
+                startCountdownSound();
               "
             >
               <BaseButton class="modal-button" :buttonText="gameModalText" />
@@ -173,7 +176,7 @@ export default {
         'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fcorrect-sfx.mp3?alt=media&token=13f14255-18dc-491e-9908-95e7d74cef22'
       ),
       wrongSound: new Audio(
-        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwrong-sfx.mp3?alt=media&token=247dddd5-665c-4405-b9c4-ea943a1b039c'
+        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwrong-sfx.mp3?alt=media&token=a72529cf-6280-4f4d-b90d-63d6e8d703c2'
       ),
     };
   },
@@ -263,6 +266,8 @@ export default {
       const interval = setInterval(
         function () {
           if (this.remainingSeconds === 0) {
+            this.shake(false);
+
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
             this.$router.push({ path: 'overview' });
@@ -278,34 +283,46 @@ export default {
             document.getElementById('countdown-audio').currentTime = 0;
           }
 
-          if (this.openedModal && this.remainingSeconds < 10) {
-            document.getElementById('countdown-audio').pause();
-            this.pausedCountdownSound = true;
-          }
-
-          if (!this.openedModal && this.pausedCountdownSound) {
-            document.getElementById('countdown-audio').play();
-          }
-
           if (this.remainingSeconds === 10) {
             document.getElementById('countdown-audio').play();
+            this.shake(true);
           }
         }.bind(this),
         1000
       );
     },
+    shake(needsToShake) {
+      needsToShake
+        ? (document
+            .getElementById('countdown-text')
+            .classList.add('shake-rotate'),
+          document
+            .getElementById('countdown-text')
+            .classList.add('shake-constant'))
+        : (document
+            .getElementById('countdown-text')
+            .classList.remove('shake-rotate'),
+          document
+            .getElementById('countdown-text')
+            .classList.remove('shake-constant'));
+    },
     openGameModal() {
       this.openedModal = true;
       this.gameModalText = 'Continue';
       this.$refs['game-modal'].show();
+      this.shake(false);
+      document.getElementById('countdown-audio').pause();
     },
     playSound(correct) {
-      if (correct) {
-        this.correctSound.currentTime = 0;
-        this.correctSound.play();
-      } else {
-        this.wrongSound.currentTime = 0;
-        this.wrongSound.play();
+      correct
+        ? ((this.correctSound.currentTime = 0), this.correctSound.play())
+        : ((this.wrongSound.currentTime = 0), this.wrongSound.play());
+    },
+    startCountdownSound() {
+      if (this.remainingSeconds < 10) {
+        document.getElementById('countdown-audio').currentTime -= 0.5;
+        document.getElementById('countdown-audio').play();
+        this.shake(true);
       }
     },
   },

@@ -26,6 +26,11 @@ export default {
         href: 'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
         rel: 'stylesheet',
       },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://csshake.surge.sh/csshake.min.css',
+      },
     ],
   },
 
