@@ -190,7 +190,7 @@ export default {
 
     colorChangeDuration() {
       return {
-        'animation-duration': `${this.getDurationOfRound * 2.6}s`,
+        'animation-duration': `${this.getDurationOfRound * 3}s`,
       };
     },
   },
