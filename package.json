@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "csshake": "^1.5.3",
+    "glob-parent": "^6.0.1",
     "node-sass": "^6.0.1",
     "nuxt": "^2.15.7",
+    "tar": "^6.1.11",
     "vue-jest": "^3.0.4",
     "webpack": "^5.44.0"
   },
