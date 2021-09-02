@@ -190,7 +190,7 @@ export default {
 
     colorChangeDuration() {
       return {
-        'animation-duration': `${this.getDurationOfRound * 3}s`,
+        'animation-duration': `${this.getDurationOfRound * 2.6}s`,
       };
     },
   },
@@ -455,7 +455,7 @@ section {
         background-color: #374b7b;
       }
       to {
-        background-color: #ce0000;
+        background-color: #d30000;
       }
     }
   }
