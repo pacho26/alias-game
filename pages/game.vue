@@ -29,7 +29,11 @@
         </div>
 
         <div id="countdown-container">
-          <h1 id="countdown-text">{{ remainingSeconds }}</h1>
+          <div id="shake-container">
+            <h1 id="countdown-text" :style="colorChangeDuration">
+              {{ remainingSeconds }}
+            </h1>
+          </div>
         </div>
       </section>
 
@@ -143,12 +147,6 @@
         </div>
       </div>
       <!-- <input type="file" @change="setWordsInDatabase" /> -->
-      <audio id="countdown-audio">
-        <source
-          src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=1de94261-6906-48b1-a67c-11d63be6df33"
-          type="audio/mpeg"
-        />
-      </audio>
     </main>
   </div>
 </template>
@@ -177,6 +175,9 @@ export default {
       wrongSound: new Audio(
         'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwrong-sfx.mp3?alt=media&token=a72529cf-6280-4f4d-b90d-63d6e8d703c2'
       ),
+      countdownSound: new Audio(
+        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=1de94261-6906-48b1-a67c-11d63be6df33'
+      ),
     };
   },
   computed: {
@@ -186,6 +187,12 @@ export default {
       'getDurationOfRound',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
+
+    colorChangeDuration() {
+      return {
+        'animation-duration': `${this.getDurationOfRound * 3}s`,
+      };
+    },
   },
   created() {
     this.getWords();
@@ -263,6 +270,8 @@ export default {
       this.wordsArray.shift();
     },
     startCountdown() {
+      document.getElementById('countdown-text').classList.add('color-changer');
+
       const interval = setInterval(
         function () {
           if (this.remainingSeconds === 0) {
@@ -279,12 +288,12 @@ export default {
 
           if (this.$router.currentRoute.path !== '/game') {
             clearInterval(interval);
-            document.getElementById('countdown-audio').pause();
-            document.getElementById('countdown-audio').currentTime = 0;
+            this.countdownSound.pause();
+            this.countdownSound.currentTime = 0;
           }
 
           if (this.remainingSeconds === 10) {
-            document.getElementById('countdown-audio').play();
+            this.countdownSound.play();
             this.shake(true);
           }
         }.bind(this),
@@ -294,16 +303,16 @@ export default {
     shake(needsToShake) {
       needsToShake
         ? (document
-            .getElementById('countdown-text')
+            .getElementById('shake-container')
             .classList.add('shake-rotate'),
           document
-            .getElementById('countdown-text')
+            .getElementById('shake-container')
             .classList.add('shake-constant'))
         : (document
-            .getElementById('countdown-text')
+            .getElementById('shake-container')
             .classList.remove('shake-rotate'),
           document
-            .getElementById('countdown-text')
+            .getElementById('shake-container')
             .classList.remove('shake-constant'));
     },
     openGameModal() {
@@ -311,7 +320,7 @@ export default {
       this.gameModalText = 'Continue';
       this.$refs['game-modal'].show();
       this.shake(false);
-      document.getElementById('countdown-audio').pause();
+      this.countdownSound.pause();
     },
     playSound(correct) {
       correct
@@ -320,8 +329,8 @@ export default {
     },
     startCountdownSound() {
       if (this.remainingSeconds < 10) {
-        document.getElementById('countdown-audio').currentTime -= 0.5;
-        document.getElementById('countdown-audio').play();
+        this.countdownSound.currentTime -= 0.5;
+        this.countdownSound.play();
         this.shake(true);
       }
     },
@@ -434,6 +443,20 @@ section {
       border-radius: 8px;
       text-align: center;
       user-select: none;
+    }
+
+    .color-changer {
+      animation: change-color-animation;
+      transition-timing-function: ease-out;
+    }
+
+    @keyframes change-color-animation {
+      from {
+        background-color: #374b7b;
+      }
+      to {
+        background-color: #ce0000;
+      }
     }
   }
 }
