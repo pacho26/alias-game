@@ -66,12 +66,16 @@ export default {
 
     changeMode() {
       this.changeColorTheme();
-      this.isDarkMode
-        ? ((document.body.style.backgroundColor = '#202124'),
-          (this.bgColor = '#000'))
-        : ((document.body.style.backgroundColor = 'white'),
-          (this.bgColor = '#ffead0'));
-      this.forceRerender();
+
+      // timeout is for animation time
+      setTimeout(() => {
+        this.isDarkMode
+          ? ((document.body.style.backgroundColor = '#202124'),
+            (this.bgColor = '#000'))
+          : ((document.body.style.backgroundColor = 'white'),
+            (this.bgColor = '#ffead0'));
+        this.forceRerender();
+      }, 200);
     },
     forceRerender() {
       this.componentKey++;
