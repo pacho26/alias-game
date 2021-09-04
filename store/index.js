@@ -29,6 +29,8 @@ export const state = () => ({
   durationOfRound: 60,
   chosenLanguage: 'croatian',
   gameInProgress: false,
+  isDarkMode: true,
+  isGameScreen: false,
 });
 
 export const getters = {
@@ -140,6 +142,12 @@ export const mutations = {
   },
   setGameInProgress(state, isInProgress) {
     state.gameInProgress = isInProgress;
+  },
+  changeColorTheme(state) {
+    state.isDarkMode = !state.isDarkMode;
+  },
+  changeGameScreenStatus(state) {
+    state.isGameScreen = !state.isGameScreen;
   },
 };
 

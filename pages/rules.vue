@@ -19,7 +19,18 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from 'vuex';
+
+export default {
+  computed: {
+    ...mapState(['isDarkMode']),
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -36,6 +47,7 @@ main {
   h2 {
     font-family: 'Poppins Extra Bold', sans-serif;
     font-weight: 800;
+    font-size: 48px;
     color: #374b7b;
     text-transform: uppercase;
     cursor: default;
@@ -48,6 +60,16 @@ main {
 
   .btn {
     transform: scale(0.8, 0.8);
+  }
+}
+
+.dark-mode {
+  main {
+    color: #f2f2f2;
+
+    h2 {
+      color: #bb86fc;
+    }
   }
 }
 </style>

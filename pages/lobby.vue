@@ -217,10 +217,16 @@ export default {
   computed: {
     ...mapGetters(['getCurrentTeams']),
     ...mapState('colors', ['colors']),
+    ...mapState(['isDarkMode']),
   },
   created() {
     this.mobileScreen = screen.width < 1000 ? true : false;
     this.setGameInProgress(false);
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
   },
   methods: {
     ...mapMutations([
@@ -439,9 +445,9 @@ main > * {
   }
 
   &:hover {
-    background: #a580b3;
+    box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
+
     .icon-plus {
-      color: #c6b4ce;
       transform: scale(1.15, 1.15);
     }
   }
@@ -598,6 +604,44 @@ main > * {
       font-weight: 700;
       font-size: 24px;
       margin-left: 7px;
+    }
+  }
+}
+
+.dark-mode {
+  main {
+    color: #f2f2f2;
+  }
+
+  .teams-container {
+    background: #303136;
+
+    h3 {
+      color: #f2f2f2;
+    }
+  }
+
+  #teams-table {
+    color: #f2f2f2;
+
+    tr:hover {
+      background: #3c5186;
+    }
+  }
+
+  .sliders {
+    background: #303136;
+  }
+
+  .icon-plus-container {
+    background: #47609e;
+
+    .icon-plus {
+      color: #f2f2f2;
+    }
+
+    &:hover {
+      box-shadow: 0 5px 15px rgba(114, 137, 192, 0.4);
     }
   }
 }

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
   data() {
@@ -25,6 +25,7 @@ export default {
   },
   computed: {
     ...mapGetters('words', ['getPreviousRoundWords']),
+    ...mapState(['isDarkMode']),
   },
   methods: {
     ...mapMutations('words', ['setPreviousRoundWords']),
@@ -35,6 +36,11 @@ export default {
   },
   created() {
     this.words = _.cloneDeep(this.getPreviousRoundWords);
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
   },
 };
 </script>
@@ -69,7 +75,17 @@ main {
   }
 
   .words:not(:last-child) {
-    border-bottom: #3c5186 1px solid;
+    border-bottom: rgba(72, 94, 150, 0.4) 1px solid;
+  }
+}
+
+.dark-mode {
+  main {
+    color: #f2f2f2;
+
+    .words:not(:last-child) {
+    border-bottom: rgba(72, 94, 150, 0.5) 1px solid;
+  }
   }
 }
 </style>

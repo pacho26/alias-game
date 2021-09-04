@@ -16,6 +16,12 @@ import { mapState, mapMutations } from 'vuex';
 export default {
   computed: {
     ...mapState('words', ['previousRoundWords']),
+    ...mapState(['isDarkMode']),
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
   },
   methods: {
     ...mapMutations(['setPoints']),
@@ -46,6 +52,12 @@ main {
   #btn {
     margin-top: 50px;
     margin-bottom: 24px;
+  }
+}
+
+.dark-mode {
+  main {
+    color: #f2f2f2;
   }
 }
 </style>

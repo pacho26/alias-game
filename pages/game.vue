@@ -107,7 +107,7 @@
             >
               <BaseButton class="modal-button" :buttonText="'No'" />
             </div>
-            <div>
+            <div @click="changeGameScreenStatus">
               <BaseButton
                 class="modal-button"
                 :buttonText="'Yes'"
@@ -152,7 +152,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters, mapState } from 'vuex';
 
 export default {
   data() {
@@ -187,19 +187,25 @@ export default {
       'getDurationOfRound',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
+    ...mapState(['isDarkMode']),
 
     colorChangeDuration() {
       return {
-        'animation-duration': `${this.getDurationOfRound * 3}s`,
+        'animation-duration': `${this.getDurationOfRound * 2.75}s`,
       };
     },
   },
   created() {
     this.getWords();
     this.remainingSeconds = this.getDurationOfRound;
+    this.changeGameScreenStatus();
   },
   mounted() {
     this.$refs['game-modal'].show();
+
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
   },
   methods: {
     ...mapMutations('words', [
@@ -207,7 +213,7 @@ export default {
       'clearAppearedIndexes',
       'setPreviousRoundWords',
     ]),
-    ...mapMutations(['setGameInProgress']),
+    ...mapMutations(['setGameInProgress', 'changeGameScreenStatus']),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
@@ -280,6 +286,7 @@ export default {
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
             this.$router.push({ path: 'overview' });
+            this.changeGameScreenStatus();
           }
 
           this.openedModal || this.remainingSeconds < 1
@@ -536,11 +543,11 @@ section {
     align-items: center;
     justify-content: center;
     width: 47%;
-    background: red;
+    background-color: red;
     padding: 40px 0;
     border-radius: 8px;
     cursor: pointer;
-    opacity: 0.73;
+    opacity: 0.83;
 
     #button-wrong {
       font-size: 72px;
@@ -562,11 +569,11 @@ section {
     align-items: center;
     justify-content: center;
     width: 47%;
-    background: green;
+    background-color: green;
     padding: 40px 0;
     border-radius: 8px;
     cursor: pointer;
-    opacity: 0.73;
+    opacity: 0.83;
 
     #button-correct {
       font-size: 70px;
@@ -590,6 +597,47 @@ section {
 
     #correct-container {
       height: 22vw;
+    }
+  }
+}
+
+.dark-mode {
+  main {
+    color: #f2f2f2;
+
+    #pause-and-points {
+      #pause-container {
+        background-color: #3f568d;
+      }
+
+      #points-container {
+        #correct-counter {
+          background-color: #00b35c;
+        }
+
+        #wrong-counter {
+          background-color: #ff3344;
+        }
+      }
+    }
+  }
+
+  #points-buttons {
+    #correct-container {
+      background-color: #00b35c;
+    }
+
+    #wrong-container {
+      background-color: #ff1a2d;
+    }
+  }
+
+  @keyframes change-color-animation {
+    from {
+      background-color: #3f568d;
+    }
+    to {
+      background-color: #ff1a2d;
     }
   }
 }

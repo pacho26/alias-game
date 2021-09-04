@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
@@ -24,13 +26,25 @@ export default {
     };
   },
   mounted() {
+    this.isDarkMode
+      ? ((document.body.style.backgroundColor = '#202124'),
+        document.body.classList.add('dark-mode'))
+      : ((document.body.style.backgroundColor = 'white'),
+        document.body.classList.remove('dark-mode'));
+
     // to prevent black screen for a moment
-    setTimeout(() => (this.isLoading = false), 150);
+    setTimeout(() => (this.isLoading = false), 180);
+  },
+  computed: {
+    ...mapState(['isDarkMode']),
   },
 };
 </script>
 
 <style lang="scss" scoped>
+$primary-color: #374b7b;
+$secondary-color: #fff5de;
+
 main {
   margin: 0 auto;
   display: flex;
@@ -42,7 +56,7 @@ main {
 }
 
 #desc {
-  background: #374b7b;
+  background: $primary-color;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,7 +65,7 @@ main {
 
   h1 {
     font-size: 50px;
-    color: #fff5de;
+    color: $secondary-color;
     text-align: center;
     max-width: 660px;
   }
@@ -67,6 +81,16 @@ main {
 
   :first-of-type {
     margin-bottom: 20px;
+  }
+}
+
+.dark-mode {
+  #desc {
+    background: #303136;
+
+    h1 {
+      color: #f2f2f2;
+    }
   }
 }
 </style>

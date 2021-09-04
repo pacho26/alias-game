@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   data() {
@@ -35,6 +35,12 @@ export default {
   emits: ['stopLoading'],
   computed: {
     ...mapGetters(['getAllTeams']),
+    ...mapState(['isDarkMode']),
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
   },
 };
 </script>
@@ -53,6 +59,10 @@ main {
   border-radius: 8px;
   font-size: 24px;
   color: #2f406a;
+
+  tr:not(:last-child) {
+    border-bottom: rgba(72, 94, 150, 0.4) 1px solid;
+  }
 
   tr {
     border-radius: 8px;
@@ -83,6 +93,16 @@ main {
 
     #team-players {
       padding-left: 10px;
+    }
+  }
+}
+
+.dark-mode {
+  #teams-table {
+    color: #f2f2f2;
+
+    tr:not(:last-child) {
+      border-bottom: rgba(72, 94, 150, 0.5) 1px solid;
     }
   }
 }

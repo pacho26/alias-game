@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
   data() {
@@ -38,12 +38,18 @@ export default {
   },
   computed: {
     ...mapGetters(['getAllTeams']),
+    ...mapState(['isDarkMode']),
   },
   created() {
     this.winningTeam = this.getAllTeams.reduce((prev, current) =>
       prev.points > current.points ? prev : current
     );
     this.setGameInProgress(false);
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
   },
   methods: {
     ...mapMutations(['setCurrentTeams', 'setGameInProgress']),
@@ -76,7 +82,7 @@ main {
     max-width: 14vh;
     position: relative;
     bottom: 46vh;
-    opacity: 0.77;
+    opacity: 0.75;
     padding: 10px 0;
     background: #fac809;
     border-radius: 8px;
@@ -95,6 +101,15 @@ main {
   #btn {
     position: relative;
     bottom: 10vh;
+  }
+}
+
+.dark-mode {
+  main {
+    #team-name {
+      color: #f2f2f2;
+      text-shadow: 2px 2px rgba(187, 134, 252, 0.8);
+    }
   }
 }
 </style>
