@@ -32,11 +32,13 @@ export default {
       : ((document.body.style.backgroundColor = 'white'),
         document.body.classList.remove('dark-mode'));
 
-    // to prevent black screen for a moment
-    setTimeout(() => (this.isLoading = false), 180);
+    // timeout is for preventing black screen for a moment
+    this.changingColorTheme
+      ? (this.isLoading = false)
+      : setTimeout(() => (this.isLoading = false), 200);
   },
   computed: {
-    ...mapState(['isDarkMode']),
+    ...mapState(['isDarkMode', 'changingColorTheme']),
   },
 };
 </script>

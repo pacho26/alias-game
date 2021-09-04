@@ -31,6 +31,7 @@ export const state = () => ({
   gameInProgress: false,
   isDarkMode: true,
   isGameScreen: false,
+  changingColorTheme: false,
 });
 
 export const getters = {
@@ -145,6 +146,7 @@ export const mutations = {
   },
   changeColorTheme(state) {
     state.isDarkMode = !state.isDarkMode;
+    state.changingColorTheme = true;
   },
   changeGameScreenStatus(state) {
     state.isGameScreen = !state.isGameScreen;
