@@ -27,7 +27,9 @@
         </div>
       </div>
     </header>
-    <Nuxt />
+    <div class="content">
+      <Nuxt />
+    </div>
   </div>
 </template>
 
@@ -89,10 +91,18 @@ export default {
   font-family: 'Poppins', sans-serif;
 }
 
+.content {
+  margin-top: 60px;
+}
+
 header {
   margin: 0;
   padding: 0;
   background: #fff5de;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
 }
 
 #header-content {
