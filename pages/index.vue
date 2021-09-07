@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 $primary-color: #374b7b;
-$secondary-color: #fff5de;
+$secondary-color: #e6e6e6;
 
 main {
   margin: 0 auto;
@@ -67,7 +67,7 @@ main {
 
   h1 {
     font-size: 50px;
-    color: $secondary-color;
+    color: #f0f0f0;
     text-align: center;
     max-width: 660px;
   }

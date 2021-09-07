@@ -19,7 +19,7 @@
             v-model="darkMode"
             @change="changeMode"
           />
-          <label for="checkbox" class="label" :style="pozadinskaBoja">
+          <label for="checkbox" class="label" :style="checkboxBackgroundColor">
             <fa class="fa-moon" icon="moon"></fa>
             <fa class="fa-sun" icon="sun"></fa>
             <div class="ball"></div>
@@ -40,14 +40,14 @@ export default {
   data() {
     return {
       componentKey: 0,
-      darkMode: true,
-      bgColor: '#000',
+      darkMode: false,
+      bgColor: '#d1dffa',
     };
   },
   computed: {
     ...mapState(['gameInProgress', 'isDarkMode', 'isGameScreen']),
 
-    pozadinskaBoja() {
+    checkboxBackgroundColor() {
       return {
         'background-color': this.bgColor,
       };
@@ -75,7 +75,7 @@ export default {
           ? ((document.body.style.backgroundColor = '#202124'),
             (this.bgColor = '#000'))
           : ((document.body.style.backgroundColor = 'white'),
-            (this.bgColor = '#ffead0'));
+            (this.bgColor = '#d1dffa'));
         this.forceRerender();
       }, 200);
     },
@@ -92,21 +92,22 @@ export default {
 }
 
 .content {
-  margin-top: 60px;
+  margin-top: 61px;
 }
 
 header {
   margin: 0;
   padding: 0;
-  background: #fff5de;
+  background: #f5f5f5;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 5;
+  box-shadow: 0 1.5px 2px 2px rgb(243, 243, 243);
 }
 
 #header-content {
-  width: 97%;
+  width: 96.7%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -124,7 +125,7 @@ header {
     height: 26px;
     width: 50px;
     position: relative;
-    top: 4px;
+    top: 5px;
   }
 
   .fa-moon {
@@ -132,7 +133,7 @@ header {
   }
 
   .fa-sun {
-    color: #f39c12;
+    color: #f29a0d;
   }
 
   .ball {
@@ -154,6 +155,10 @@ header {
   .checkbox:checked + .label .ball {
     transform: translateX(24px);
   }
+
+  .label {
+    cursor: pointer;
+  }
 }
 
 .no-click {
@@ -163,7 +168,7 @@ header {
 #logo-link {
   text-decoration: none;
   font-family: 'Poppins Bold', sans-serif;
-  color: #3c5186;
+  color: #3a5088;
   font-size: 40px;
   font-weight: 800;
   padding: 8px;
@@ -171,7 +176,7 @@ header {
 
   span {
     font-family: 'Poppins Extra Bold', sans-serif;
-    color: #9b72aa;
+    color: #9f6db0;
     font-size: 20px;
     font-weight: 800;
   }
@@ -179,11 +184,12 @@ header {
 
 .dark-mode {
   header {
-    background: #18191b;
+    background: rgb(31, 31, 31);
+    box-shadow: 0 1.5px 2px 2px rgb(30, 30, 30);
   }
 
   #logo-link {
-    color: #4f6bb0;
+    color: #5974c0;
 
     span {
       color: #ffb2ff;

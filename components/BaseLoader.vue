@@ -12,7 +12,7 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-$colors: #3c5186, #9b72aa, #c6b4ce, #fff5de;
+$colors: #3c5186, #9b72aa, #c6b4ce, #f2f2f2;
 
 .page-loader {
   display: flex;

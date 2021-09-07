@@ -71,7 +71,10 @@
                 $refs['quit-modal'].show();
               "
             >
-              <BaseButton class="modal-button" :buttonText="'Quit'" />
+              <BaseButton
+                class="modal-button close-modal-button"
+                :buttonText="'Quit'"
+              />
             </div>
             <div
               @click="
@@ -83,7 +86,10 @@
                 setGameInProgress(true);
               "
             >
-              <BaseButton class="modal-button" :buttonText="gameModalText" />
+              <BaseButton
+                class="modal-button confirm-modal-button"
+                :buttonText="gameModalText"
+              />
             </div>
           </div>
         </div>
@@ -105,11 +111,14 @@
                 $refs['game-modal'].show();
               "
             >
-              <BaseButton class="modal-button" :buttonText="'No'" />
+              <BaseButton
+                class="modal-button close-modal-button"
+                :buttonText="'No'"
+              />
             </div>
             <div @click="changeGameScreenStatus">
               <BaseButton
-                class="modal-button"
+                class="modal-button confirm-modal-button"
                 :buttonText="'Yes'"
                 :to="'/lobby'"
               />
@@ -376,7 +385,7 @@ section {
 
       #pause-icon {
         font-size: 30px;
-        color: white;
+        color: #f4f4f4;
         transition: 0.2s ease-in-out;
       }
 
@@ -419,7 +428,7 @@ section {
         }
 
         #correct-counter {
-          color: white;
+          color: #f4f4f4;
           background: green;
           padding: 8px 12px;
           font-size: 20px;
@@ -427,7 +436,7 @@ section {
         }
 
         #wrong-counter {
-          color: white;
+          color: #f4f4f4;
           background: red;
           padding: 8px 15px;
           font-size: 20px;
@@ -446,7 +455,7 @@ section {
       font-weight: 600;
       padding: 10px;
       background: #374b7b;
-      color: #fff5de;
+      color: #f4f4f4;
       border-radius: 8px;
       text-align: center;
       user-select: none;
@@ -512,6 +521,38 @@ section {
   align-items: center;
   justify-content: space-evenly;
   width: 400px;
+
+  .confirm-modal-button {
+    color: #f5f5f5;
+    background: #374b7b;
+
+    &:hover {
+      background: #e2e2e2;
+      color: #374b7b;
+      box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+  .close-modal-button {
+    background-color: #8e609f;
+    color: #f5f5f5;
+
+    &:hover {
+      background: #e2e2e2;
+      color: #80568f;
+      box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
 }
 
 .modal-button {
@@ -573,7 +614,7 @@ section {
     padding: 40px 0;
     border-radius: 8px;
     cursor: pointer;
-    opacity: 0.83;
+    opacity: 0.85;
 
     #button-correct {
       font-size: 70px;
@@ -603,7 +644,7 @@ section {
 
 .dark-mode {
   main {
-    color: #f2f2f2;
+    color: #f4f4f4;
 
     #pause-and-points {
       #pause-container {
@@ -616,7 +657,7 @@ section {
         }
 
         #wrong-counter {
-          background-color: #ff3344;
+          background-color: #fa3848;
         }
       }
     }
@@ -628,7 +669,7 @@ section {
     }
 
     #wrong-container {
-      background-color: #ff1a2d;
+      background-color: #fa3848;
     }
   }
 

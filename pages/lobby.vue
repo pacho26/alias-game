@@ -4,7 +4,7 @@
 
     <main>
       <div class="settings">
-        <div class="teams-container">
+        <div class="teams-container box-shadow-effect">
           <h3>CURRENT TEAMS</h3>
           <div id="teams-table">
             <table style="width: 100%">
@@ -104,10 +104,18 @@
               </div>
 
               <div v-if="!editingTeam" @click="addTeamMethod">
-                <BaseButton class="add-team-button" :buttonText="'Add team'" />
+                <BaseButton
+                  id="confirm-form-button"
+                  class="add-team-button"
+                  :buttonText="'Add team'"
+                />
               </div>
               <div v-else @click="addTeamMethod">
-                <BaseButton class="add-team-button" :buttonText="'Confirm'" />
+                <BaseButton
+                  id="confirm-form-button"
+                  class="add-team-button"
+                  :buttonText="'Confirm'"
+                />
               </div>
             </div>
 
@@ -121,7 +129,7 @@
           </b-modal>
         </div>
 
-        <div class="sliders">
+        <div class="sliders box-shadow-effect">
           <h3>SETTINGS</h3>
           <div class="slider">
             Target result: <span>{{ targetResult }}</span>
@@ -129,6 +137,7 @@
           <b-form-input
             v-model="targetResult"
             type="range"
+            class="custom-range"
             min="30"
             max="120"
             step="5"
@@ -358,6 +367,22 @@ main > * {
   margin: 20px;
 }
 
+.custom-range::-webkit-slider-thumb {
+  background: hsl(267, 100%, 73%);
+}
+
+.custom-range::-moz-range-thumb {
+  background: hsl(267, 100%, 73%);
+}
+
+.custom-range::-ms-thumb {
+  background: hsl(267, 100%, 73%);
+}
+
+.box-shadow-effect {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+}
+
 .settings {
   display: flex;
 
@@ -372,7 +397,6 @@ main > * {
 
 .teams-container {
   padding: 20px 0;
-  background: #fff5de;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -434,7 +458,7 @@ main > * {
 
   .icon-plus {
     font-size: 30px;
-    color: #fff5de;
+    color: #f2f2f2;
     border: none;
     margin: 0;
     transition: 0.2s ease-in-out;
@@ -459,17 +483,38 @@ main > * {
   max-width: 110px;
 }
 
+#confirm-form-button {
+  color: #f5f5f5;
+  background: #374b7b;
+
+  &:hover {
+    background: #e2e2e2;
+    color: #374b7b;
+    box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
 #close-form-button {
-  background: #fff5de;
-  color: #8e609f;
-  border-color: #8e609f;
+  background-color: #8e609f;
+  color: #f5f5f5;
   font-size: 15px;
   font-weight: 700;
   max-width: 110px;
 
   &:hover {
-    color: #fff5de;
-    background: #8e609f;
+    background: #e2e2e2;
+    color: #80568f;
+    box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: none;
   }
 }
 
@@ -480,8 +525,9 @@ main > * {
   margin: 6px 0;
 
   #delete-team-button {
-    background: #fff5de;
+    background: #f8f8f8;
     color: #e05260;
+    border-width: 2px;
     border-color: #e05260;
     font-size: 15px;
     font-weight: 700;
@@ -489,7 +535,7 @@ main > * {
     min-width: 130px;
 
     &:hover {
-      color: #fff5de;
+      color: #f5f5f5;
       background: #e05260;
     }
   }
@@ -550,7 +596,6 @@ main > * {
 }
 
 .sliders {
-  background: #fff5de;
   padding: 22px;
   border-radius: 8px;
   min-width: 360px;
@@ -608,9 +653,25 @@ main > * {
   }
 }
 
+.custom-range::-webkit-slider-thumb {
+  background: #385494;
+}
+
+.custom-range::-moz-range-thumb {
+  background: #385494;
+}
+
+.custom-range::-ms-thumb {
+  background: #385494;
+}
+
 .dark-mode {
   main {
     color: #f2f2f2;
+  }
+
+  .box-shadow-effect {
+    box-shadow: none;
   }
 
   .teams-container {
@@ -625,23 +686,40 @@ main > * {
     color: #f2f2f2;
 
     tr:hover {
-      background: #3c5186;
+      background: hsl(267, 94%, 85%);
+      color: rgb(43, 43, 43);
     }
   }
 
   .sliders {
     background: #303136;
+
+    .custom-range::-webkit-slider-thumb {
+      background: hsl(267, 100%, 74%);
+    }
+
+    .custom-range::-moz-range-thumb {
+      background: hsl(267, 100%, 74%);
+    }
+
+    .custom-range::-ms-thumb {
+      background: hsl(267, 100%, 74%);
+    }
   }
 
   .icon-plus-container {
-    background: #47609e;
+    background: #bc85ff;
 
     .icon-plus {
-      color: #f2f2f2;
+      color: #303136;
     }
 
     &:hover {
       box-shadow: 0 5px 15px rgba(114, 137, 192, 0.4);
+
+      .icon-plus {
+        color: #f2f2f2;
+      }
     }
   }
 }

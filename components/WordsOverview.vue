@@ -1,17 +1,30 @@
 <template>
-  <main>
-    <div class="words" v-for="word in words" :key="word.word">
-      <p>{{ word.word }}</p>
-      <div id="switch-container">
-        <b-form-checkbox
-          switch
-          size="lg"
-          v-model="word.correct"
-          @change="updateCorrectWords"
-        ></b-form-checkbox>
+  <div>
+    <BaseLoader v-if="isLoading" />
+
+    <main>
+      <div class="words" v-for="word in words" :key="word.word">
+        <p>{{ word.word }}</p>
+
+        <div id="answer-switch">
+          <input
+            type="checkbox"
+            class="checkbox"
+            name="checkbox"
+            :id="word.word"
+            v-model="word.correct"
+            @change="
+              updateCorrectWords();
+              updateCheckboxColors();
+            "
+          />
+          <label :for="word.word" class="label" name="label">
+            <div class="ball"></div>
+          </label>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -21,6 +34,7 @@ export default {
   data() {
     return {
       words: [],
+      isLoading: true,
     };
   },
   computed: {
@@ -33,6 +47,25 @@ export default {
     updateCorrectWords() {
       this.setPreviousRoundWords(_.cloneDeep(this.words));
     },
+
+    updateCheckboxColors() {
+      const checkboxes = document.getElementsByName('checkbox');
+      const labels = document.getElementsByName('label');
+
+      if (this.isDarkMode) {
+        for (let i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].checked
+            ? (labels[i].style.backgroundColor = '#bb86fc')
+            : (labels[i].style.backgroundColor = '#f2f2f2');
+        }
+      } else {
+        for (let i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].checked
+            ? (labels[i].style.backgroundColor = '#47619e')
+            : (labels[i].style.backgroundColor = '#b3b3b3');
+        }
+      }
+    },
   },
   created() {
     this.words = _.cloneDeep(this.getPreviousRoundWords);
@@ -41,6 +74,9 @@ export default {
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
+
+    this.updateCheckboxColors();
+    this.isLoading = false;
   },
 };
 </script>
@@ -50,7 +86,6 @@ main {
   display: flex;
   flex-direction: column;
   color: #3c5186;
-  font-size: 28px;
 
   .words {
     max-width: 450px;
@@ -58,13 +93,53 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 13px;
+
+    #answer-switch {
+      transform: scale(1.4);
+
+      .label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        border-radius: 50px;
+        height: 26px;
+        width: 50px;
+        position: relative;
+        top: 5px;
+      }
+
+      .ball {
+        background-color: white;
+        position: absolute;
+        height: 22px;
+        top: 2px;
+        left: 2px;
+        border-radius: 50%;
+        width: 22px;
+        transition: transform 0.2s linear;
+      }
+
+      .checkbox {
+        opacity: 0;
+        position: absolute;
+      }
+
+      .checkbox:checked + .label .ball {
+        transform: translateX(24px);
+      }
+
+      .label {
+        cursor: pointer;
+      }
+    }
 
     p {
       position: relative;
       top: 8px;
       user-select: none;
+      font-size: 28px;
     }
 
     #switch-container {
@@ -84,8 +159,14 @@ main {
     color: #f2f2f2;
 
     .words:not(:last-child) {
-    border-bottom: rgba(72, 94, 150, 0.5) 1px solid;
-  }
+      border-bottom: rgba(72, 94, 150, 0.5) 1px solid;
+    }
+
+    #answer-switch {
+      .ball {
+        background-color: #18191b;
+      }
+    }
   }
 }
 </style>

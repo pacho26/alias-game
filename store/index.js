@@ -29,7 +29,7 @@ export const state = () => ({
   durationOfRound: 60,
   chosenLanguage: 'croatian',
   gameInProgress: false,
-  isDarkMode: true,
+  isDarkMode: false,
   isGameScreen: false,
   changingColorTheme: false,
 });

@@ -30,15 +30,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #374b7b;
-$secondary-color: #fff5de;
+$primary-color: #e6e6e6;
+$secondary-color: #374b7b;
 
 * {
   box-sizing: border-box;
 }
 
 .btn {
-  border: 2px $primary-color solid;
   border-radius: 8px;
   padding: 10px;
   width: 300px;
@@ -47,7 +46,7 @@ $secondary-color: #fff5de;
   text-transform: uppercase;
   margin: 10px;
   text-align: center;
-  color: #3c5186;
+  color: #f2f2f2;
   background: $secondary-color;
   margin: 0;
   transition: all 0.2s ease-in-out;
@@ -67,7 +66,6 @@ $secondary-color: #fff5de;
 
 .dark-mode {
   .btn {
-    border-color: #bb86fc;
     background: #bb86fc;
     color: #202124;
 
