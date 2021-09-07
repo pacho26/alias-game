@@ -148,8 +148,8 @@ export const mutations = {
     state.isDarkMode = !state.isDarkMode;
     state.changingColorTheme = true;
   },
-  changeGameScreenStatus(state) {
-    state.isGameScreen = !state.isGameScreen;
+  changeGameScreenStatus(state, status) {
+    state.isGameScreen = status;
   },
 };
 

@@ -116,7 +116,7 @@
                 :buttonText="'No'"
               />
             </div>
-            <div @click="changeGameScreenStatus">
+            <div @click="changeGameScreenStatus(false)">
               <BaseButton
                 class="modal-button confirm-modal-button"
                 :buttonText="'Yes'"
@@ -207,7 +207,7 @@ export default {
   created() {
     this.getWords();
     this.remainingSeconds = this.getDurationOfRound;
-    this.changeGameScreenStatus();
+    this.changeGameScreenStatus(true);
   },
   mounted() {
     this.$refs['game-modal'].show();
@@ -295,7 +295,7 @@ export default {
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
             this.$router.push({ path: 'overview' });
-            this.changeGameScreenStatus();
+            this.changeGameScreenStatus(false);
           }
 
           this.openedModal || this.remainingSeconds < 1

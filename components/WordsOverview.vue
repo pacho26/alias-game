@@ -56,7 +56,7 @@ export default {
         for (let i = 0; i < checkboxes.length; i++) {
           checkboxes[i].checked
             ? (labels[i].style.backgroundColor = '#bb86fc')
-            : (labels[i].style.backgroundColor = '#f2f2f2');
+            : (labels[i].style.backgroundColor = '#e6e6e6');
         }
       } else {
         for (let i = 0; i < checkboxes.length; i++) {

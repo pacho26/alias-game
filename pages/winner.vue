@@ -13,7 +13,12 @@
         @load="stopLoading"
       />
       <img id="team-logo" :src="winningTeam.logo" alt="Team logo" />
-      <div @click="setPreviousTeams">
+      <div
+        @click="
+          setPreviousTeams();
+          changeGameScreenStatus(true);
+        "
+      >
         <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
       </div>
       <audio id="champions-audio">
@@ -45,6 +50,9 @@ export default {
       prev.points > current.points ? prev : current
     );
     this.setGameInProgress(false);
+
+    // It's true because if this page rerenders, song is starting over and over again
+    this.changeGameScreenStatus(true);
   },
   mounted() {
     this.isDarkMode
@@ -52,7 +60,11 @@ export default {
       : document.body.classList.remove('dark-mode');
   },
   methods: {
-    ...mapMutations(['setCurrentTeams', 'setGameInProgress']),
+    ...mapMutations([
+      'setCurrentTeams',
+      'setGameInProgress',
+      'changeGameScreenStatus',
+    ]),
 
     setPreviousTeams() {
       this.setCurrentTeams(this.getAllTeams);

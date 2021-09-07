@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   data() {
@@ -37,8 +37,14 @@ export default {
       ? (this.isLoading = false)
       : setTimeout(() => (this.isLoading = false), 200);
   },
+  created() {
+    this.changeGameScreenStatus(false);
+  },
   computed: {
     ...mapState(['isDarkMode', 'changingColorTheme']),
+  },
+  methods: {
+    ...mapMutations(['setGameInProgress', 'changeGameScreenStatus']),
   },
 };
 </script>
@@ -80,6 +86,7 @@ main {
   text-align: center;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
   :first-of-type {
     margin-bottom: 20px;
@@ -95,4 +102,12 @@ main {
     }
   }
 }
+
+// @media only screen and (max-width: 500px) {
+//   .buttons {
+//     .btn {
+//       width: 80vw;
+//     }
+//   }
+// }
 </style>

@@ -51,6 +51,7 @@
 
           <b-modal
             id="add-team-modal"
+            class="add-team-modal"
             ref="team-modal"
             title="New team"
             hide-footer
@@ -419,6 +420,11 @@ main > * {
 .select-form,
 .team-name-input {
   max-width: 250px;
+  transform: scale(1.2, 1.2);
+}
+
+.select-form {
+  margin-top: 10px;
 }
 
 #add-team-form {
@@ -444,7 +450,8 @@ main > * {
 }
 
 .players-container {
-  margin-top: 20px;
+  transform: scale(1.18, 1.18);
+  margin-top: 34px;
 }
 
 .icon-plus-container {
@@ -486,6 +493,7 @@ main > * {
 #confirm-form-button {
   color: #f5f5f5;
   background: #374b7b;
+  transform: scale(1.2, 1.2);
 
   &:hover {
     background: #e2e2e2;
@@ -505,6 +513,7 @@ main > * {
   font-size: 15px;
   font-weight: 700;
   max-width: 110px;
+  transform: scale(1.2, 1.2);
 
   &:hover {
     background: #e2e2e2;
@@ -533,6 +542,8 @@ main > * {
     font-weight: 700;
     max-width: 280px;
     min-width: 130px;
+    transform: scale(1.09, 1.11);
+    margin-top: 2px;
 
     &:hover {
       color: #f5f5f5;
@@ -543,6 +554,7 @@ main > * {
 
 .modal-buttons {
   margin: 0 auto;
+  margin-top: 24px;
   padding: 12px 0;
   max-width: 280px;
   display: flex;
@@ -727,6 +739,45 @@ main > * {
 @media only screen and (max-width: 1000px) {
   .settings {
     flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .select-form,
+  .team-name-input {
+    max-width: 60vw;
+    transform: scale(1.3, 1.3);
+  }
+
+  .team-name-input {
+    margin-top: 4px;
+  }
+
+  .select-form {
+    margin-top: 14px;
+  }
+
+  .players-container {
+    transform: scale(1.32, 1.32);
+    margin-top: 40px;
+  }
+
+  .modal-buttons {
+    margin-top: 46px;
+
+    #close-form-button {
+      transform: scale(1.4, 1.4);
+    }
+
+    #confirm-form-button {
+      transform: scale(1.4, 1.4);
+    }
+  }
+
+  #delete-team-button {
+    margin-top: 8px;
+    transform: scale(1.17, 1.17);
+    margin-bottom: 10px;
   }
 }
 </style>

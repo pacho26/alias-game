@@ -50,7 +50,6 @@ $secondary-color: #374b7b;
   background: $secondary-color;
   margin: 0;
   transition: all 0.2s ease-in-out;
-  max-width: 250px;
 
   &:hover {
     background: $primary-color;
@@ -73,6 +72,12 @@ $secondary-color: #374b7b;
       color: #f2f2f2;
       box-shadow: 0 5px 15px rgba(145, 92, 182, 0.4);
     }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .btn {
+    width: 80vw;
   }
 }
 </style>
