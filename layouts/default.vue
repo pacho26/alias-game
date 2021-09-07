@@ -114,7 +114,7 @@ header {
 }
 
 #theme-switch {
-  transform: scale(1.4);
+  transform: scale(1.42);
 
   .label {
     display: flex;
@@ -194,6 +194,20 @@ header {
     span {
       color: #ffb2ff;
     }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #theme-switch {
+    position: relative;
+    right: 6px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #theme-switch {
+    position: relative;
+    left: 1.5vw;
   }
 }
 </style>

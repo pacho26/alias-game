@@ -413,10 +413,6 @@ main > * {
   }
 }
 
-.name-input {
-  max-width: 183px;
-}
-
 .select-form,
 .team-name-input {
   max-width: 250px;
@@ -435,6 +431,16 @@ main > * {
   border: none;
   font-family: 'Poppins', sans-serif;
   margin: 14px 0;
+
+  .select-form {
+    color: #374b7b;
+    font-weight: 500;
+  }
+
+  .team-name-input {
+    color: #374b7b;
+    font-weight: 700;
+  }
 }
 
 #error-message {
@@ -452,6 +458,14 @@ main > * {
 .players-container {
   transform: scale(1.18, 1.18);
   margin-top: 34px;
+  color: #374b7b;
+  font-weight: 600;
+
+  .name-input {
+    color: #374b7b;
+    font-weight: 500;
+    max-width: 183px;
+  }
 }
 
 .icon-plus-container {
@@ -534,7 +548,7 @@ main > * {
   margin: 6px 0;
 
   #delete-team-button {
-    background: #f8f8f8;
+    background: #f5f5f5;
     color: #e05260;
     border-width: 2px;
     border-color: #e05260;
@@ -543,7 +557,7 @@ main > * {
     max-width: 280px;
     min-width: 130px;
     transform: scale(1.09, 1.11);
-    margin-top: 2px;
+    margin: 2px 0;
 
     &:hover {
       color: #f5f5f5;
@@ -758,12 +772,13 @@ main > * {
   }
 
   .players-container {
-    transform: scale(1.32, 1.32);
+    transform: scale(1.34, 1.34);
     margin-top: 40px;
   }
 
   .modal-buttons {
     margin-top: 46px;
+    max-width: 66vw;
 
     #close-form-button {
       transform: scale(1.4, 1.4);
@@ -774,10 +789,13 @@ main > * {
     }
   }
 
-  #delete-team-button {
-    margin-top: 8px;
-    transform: scale(1.17, 1.17);
-    margin-bottom: 10px;
+  #delete-team-container {
+    #delete-team-button {
+      margin-top: 8px;
+      margin-bottom: 10px;
+      transform: scale(1.2, 1.2);
+      max-width: 63vw;
+    }
   }
 }
 </style>
