@@ -101,13 +101,12 @@ main {
   }
 
   #team-name {
-    color: #2f406a;
+    color: #374b7b;
     font-size: 48px;
     font-weight: 700;
     position: relative;
     bottom: 40px;
     text-align: center;
-    text-shadow: 2px 2px #c8a104;
   }
 
   #btn {
@@ -119,8 +118,7 @@ main {
 .dark-mode {
   main {
     #team-name {
-      color: #f2f2f2;
-      text-shadow: 2px 2px rgba(187, 134, 252, 0.8);
+      color: #ffb2ff;
     }
   }
 }

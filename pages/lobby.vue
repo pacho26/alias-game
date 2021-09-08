@@ -130,7 +130,7 @@
           </b-modal>
         </div>
 
-        <div class="sliders box-shadow-effect">
+        <div class="settings-container box-shadow-effect">
           <h3>SETTINGS</h3>
           <div class="slider">
             Target result: <span>{{ targetResult }}</span>
@@ -149,6 +149,7 @@
           </div>
           <b-form-input
             v-model="duration"
+            class="custom-range"
             type="range"
             min="30"
             max="90"
@@ -237,6 +238,10 @@ export default {
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
+
+    if (this.getCurrentTeams.length === 0) {
+      this.isLoading = false;
+    }
   },
   methods: {
     ...mapMutations([
@@ -387,7 +392,7 @@ main > * {
 .settings {
   display: flex;
 
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-evenly;
@@ -397,7 +402,7 @@ main > * {
 }
 
 .teams-container {
-  padding: 20px 0;
+  padding: 23px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -408,7 +413,7 @@ main > * {
 
   h3 {
     color: #374b7b;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 14px;
   }
 }
@@ -621,15 +626,15 @@ main > * {
   }
 }
 
-.sliders {
-  padding: 22px;
+.settings-container {
+  padding: 23px 28px;
   border-radius: 8px;
   min-width: 360px;
 
   h3 {
     text-align: center;
     margin-bottom: 14px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .flags {
@@ -658,10 +663,12 @@ main > * {
     display: flex;
     align-items: center;
     justify-content: center;
+
     span {
       font-weight: 800;
       font-size: 26px;
       margin-left: 7px;
+      max-width: 30px;
     }
   }
 
@@ -670,11 +677,14 @@ main > * {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    right: 12px;
 
     span {
       font-weight: 700;
       font-size: 24px;
       margin-left: 7px;
+      max-width: 80px;
     }
   }
 }
@@ -694,6 +704,10 @@ main > * {
 .dark-mode {
   main {
     color: #f2f2f2;
+
+    h2 {
+      font-size: 5vw;
+    }
   }
 
   .box-shadow-effect {
@@ -711,13 +725,17 @@ main > * {
   #teams-table {
     color: #f2f2f2;
 
+    #team-placeholder {
+      color: #f2f2f2;
+    }
+
     tr:hover {
       background: hsl(267, 94%, 85%);
       color: rgb(43, 43, 43);
     }
   }
 
-  .sliders {
+  .settings-container {
     background: #303136;
 
     .custom-range::-webkit-slider-thumb {
@@ -754,9 +772,24 @@ main > * {
   .settings {
     flex-direction: column;
   }
-}
 
-@media only screen and (max-width: 600px) {
+  .teams-container {
+    min-width: 91vw;
+
+    #teams-table {
+      min-width: 91vw;
+    }
+  }
+
+  .settings-container {
+    min-width: 91vw;
+    padding: 24px 12vw;
+
+    .custom-range {
+      transform: scale(1.15, 1.15);
+    }
+  }
+
   .select-form,
   .team-name-input {
     max-width: 60vw;

@@ -41,7 +41,7 @@ export default {
     return {
       componentKey: 0,
       darkMode: false,
-      bgColor: '#d1dffa',
+      bgColor: '#d0defb',
     };
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
           ? ((document.body.style.backgroundColor = '#202124'),
             (this.bgColor = '#000'))
           : ((document.body.style.backgroundColor = 'white'),
-            (this.bgColor = '#d1dffa'));
+            (this.bgColor = '#d0defb'));
         this.forceRerender();
       }, 200);
     },

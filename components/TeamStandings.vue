@@ -102,7 +102,7 @@ main {
     color: #f2f2f2;
 
     tr:not(:last-child) {
-      border-bottom: rgba(72, 94, 150, 0.5) 1px solid;
+      border-bottom: rgba(187, 134, 252, 0.3) 1px solid;
     }
   }
 }
