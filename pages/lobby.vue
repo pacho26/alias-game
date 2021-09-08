@@ -704,10 +704,6 @@ main > * {
 .dark-mode {
   main {
     color: #f2f2f2;
-
-    h2 {
-      font-size: 5vw;
-    }
   }
 
   .box-shadow-effect {
@@ -769,6 +765,12 @@ main > * {
 }
 
 @media only screen and (max-width: 1000px) {
+  main {
+    h2 {
+      font-size: 5.1vw;
+    }
+  }
+
   .settings {
     flex-direction: column;
   }
