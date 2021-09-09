@@ -1,42 +1,52 @@
 <template>
-  <main>
-    <h2>{{ strings.rules }}</h2>
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse ab autem
-      voluptatibus sequi quam distinctio harum. Aut aperiam dignissimos
-      exercitationem accusantium a quod ratione eum quis sint, aspernatur
-      similique voluptas commodi, et quia numquam reprehenderit? Maxime sed
-      porro aliquid, expedita tempora minima non eum doloribus aperiam possimus
-      qui repudiandae sunt iure sapiente cumque iusto magnam tempore culpa! Enim
-      est corporis autem error praesentium molestias consectetur accusantium
-      accusamus. Iure repellendus corporis reiciendis nihil quas repudiandae
-      quia qui esse. Obcaecati, dolore nesciunt et veniam aut recusandae laborum
-      consequatur rerum mollitia modi pariatur blanditiis voluptates minus
-      quisquam doloremque? Error laudantium voluptatum dolorem adipisci.
-    </p>
-    <BaseButton class="btn" :to="'/'" :buttonText="this.strings.return" />
-  </main>
+  <div>
+    <BaseLoader v-if="isLoading" />
+
+    <main v-if="getStartedOnIndexPage">
+      <h2>{{ strings.rules }}</h2>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse ab autem
+        voluptatibus sequi quam distinctio harum. Aut aperiam dignissimos
+        exercitationem accusantium a quod ratione eum quis sint, aspernatur
+        similique voluptas commodi, et quia numquam reprehenderit? Maxime sed
+        porro aliquid, expedita tempora minima non eum doloribus aperiam
+        possimus qui repudiandae sunt iure sapiente cumque iusto magnam tempore
+        culpa! Enim est corporis autem error praesentium molestias consectetur
+        accusantium accusamus. Iure repellendus corporis reiciendis nihil quas
+        repudiandae quia qui esse. Obcaecati, dolore nesciunt et veniam aut
+        recusandae laborum consequatur rerum mollitia modi pariatur blanditiis
+        voluptates minus quisquam doloremque? Error laudantium voluptatum
+        dolorem adipisci.
+      </p>
+      <BaseButton class="btn" :to="'/'" :buttonText="this.strings.return" />
+    </main>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       strings: {},
+      isLoading: true,
     };
   },
   computed: {
     ...mapState(['isDarkMode', 'chosenLanguage']),
+    ...mapGetters(['getStartedOnIndexPage']),
   },
   created() {
-    this.translate();
+    !this.getStartedOnIndexPage
+      ? this.$router.push({ path: '/' })
+      : this.translate();
   },
   mounted() {
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
+    this.isLoading = false;
   },
   methods: {
     translate() {

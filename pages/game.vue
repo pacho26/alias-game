@@ -2,7 +2,7 @@
   <div>
     <BaseLoader v-if="isLoading" />
 
-    <main>
+    <main v-if="getStartedOnIndexPage">
       <section>
         <div id="pause-and-points">
           <div id="pause-container" @click="openGameModal">
@@ -179,15 +179,9 @@ export default {
       pausedCountdownSound: false,
       isLoading: true,
       strings: {},
-      correctSound: new Audio(
-        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fcorrect-sfx.mp3?alt=media&token=13f14255-18dc-491e-9908-95e7d74cef22'
-      ),
-      wrongSound: new Audio(
-        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwrong-sfx.mp3?alt=media&token=a72529cf-6280-4f4d-b90d-63d6e8d703c2'
-      ),
-      countdownSound: new Audio(
-        'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=1de94261-6906-48b1-a67c-11d63be6df33'
-      ),
+      correctSound: '',
+      wrongSound: '',
+      countdownSound: '',
     };
   },
   computed: {
@@ -195,6 +189,7 @@ export default {
       'getCurrentTeams',
       'getCurrentTeamIndex',
       'getDurationOfRound',
+      'getStartedOnIndexPage',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
@@ -206,17 +201,30 @@ export default {
     },
   },
   created() {
-    this.translate();
-    this.getWords();
-    this.remainingSeconds = this.getDurationOfRound;
-    this.changeGameScreenStatus(true);
+    !this.getStartedOnIndexPage
+      ? this.$router.push({ path: '/' })
+      : (this.translate(),
+        this.getWords(),
+        (this.remainingSeconds = this.getDurationOfRound),
+        this.changeGameScreenStatus(true),
+        (this.correctSound = new Audio(
+          'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fcorrect-sfx.mp3?alt=media&token=13f14255-18dc-491e-9908-95e7d74cef22'
+        )),
+        (this.wrongSound = new Audio(
+          'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwrong-sfx.mp3?alt=media&token=a72529cf-6280-4f4d-b90d-63d6e8d703c2'
+        )),
+        (this.countdownSound = new Audio(
+          'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=1de94261-6906-48b1-a67c-11d63be6df33'
+        )));
   },
   mounted() {
-    this.$refs['game-modal'].show();
+    if (this.getStartedOnIndexPage) {
+      this.$refs['game-modal'].show();
 
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
+      this.isDarkMode
+        ? document.body.classList.add('dark-mode')
+        : document.body.classList.remove('dark-mode');
+    }
   },
   methods: {
     ...mapMutations('words', [

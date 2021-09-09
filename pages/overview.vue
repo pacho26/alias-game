@@ -1,36 +1,45 @@
 <template>
-  <main>
-    <h1>{{ strings.modifyAnswers }}</h1>
-    <div class="words-container">
-      <WordsOverview />
-    </div>
-    <div id="btn" @click="addPoints">
-      <BaseButton :to="'/standings'" :buttonText="strings.continue" />
-    </div>
-  </main>
+  <div>
+    <BaseLoader v-if="isLoading" />
+
+    <main v-if="getStartedOnIndexPage">
+      <h1>{{ strings.modifyAnswers }}</h1>
+      <div class="words-container">
+        <WordsOverview />
+      </div>
+      <div id="btn" @click="addPoints">
+        <BaseButton :to="'/standings'" :buttonText="strings.continue" />
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       strings: {},
+      isLoading: true,
     };
   },
   computed: {
     ...mapState('words', ['previousRoundWords']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
+    ...mapGetters(['getStartedOnIndexPage']),
   },
   created() {
-    this.translate();
-    this.changeGameScreenStatus(false);
+    !this.getStartedOnIndexPage
+      ? this.$router.push({ path: '/' })
+      : (this.translate(), this.changeGameScreenStatus(false));
   },
   mounted() {
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
+
+    this.isLoading = false;
   },
   methods: {
     ...mapMutations(['setPoints', 'changeGameScreenStatus']),

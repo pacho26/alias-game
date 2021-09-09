@@ -2,7 +2,7 @@
   <div>
     <BaseLoader v-if="isLoading" />
 
-    <main>
+    <main v-if="getStartedOnIndexPage">
       <div class="settings">
         <div class="teams-container box-shadow-effect">
           <h3>{{ strings.teams }}</h3>
@@ -220,14 +220,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCurrentTeams']),
+    ...mapGetters(['getCurrentTeams', 'getStartedOnIndexPage']),
     ...mapState('colors', ['colors']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
   },
   created() {
-    this.translate();
-    this.mobileScreen = screen.width < 1000 ? true : false;
-    this.setGameInProgress(false);
+    !this.getStartedOnIndexPage
+      ? this.$router.push({ path: '/' })
+      : (this.translate(),
+        (this.mobileScreen = screen.width < 1000 ? true : false),
+        this.setGameInProgress(false));
   },
   mounted() {
     this.isDarkMode

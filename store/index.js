@@ -32,6 +32,7 @@ export const state = () => ({
   isDarkMode: false,
   isGameScreen: false,
   changingColorTheme: false,
+  startedOnIndexPage: false,
 });
 
 export const getters = {
@@ -71,6 +72,9 @@ export const getters = {
   },
   getHasWinner(state) {
     return state.hasWinner;
+  },
+  getStartedOnIndexPage(state) {
+    return state.startedOnIndexPage;
   },
 };
 
@@ -150,6 +154,9 @@ export const mutations = {
   },
   changeGameScreenStatus(state, status) {
     state.isGameScreen = status;
+  },
+  startingFromIndexPage(state) {
+    state.startedOnIndexPage = true;
   },
 };
 

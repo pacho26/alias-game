@@ -2,7 +2,7 @@
   <div>
     <BaseLoader v-if="isLoading" />
 
-    <main>
+    <main v-if="getStartedOnIndexPage">
       <TeamStandings @stopLoading="onImagesLoaded" />
       <div v-if="!getHasWinner" class="btn">
         <BaseButton :to="'/game'" :buttonText="strings.continue" />
@@ -25,11 +25,16 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getHasWinner', 'getChosenLanguage']),
+    ...mapGetters([
+      'getHasWinner',
+      'getChosenLanguage',
+      'getStartedOnIndexPage',
+    ]),
   },
   created() {
-    this.translate();
-    this.continueOnNextTeam();
+    !this.getStartedOnIndexPage
+      ? this.$router.push({ path: '/' })
+      : (this.translate(), this.continueOnNextTeam());
   },
   methods: {
     ...mapMutations(['continueOnNextTeam']),

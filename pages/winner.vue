@@ -2,7 +2,7 @@
   <div>
     <BaseLoader v-if="isLoading" />
 
-    <main>
+    <main v-if="getStartedOnIndexPage">
       <h1 id="team-name">
         {{ winningTeam.name.toUpperCase() }}
       </h1>
@@ -43,17 +43,22 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getAllTeams', 'getChosenLanguage']),
+    ...mapGetters([
+      'getAllTeams',
+      'getChosenLanguage',
+      'getStartedOnIndexPage',
+    ]),
     ...mapState(['isDarkMode']),
   },
   created() {
-    this.winningTeam = this.getAllTeams.reduce((prev, current) =>
-      prev.points > current.points ? prev : current
-    );
-    this.setGameInProgress(false);
-
-    // It's true because if this page rerenders, song is starting over and over again
-    this.changeGameScreenStatus(true);
+    !this.getStartedOnIndexPage
+      ? this.$router.push({ path: '/' })
+      : ((this.winningTeam = this.getAllTeams.reduce((prev, current) =>
+          prev.points > current.points ? prev : current
+        )),
+        this.setGameInProgress(false),
+        // It's true because if this page rerenders, song is starting over and over again
+        this.changeGameScreenStatus(true));
   },
   mounted() {
     this.translate();

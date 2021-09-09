@@ -64,6 +64,8 @@ export default {
     };
   },
   created() {
+    // to prevent redirecting if starting page is not index.vue
+    this.startingFromIndexPage();
     this.translate();
     this.changeGameScreenStatus(false);
   },
@@ -89,6 +91,7 @@ export default {
       'setGameInProgress',
       'changeGameScreenStatus',
       'setLanguage',
+      'startingFromIndexPage',
     ]),
 
     selectFlag() {
