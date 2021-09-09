@@ -55,7 +55,7 @@
           <div>
             <h1>{{ getCurrentTeams[getCurrentTeamIndex].name }}</h1>
             <h4>
-              Explaining:
+              {{ strings.explaining }}:
               <span>{{
                 getCurrentTeams[getCurrentTeamIndex].players[
                   getCurrentTeams[getCurrentTeamIndex].explainingPlayerIndex
@@ -73,7 +73,7 @@
             >
               <BaseButton
                 class="modal-button close-modal-button"
-                :buttonText="'Quit'"
+                :buttonText="strings.quit"
               />
             </div>
             <div
@@ -103,7 +103,7 @@
         centered
       >
         <div id="quit-modal">
-          <h2>Are you sure?</h2>
+          <h2>{{ strings.areYouSure }}?</h2>
           <div class="modal-buttons">
             <div
               @click="
@@ -113,13 +113,13 @@
             >
               <BaseButton
                 class="modal-button close-modal-button"
-                :buttonText="'No'"
+                :buttonText="strings.no"
               />
             </div>
             <div @click="changeGameScreenStatus(false)">
               <BaseButton
                 class="modal-button confirm-modal-button"
-                :buttonText="'Yes'"
+                :buttonText="strings.yes"
                 :to="'/lobby'"
               />
             </div>
@@ -174,10 +174,11 @@ export default {
       wrongWordsCounter: 0,
       showCurrentWord: false,
       showCheatPicture: false,
-      gameModalText: 'Play',
+      gameModalText: '',
       openedModal: false,
       pausedCountdownSound: false,
       isLoading: true,
+      strings: {},
       correctSound: new Audio(
         'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fcorrect-sfx.mp3?alt=media&token=13f14255-18dc-491e-9908-95e7d74cef22'
       ),
@@ -196,7 +197,7 @@ export default {
       'getDurationOfRound',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
-    ...mapState(['isDarkMode']),
+    ...mapState(['isDarkMode', 'chosenLanguage']),
 
     colorChangeDuration() {
       return {
@@ -205,6 +206,7 @@ export default {
     },
   },
   created() {
+    this.translate();
     this.getWords();
     this.remainingSeconds = this.getDurationOfRound;
     this.changeGameScreenStatus(true);
@@ -291,11 +293,9 @@ export default {
         function () {
           if (this.remainingSeconds === 0) {
             this.shake(false);
-
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
             this.$router.push({ path: 'overview' });
-            this.changeGameScreenStatus(false);
           }
 
           this.openedModal || this.remainingSeconds < 1
@@ -333,7 +333,10 @@ export default {
     },
     openGameModal() {
       this.openedModal = true;
-      this.gameModalText = 'Continue';
+      this.chosenLanguage === 'english'
+        ? (this.gameModalText = 'Continue')
+        : (this.gameModalText = 'Nastavi');
+
       this.$refs['game-modal'].show();
       this.shake(false);
       this.countdownSound.pause();
@@ -349,6 +352,21 @@ export default {
         this.countdownSound.play();
         this.shake(true);
       }
+    },
+    translate() {
+      this.chosenLanguage === 'english'
+        ? ((this.strings.explaining = 'Explaining'),
+          (this.strings.quit = 'Quit'),
+          (this.gameModalText = 'Play'),
+          (this.strings.no = 'No'),
+          (this.strings.yes = 'Yes'),
+          (this.strings.areYouSure = 'Are you sure'))
+        : ((this.strings.explaining = 'Objašnjava'),
+          (this.strings.quit = 'Izađi'),
+          (this.gameModalText = 'Igraj'),
+          (this.strings.no = 'Ne'),
+          (this.strings.yes = 'Da'),
+          (this.strings.areYouSure = 'Jeste li sigurni'));
     },
   },
 };

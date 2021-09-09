@@ -5,14 +5,16 @@
     <main>
       <div class="settings">
         <div class="teams-container box-shadow-effect">
-          <h3>CURRENT TEAMS</h3>
+          <h3>{{ strings.teams }}</h3>
           <div id="teams-table">
             <table style="width: 100%">
               <tr
                 id="team-placeholder"
                 v-if="this.getCurrentTeams.length === 0"
               >
-                Add teams to start the game.
+                {{
+                  strings.addTeamsToStart
+                }}
               </tr>
               <tr
                 v-for="team in this.getCurrentTeams"
@@ -43,7 +45,7 @@
           <div
             v-else
             class="icon-plus-container"
-            v-b-tooltip.hover.right="'Add a new team!'"
+            v-b-tooltip.hover.right="strings.tooltipAddTeam"
             @click="openEmptyTeamModal"
           >
             <fa class="icon-plus" icon="plus"></fa>
@@ -62,14 +64,22 @@
               <b-form-input
                 class="mb-3 team-name-input"
                 v-model.trim="newTeamName"
-                placeholder="Enter team name"
+                :placeholder="strings.enterTeamName"
                 autocomplete="off"
               ></b-form-input>
 
               <b-form-select
+                v-if="chosenLanguage === 'english'"
                 class="select-form"
                 v-model="numberOfPlayers"
-                :options="options"
+                :options="optionsEnglish"
+              ></b-form-select>
+
+              <b-form-select
+                v-else
+                class="select-form"
+                v-model="numberOfPlayers"
+                :options="optionsCroatian"
               ></b-form-select>
 
               <div class="players-container">
@@ -78,12 +88,12 @@
                   v-for="index in numberOfPlayers"
                   :key="index"
                 >
-                  <p class="pr-2 mt-3">Player {{ index }}:</p>
+                  <p class="pr-2 mt-3">{{ strings.player }} {{ index }}:</p>
                   <b-form-input
                     class="name-input"
                     v-model.trim="names[index - 1]"
                     @keyup.enter="addTeamMethod()"
-                    placeholder="Enter player's name"
+                    :placeholder="strings.enterPlayerName"
                     autocomplete="off"
                   ></b-form-input>
                 </div>
@@ -91,7 +101,7 @@
             </div>
 
             <p id="error-message" v-if="unfinishedForm">
-              You have some empty values!
+              {{ strings.emptyValues }}
             </p>
 
             <div class="modal-buttons">
@@ -101,21 +111,24 @@
                   clearForm();
                 "
               >
-                <BaseButton id="close-form-button" :buttonText="'Cancel'" />
+                <BaseButton
+                  id="close-form-button"
+                  :buttonText="strings.cancel"
+                />
               </div>
 
               <div v-if="!editingTeam" @click="addTeamMethod">
                 <BaseButton
                   id="confirm-form-button"
                   class="add-team-button"
-                  :buttonText="'Add team'"
+                  :buttonText="strings.addTeam"
                 />
               </div>
               <div v-else @click="addTeamMethod">
                 <BaseButton
                   id="confirm-form-button"
                   class="add-team-button"
-                  :buttonText="'Confirm'"
+                  :buttonText="strings.confirm"
                 />
               </div>
             </div>
@@ -125,15 +138,18 @@
               id="delete-team-container"
               @click="deleteTeam"
             >
-              <BaseButton id="delete-team-button" :buttonText="'Delete team'" />
+              <BaseButton
+                id="delete-team-button"
+                :buttonText="strings.deleteTeam"
+              />
             </div>
           </b-modal>
         </div>
 
         <div class="settings-container box-shadow-effect">
-          <h3>SETTINGS</h3>
+          <h3>{{ strings.settings }}</h3>
           <div class="slider">
-            Target result: <span>{{ targetResult }}</span>
+            {{ strings.targetResult }}: <span>{{ targetResult }}</span>
           </div>
           <b-form-input
             v-model="targetResult"
@@ -145,7 +161,7 @@
           ></b-form-input>
 
           <div class="slider mt-4">
-            Duration of the round: <span>{{ duration }}</span>
+            {{ strings.duration }}: <span>{{ duration }}</span>
           </div>
           <b-form-input
             v-model="duration"
@@ -155,46 +171,18 @@
             max="90"
             step="10"
           ></b-form-input>
-
-          <div>
-            <p id="selected-language" class="mt-4">
-              Selected language:
-              <span>{{
-                selectedLanguage.charAt(0).toUpperCase() +
-                selectedLanguage.slice(1)
-              }}</span>
-            </p>
-            <div class="flags">
-              <img
-                src="../assets/countryFlags/croatia.svg"
-                alt="Croatia flag"
-                id="croatia-flag"
-                class="flag"
-                @click="
-                  selectedLanguage = 'croatian';
-                  selectFlag();
-                "
-              />
-              <img
-                src="../assets/countryFlags/united-kingdom.svg"
-                alt="United Kingdom flag"
-                id="united-kingdom-flag"
-                class="flag"
-                @click="
-                  selectedLanguage = 'english';
-                  selectFlag();
-                "
-              />
-            </div>
-          </div>
         </div>
       </div>
 
       <div v-if="this.getCurrentTeams.length >= 2" @click="setConfiguration">
-        <BaseButton id="startBtn" :buttonText="'Start game'" :to="'/game'" />
+        <BaseButton
+          id="startBtn"
+          :buttonText="strings.startGame"
+          :to="'/game'"
+        />
       </div>
 
-      <h2 v-else>There must be at least 2 teams!</h2>
+      <h2 v-else>{{ strings.thereMustBe }}</h2>
     </main>
   </div>
 </template>
@@ -208,11 +196,17 @@ export default {
       newTeamName: '',
       currentTeamIndex: '',
       numberOfPlayers: null,
-      options: [
+      optionsEnglish: [
         { value: null, text: 'Select number of players', disabled: true },
         { value: 2, text: '2 players' },
         { value: 3, text: '3 players' },
         { value: 4, text: '4 players' },
+      ],
+      optionsCroatian: [
+        { value: null, text: 'Odaberi broj igrača', disabled: true },
+        { value: 2, text: '2 igrača' },
+        { value: 3, text: '3 igrača' },
+        { value: 4, text: '4 igrača' },
       ],
       names: [],
       unfinishedForm: false,
@@ -220,17 +214,18 @@ export default {
       previousTeamName: '',
       targetResult: '60',
       duration: '60',
-      selectedLanguage: 'croatian',
       mobileScreen: false,
       isLoading: true,
+      strings: {},
     };
   },
   computed: {
     ...mapGetters(['getCurrentTeams']),
     ...mapState('colors', ['colors']),
-    ...mapState(['isDarkMode']),
+    ...mapState(['isDarkMode', 'chosenLanguage']),
   },
   created() {
+    this.translate();
     this.mobileScreen = screen.width < 1000 ? true : false;
     this.setGameInProgress(false);
   },
@@ -249,7 +244,6 @@ export default {
       'editTeam',
       'setTargetResult',
       'setDurationOfRound',
-      'setLanguage',
       'clearPreviousGame',
       'deleteTeamByIndex',
       'setGameInProgress',
@@ -329,26 +323,49 @@ export default {
       this.names = [];
       this.unfinishedForm = false;
     },
-    selectFlag() {
-      switch (this.selectedLanguage) {
-        case 'croatian':
-          document.getElementById('croatia-flag').style.opacity = '1';
-          document.getElementById('united-kingdom-flag').style.opacity = '0.5';
-          break;
-        case 'english':
-          document.getElementById('croatia-flag').style.opacity = '0.5';
-          document.getElementById('united-kingdom-flag').style.opacity = '1';
-          break;
-      }
-    },
     setConfiguration() {
       this.setTargetResult(+this.targetResult);
       this.setDurationOfRound(+this.duration);
-      this.setLanguage(this.selectedLanguage);
       this.clearPreviousGame();
     },
     onImageLoad() {
       this.isLoading = false;
+    },
+    translate() {
+      this.chosenLanguage === 'english'
+        ? ((this.strings.teams = 'Teams'.toUpperCase()),
+          (this.strings.addTeamsToStart = 'Add teams to start the game.'),
+          (this.strings.tooltipAddTeam = 'Add a new team!'),
+          (this.strings.emptyValues = 'You have some empty values!'),
+          (this.strings.cancel = 'Cancel'),
+          (this.strings.addTeam = 'Add team'),
+          (this.strings.confirm = 'Confirm'),
+          (this.strings.deleteTeam = 'Delete team'),
+          (this.strings.settings = 'Settings'.toUpperCase()),
+          (this.strings.targetResult = 'Target result'),
+          (this.strings.duration = 'Duration of the round'),
+          (this.strings.startGame = 'Start game'),
+          (this.strings.thereMustBe = 'There must be at least 2 teams!'),
+          (this.strings.enterTeamName = 'Enter team name'),
+          (this.strings.enterPlayerName = "Enter player's name"),
+          (this.strings.player = 'Player'))
+        : ((this.strings.teams = 'Ekipe'.toUpperCase()),
+          (this.strings.addTeamsToStart =
+            'Dodajte ekipe kako bi započeli igru.'),
+          (this.strings.tooltipAddTeam = 'Dodajte novu ekipu!'),
+          (this.strings.emptyValues = 'Niste unijeli sva polja!'),
+          (this.strings.cancel = 'Odustani'),
+          (this.strings.addTeam = 'Dodaj'),
+          (this.strings.confirm = 'Potvrdi'),
+          (this.strings.deleteTeam = 'Izbriši ekipu'),
+          (this.strings.settings = 'Postavke'.toUpperCase()),
+          (this.strings.targetResult = 'Ciljni rezultat'),
+          (this.strings.duration = 'Vrijeme trajanja runde'),
+          (this.strings.startGame = 'Započni igru'),
+          (this.strings.thereMustBe = 'Morate unijeti barem 2 ekipe!'),
+          (this.strings.enterTeamName = 'Unesite ime ekipe'),
+          (this.strings.enterPlayerName = 'Unesite ime igrača'),
+          (this.strings.player = 'Igrač'));
     },
   },
 };
@@ -391,7 +408,6 @@ main > * {
 
 .settings {
   display: flex;
-
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
@@ -627,35 +643,14 @@ main > * {
 }
 
 .settings-container {
-  padding: 23px 28px;
+  padding: 23px 28px 30px;
   border-radius: 8px;
   min-width: 360px;
 
   h3 {
     text-align: center;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     font-weight: 700;
-  }
-
-  .flags {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-
-    .flag {
-      max-width: 60px;
-      cursor: pointer;
-      margin: 0;
-      transition: 0.2s;
-
-      &:hover {
-        transform: scale(1.2, 1.2);
-      }
-    }
-
-    #united-kingdom-flag {
-      opacity: 0.5;
-    }
   }
 
   .slider {
@@ -669,22 +664,6 @@ main > * {
       font-size: 26px;
       margin-left: 7px;
       max-width: 30px;
-    }
-  }
-
-  #selected-language {
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    right: 12px;
-
-    span {
-      font-weight: 700;
-      font-size: 24px;
-      margin-left: 7px;
-      max-width: 80px;
     }
   }
 }

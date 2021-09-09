@@ -19,7 +19,7 @@
           changeGameScreenStatus(true);
         "
       >
-        <BaseButton id="btn" :to="'lobby'" :buttonText="'Go to lobby'" />
+        <BaseButton id="btn" :to="'lobby'" :buttonText="strings.goToLobby" />
       </div>
       <audio id="champions-audio">
         <source
@@ -39,10 +39,11 @@ export default {
     return {
       winningTeam: {},
       isLoading: true,
+      strings: {},
     };
   },
   computed: {
-    ...mapGetters(['getAllTeams']),
+    ...mapGetters(['getAllTeams', 'getChosenLanguage']),
     ...mapState(['isDarkMode']),
   },
   created() {
@@ -55,6 +56,7 @@ export default {
     this.changeGameScreenStatus(true);
   },
   mounted() {
+    this.translate();
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
@@ -72,6 +74,11 @@ export default {
     stopLoading() {
       this.isLoading = false;
       document.getElementById('champions-audio').play();
+    },
+    translate() {
+      this.getChosenLanguage === 'english'
+        ? (this.strings.goToLobby = 'Go to lobby')
+        : (this.strings.goToLobby = 'Povratak');
     },
   },
 };

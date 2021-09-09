@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h2>Rules</h2>
+    <h2>{{ strings.rules }}</h2>
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse ab autem
       voluptatibus sequi quam distinctio harum. Aut aperiam dignissimos
@@ -14,7 +14,7 @@
       consequatur rerum mollitia modi pariatur blanditiis voluptates minus
       quisquam doloremque? Error laudantium voluptatum dolorem adipisci.
     </p>
-    <BaseButton class="btn" :to="'/'" :buttonText="'Return to menu'" />
+    <BaseButton class="btn" :to="'/'" :buttonText="this.strings.return" />
   </main>
 </template>
 
@@ -22,13 +22,30 @@
 import { mapState } from 'vuex';
 
 export default {
+  data() {
+    return {
+      strings: {},
+    };
+  },
   computed: {
-    ...mapState(['isDarkMode']),
+    ...mapState(['isDarkMode', 'chosenLanguage']),
+  },
+  created() {
+    this.translate();
   },
   mounted() {
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
+  },
+  methods: {
+    translate() {
+      this.chosenLanguage === 'english'
+        ? ((this.strings.return = 'Return to menu'),
+          (this.strings.rules = 'Rules'))
+        : ((this.strings.return = 'Povratak na izbornik'),
+          (this.strings.rules = 'Pravila'));
+    },
   },
 };
 </script>
@@ -61,6 +78,7 @@ main {
   .btn {
     transform: scale(0.9, 0.9);
     margin-top: 16px;
+    min-width: 350px;
   }
 }
 

@@ -5,10 +5,10 @@
     <main>
       <TeamStandings @stopLoading="onImagesLoaded" />
       <div v-if="!getHasWinner" class="btn">
-        <BaseButton :to="'/game'" :buttonText="'Continue'" />
+        <BaseButton :to="'/game'" :buttonText="strings.continue" />
       </div>
       <div v-else class="btn">
-        <BaseButton :to="'/winner'" :buttonText="'Finish'" />
+        <BaseButton :to="'/winner'" :buttonText="strings.finish" />
       </div>
     </main>
   </div>
@@ -21,10 +21,15 @@ export default {
   data() {
     return {
       isLoading: true,
+      strings: {},
     };
   },
   computed: {
-    ...mapGetters(['getHasWinner']),
+    ...mapGetters(['getHasWinner', 'getChosenLanguage']),
+  },
+  created() {
+    this.translate();
+    this.continueOnNextTeam();
   },
   methods: {
     ...mapMutations(['continueOnNextTeam']),
@@ -32,9 +37,13 @@ export default {
     onImagesLoaded() {
       this.isLoading = false;
     },
-  },
-  created() {
-    this.continueOnNextTeam();
+    translate() {
+      this.getChosenLanguage === 'english'
+        ? ((this.strings.continue = 'Continue'),
+          (this.strings.finish = 'Finish'))
+        : ((this.strings.continue = 'Nastavi'),
+          (this.strings.finish = 'Završi'));
+    },
   },
 };
 </script>
@@ -45,5 +54,9 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  .btn {
+    margin-top: 10px;
+  }
 }
 </style>
