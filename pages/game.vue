@@ -271,7 +271,7 @@ export default {
     async getRandomWordsFromDatabase(amount) {
       const wordsRef = this.$fire.firestore
         .collection('dictionaries')
-        .doc('croatian');
+        .doc(this.chosenLanguage);
       const wordsDoc = await wordsRef.get();
 
       const wordsArray = wordsDoc.data().words;
