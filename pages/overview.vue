@@ -40,6 +40,7 @@ export default {
       : document.body.classList.remove('dark-mode');
 
     this.isLoading = false;
+    this.preventClickingBack();
   },
   methods: {
     ...mapMutations(['setPoints', 'changeGameScreenStatus']),
@@ -57,6 +58,17 @@ export default {
           (this.strings.modifyAnswers = 'Modify answers'.toUpperCase()))
         : ((this.strings.continue = 'Nastavi'),
           (this.strings.modifyAnswers = 'Izmijeni odgovore'.toUpperCase()));
+    },
+    preventClickingBack() {
+      window.location.hash = 'no-back-button';
+
+      // Again because Google Chrome doesn't insert
+      // the first hash into the history
+      window.location.hash = 'Again-No-back-button';
+
+      window.onhashchange = function () {
+        window.location.hash = 'no-back-button';
+      };
     },
   },
 };

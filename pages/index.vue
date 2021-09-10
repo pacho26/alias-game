@@ -70,6 +70,7 @@ export default {
     this.changeGameScreenStatus(false);
   },
   mounted() {
+    this.$confetti.stop();
     this.selectFlag();
 
     this.isDarkMode
@@ -82,6 +83,8 @@ export default {
     this.changingColorTheme
       ? (this.isLoading = false)
       : setTimeout(() => (this.isLoading = false), 200);
+
+    this.showAlertBeforeUnload();
   },
   computed: {
     ...mapState(['isDarkMode', 'changingColorTheme', 'chosenLanguage']),
@@ -126,6 +129,14 @@ export default {
     },
     forceRerender() {
       this.componentKey++;
+    },
+    showAlertBeforeUnload() {
+      window.addEventListener('beforeunload', function (e) {
+        var confirmationMessage = '\o/';
+
+        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+        return confirmationMessage; //Webkit, Safari, Chrome
+      });
     },
   },
 };

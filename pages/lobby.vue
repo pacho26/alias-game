@@ -153,6 +153,7 @@
           </div>
           <b-form-input
             v-model="targetResult"
+            @change="setTargetResult(+targetResult)"
             type="range"
             class="custom-range"
             min="30"
@@ -165,6 +166,7 @@
           </div>
           <b-form-input
             v-model="duration"
+            @change="setDurationOfRound(+duration)"
             class="custom-range"
             type="range"
             min="30"
@@ -174,7 +176,7 @@
         </div>
       </div>
 
-      <div v-if="this.getCurrentTeams.length >= 2" @click="setConfiguration">
+      <div v-if="this.getCurrentTeams.length >= 2" @click="clearPreviousGame()">
         <BaseButton
           id="startBtn"
           :buttonText="strings.startGame"
@@ -203,7 +205,7 @@ export default {
         { value: 4, text: '4 players' },
       ],
       optionsCroatian: [
-        { value: null, text: 'Odaberi broj igrača', disabled: true },
+        { value: null, text: 'Odaberite broj igrača', disabled: true },
         { value: 2, text: '2 igrača' },
         { value: 3, text: '3 igrača' },
         { value: 4, text: '4 igrača' },
@@ -220,7 +222,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['getCurrentTeams', 'getStartedOnIndexPage']),
+    ...mapGetters([
+      'getCurrentTeams',
+      'getStartedOnIndexPage',
+      'getDurationOfRound',
+      'getTargetResult',
+    ]),
     ...mapState('colors', ['colors']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
   },
@@ -230,6 +237,9 @@ export default {
       : (this.translate(),
         (this.mobileScreen = screen.width < 1000 ? true : false),
         this.setGameInProgress(false));
+
+    this.duration = this.getDurationOfRound;
+    this.targetResult = this.getTargetResult;
   },
   mounted() {
     this.isDarkMode
@@ -325,11 +335,6 @@ export default {
       this.names = [];
       this.unfinishedForm = false;
     },
-    setConfiguration() {
-      this.setTargetResult(+this.targetResult);
-      this.setDurationOfRound(+this.duration);
-      this.clearPreviousGame();
-    },
     onImageLoad() {
       this.isLoading = false;
     },
@@ -354,8 +359,8 @@ export default {
         : ((this.strings.teams = 'Ekipe'.toUpperCase()),
           (this.strings.addTeamsToStart =
             'Dodajte ekipe kako bi započeli igru.'),
-          (this.strings.tooltipAddTeam = 'Dodajte novu ekipu!'),
-          (this.strings.emptyValues = 'Niste unijeli sva polja!'),
+          (this.strings.tooltipAddTeam = 'Dodaj novu ekipu!'),
+          (this.strings.emptyValues = 'Nisu unesena sva polja!'),
           (this.strings.cancel = 'Odustani'),
           (this.strings.addTeam = 'Dodaj'),
           (this.strings.confirm = 'Potvrdi'),
@@ -364,7 +369,7 @@ export default {
           (this.strings.targetResult = 'Ciljni rezultat'),
           (this.strings.duration = 'Vrijeme trajanja runde'),
           (this.strings.startGame = 'Započni igru'),
-          (this.strings.thereMustBe = 'Morate unijeti barem 2 ekipe!'),
+          (this.strings.thereMustBe = 'Trebaju se dodati barem 2 ekipe!'),
           (this.strings.enterTeamName = 'Unesite ime ekipe'),
           (this.strings.enterPlayerName = 'Unesite ime igrača'),
           (this.strings.player = 'Igrač'));

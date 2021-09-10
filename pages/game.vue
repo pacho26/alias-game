@@ -225,6 +225,9 @@ export default {
         ? document.body.classList.add('dark-mode')
         : document.body.classList.remove('dark-mode');
     }
+
+    // because the game could be aborted accidently
+    this.preventClickingBack();
   },
   methods: {
     ...mapMutations('words', [
@@ -375,6 +378,17 @@ export default {
           (this.strings.no = 'Ne'),
           (this.strings.yes = 'Da'),
           (this.strings.areYouSure = 'Jeste li sigurni'));
+    },
+    preventClickingBack() {
+      window.location.hash = 'no-back-button';
+
+      // Again because Google Chrome doesn't insert
+      // the first hash into the history
+      window.location.hash = 'Again-No-back-button';
+
+      window.onhashchange = function () {
+        window.location.hash = 'no-back-button';
+      };
     },
   },
 };

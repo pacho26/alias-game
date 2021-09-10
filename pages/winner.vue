@@ -17,6 +17,7 @@
         @click="
           setPreviousTeams();
           changeGameScreenStatus(true);
+          $confetti.stop();
         "
       >
         <BaseButton id="btn" :to="'lobby'" :buttonText="strings.goToLobby" />
@@ -76,14 +77,31 @@ export default {
     setPreviousTeams() {
       this.setCurrentTeams(this.getAllTeams);
     },
-    stopLoading() {
+    async stopLoading() {
       this.isLoading = false;
-      document.getElementById('champions-audio').play();
+      await document.getElementById('champions-audio').play();
+      this.startParticles();
     },
     translate() {
       this.getChosenLanguage === 'english'
         ? (this.strings.goToLobby = 'Go to lobby')
         : (this.strings.goToLobby = 'Povratak');
+    },
+    startParticles() {
+      this.$confetti.start({
+        particles: [
+          {
+            type: 'rect',
+          },
+        ],
+        defaultColors: ['#ab6afb', '#4f6cb0', '#cccccc'],
+        defaultDropRate: 5,
+        defaultSize: 10,
+        particlesPerFrame: 1,
+      });
+      setTimeout(() => {
+        this.$confetti.stop();
+      }, 13000);
     },
   },
 };

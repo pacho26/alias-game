@@ -36,6 +36,9 @@ export default {
       ? this.$router.push({ path: '/' })
       : (this.translate(), this.continueOnNextTeam());
   },
+  mounted() {
+    this.preventClickingBack();
+  },
   methods: {
     ...mapMutations(['continueOnNextTeam']),
 
@@ -48,6 +51,17 @@ export default {
           (this.strings.finish = 'Finish'))
         : ((this.strings.continue = 'Nastavi'),
           (this.strings.finish = 'Završi'));
+    },
+    preventClickingBack() {
+      window.location.hash = 'no-back-button';
+
+      // Again because Google Chrome doesn't insert
+      // the first hash into the history
+      window.location.hash = 'Again-No-back-button';
+
+      window.onhashchange = function () {
+        window.location.hash = 'no-back-button';
+      };
     },
   },
 };
