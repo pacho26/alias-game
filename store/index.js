@@ -137,6 +137,7 @@ export const mutations = {
   clearPreviousGame(state) {
     state.currentTeamIndex = 0;
     state.hasWinner = false;
+    state.loserTeams = [];
     for (const team of state.currentTeams) {
       team.points = 0;
       team.explainingPlayerIndex = 0;
