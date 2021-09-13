@@ -30,8 +30,14 @@
                   />
                 </td>
                 <td id="team-name">{{ team.name }}</td>
-                <td id="team-players" class="pr-4">
-                  {{ team.players.join(', ') }}
+                <td id="team-players" class="pr-4 pt-3">
+                  <div
+                    id="players"
+                    v-for="player in team.players"
+                    :key="player"
+                  >
+                    <p>{{ player }}</p>
+                  </div>
                 </td>
               </tr>
             </table>
@@ -399,18 +405,6 @@ main > * {
   margin: 20px;
 }
 
-.custom-range::-webkit-slider-thumb {
-  background: hsl(267, 100%, 73%);
-}
-
-.custom-range::-moz-range-thumb {
-  background: hsl(267, 100%, 73%);
-}
-
-.custom-range::-ms-thumb {
-  background: hsl(267, 100%, 73%);
-}
-
 .box-shadow-effect {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 }
@@ -635,6 +629,10 @@ main > * {
 
   #team-players {
     font-size: 20px;
+
+    #players {
+      line-height: 0.5;
+    }
   }
 
   #logo-container {
@@ -747,6 +745,16 @@ main > * {
         color: #f2f2f2;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 600px) {
+  .team-name-input, .select-form {
+    width: 256px;
+  }
+
+  .modal-buttons {
+    width: 314px;
   }
 }
 
