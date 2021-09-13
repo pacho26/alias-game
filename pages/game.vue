@@ -53,6 +53,12 @@
       >
         <div id="game-modal">
           <div>
+            <img
+              :src="getCurrentTeams[getCurrentTeamIndex].logo"
+              id="team-logo"
+              class="mb-1"
+              alt="team logo"
+            />
             <h1>{{ getCurrentTeams[getCurrentTeamIndex].name }}</h1>
             <h4>
               {{ strings.explaining }}:
@@ -64,7 +70,7 @@
             </h4>
           </div>
 
-          <div class="modal-buttons">
+          <div class="modal-buttons mt-4">
             <div
               @click="
                 $refs['game-modal'].hide();
@@ -182,6 +188,8 @@ export default {
       correctSound: '',
       wrongSound: '',
       countdownSound: '',
+      startBellSound: '',
+      gameStarted: false,
     };
   },
   computed: {
@@ -215,6 +223,9 @@ export default {
         )),
         (this.countdownSound = new Audio(
           'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2F10-seconds-countdown.mp3?alt=media&token=1de94261-6906-48b1-a67c-11d63be6df33'
+        )),
+        (this.startBellSound = new Audio(
+          'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fstart-bell.mp3?alt=media&token=3ff66936-e9ca-41e4-8c86-b61abe875d5f'
         )));
   },
   mounted() {
@@ -299,6 +310,14 @@ export default {
     },
     startCountdown() {
       document.getElementById('countdown-text').classList.add('color-changer');
+      if (!this.gameStarted) {
+        this.startBellSound.play();
+        this.gameStarted = true;
+
+        this.chosenLanguage === 'english'
+          ? (this.gameModalText = 'Continue')
+          : (this.gameModalText = 'Nastavi');
+      }
 
       const interval = setInterval(
         function () {
@@ -313,6 +332,7 @@ export default {
             ? clearInterval(interval)
             : this.remainingSeconds--;
 
+          // In case route is changed (game is aborted)
           if (this.$router.currentRoute.path !== '/game') {
             clearInterval(interval);
             this.countdownSound.pause();
@@ -344,9 +364,6 @@ export default {
     },
     openGameModal() {
       this.openedModal = true;
-      this.chosenLanguage === 'english'
-        ? (this.gameModalText = 'Continue')
-        : (this.gameModalText = 'Nastavi');
 
       this.$refs['game-modal'].show();
       this.shake(false);
@@ -543,6 +560,12 @@ section {
   padding: 10px;
   color: #374b7b;
   text-align: center;
+
+  #team-logo {
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 8px;
+  }
 
   h1 {
     font-weight: 700;
