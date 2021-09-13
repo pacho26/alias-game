@@ -30,7 +30,9 @@
                   />
                 </td>
                 <td id="team-name">{{ team.name }}</td>
-                <td class="px-4">{{ team.players.join(', ') }}</td>
+                <td id="team-players" class="pr-4">
+                  {{ team.players.join(', ') }}
+                </td>
               </tr>
             </table>
           </div>
@@ -385,7 +387,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 1100px;
+  max-width: 1050px;
   color: #374b7b;
 
   #startBtn {
@@ -416,7 +418,6 @@ main > * {
 .settings {
   display: flex;
   align-items: flex-start;
-  flex-wrap: wrap;
   width: 100%;
   justify-content: space-evenly;
 }
@@ -431,8 +432,7 @@ main > * {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  max-width: 570px;
-  min-width: 430px;
+  width: 580px;
 
   h3 {
     color: #374b7b;
@@ -608,8 +608,7 @@ main > * {
   border-radius: 8px;
   font-size: 24px;
   color: #2f406a;
-  max-width: 570px;
-  min-width: 430px;
+  width: 580px;
   padding: 10px 0;
 
   #team-placeholder {
@@ -634,12 +633,13 @@ main > * {
     padding-left: 4px;
   }
 
+  #team-players {
+    font-size: 20px;
+  }
+
   #logo-container {
     padding-right: 10px;
     padding: 10px 10px 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     #team-logo {
       max-width: 80px;
@@ -763,9 +763,11 @@ main > * {
 
   .teams-container {
     min-width: 91vw;
+    width: auto;
 
     #teams-table {
       min-width: 91vw;
+      width: auto;
     }
   }
 

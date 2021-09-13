@@ -71,6 +71,10 @@ main {
   padding: 20px;
   color: #3c5186;
 
+  .btn {
+    font-size: 22px;
+  }
+
   h2 {
     font-family: 'Poppins Extra Bold', sans-serif;
     font-weight: 800;
@@ -84,12 +88,6 @@ main {
   p {
     font-size: 20px;
   }
-
-  .btn {
-    transform: scale(0.9, 0.9);
-    margin-top: 16px;
-    min-width: 350px;
-  }
 }
 
 .dark-mode {
@@ -98,14 +96,6 @@ main {
 
     h2 {
       color: #bb86fc;
-    }
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  main {
-    .btn {
-      transform: scale(1, 1);
     }
   }
 }
