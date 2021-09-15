@@ -86,6 +86,7 @@ main {
   display: flex;
   flex-direction: column;
   color: #3c5186;
+  margin-right: 14px;
 
   .words {
     max-width: 450px;

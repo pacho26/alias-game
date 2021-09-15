@@ -86,6 +86,11 @@ main {
     margin: 20px 0;
   }
 
+  .words-container {
+    overflow-y: scroll;
+    height: 70vh;
+  }
+
   #btn {
     margin-top: 50px;
     margin-bottom: 24px;
@@ -95,6 +100,27 @@ main {
 .dark-mode {
   main {
     color: #f2f2f2;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cad3e7;
+  border-radius: 10px;
+
+  &:hover,
+  &:active {
+    background: #a7b6d7;
   }
 }
 </style>

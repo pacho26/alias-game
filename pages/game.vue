@@ -314,9 +314,12 @@ export default {
         this.startBellSound.play();
         this.gameStarted = true;
 
-        this.chosenLanguage === 'english'
-          ? (this.gameModalText = 'Continue')
-          : (this.gameModalText = 'Nastavi');
+        // prevent seeing text change while modal is closing
+        setTimeout(() => {
+          this.chosenLanguage === 'english'
+            ? (this.gameModalText = 'Continue')
+            : (this.gameModalText = 'Nastavi');
+        }, 100);
       }
 
       const interval = setInterval(

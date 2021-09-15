@@ -21,12 +21,12 @@
                 :key="team.name"
                 @click="prepareEditing(team.name)"
               >
-                <td id="logo-container" class="pl-4">
+                <td id="logo-container" class="pl-2">
                   <img
                     :src="team.logo"
                     id="team-logo"
                     alt="team logo"
-                    @load="onImageLoad"
+                    @load="handleImgLoading"
                   />
                 </td>
                 <td id="team-name">{{ team.name }}</td>
@@ -46,7 +46,10 @@
           <div
             v-if="mobileScreen"
             class="icon-plus-container"
-            @click="openEmptyTeamModal"
+            @click="
+              selectedLogoUrl = '';
+              openEmptyTeamModal();
+            "
           >
             <fa class="icon-plus" icon="plus"></fa>
           </div>
@@ -54,7 +57,10 @@
             v-else
             class="icon-plus-container"
             v-b-tooltip.hover.right="strings.tooltipAddTeam"
-            @click="openEmptyTeamModal"
+            @click="
+              selectedLogoUrl = '';
+              openEmptyTeamModal();
+            "
           >
             <fa class="icon-plus" icon="plus"></fa>
           </div>
@@ -63,7 +69,6 @@
             id="add-team-modal"
             class="add-team-modal"
             ref="team-modal"
-            title="New team"
             hide-footer
             hide-header
             centered
@@ -75,6 +80,42 @@
                 :placeholder="strings.enterTeamName"
                 autocomplete="off"
               ></b-form-input>
+
+              <b-modal
+                id="logo-modal"
+                class="logo-modal"
+                ref="logo-modal"
+                hide-footer
+                hide-header
+                centered
+              >
+                <LogoSelection @logoSelected="setSelectedLogo" />
+              </b-modal>
+
+              <p v-if="selectedLogoUrl">
+                <img
+                  :src="selectedLogoUrl"
+                  id="selected-logo"
+                  alt="selected-logo"
+                />
+              </p>
+
+              <div
+                v-if="!this.selectedLogoUrl"
+                @click="$bvModal.show('logo-modal')"
+              >
+                <BaseButton
+                  id="choose-logo-button"
+                  class="mb-2 mt-2"
+                  :buttonText="strings.chooseLogo"
+                />
+              </div>
+              <div v-else @click="$bvModal.show('logo-modal')">
+                <BaseButton
+                  id="choose-logo-button"
+                  :buttonText="strings.changeLogo"
+                />
+              </div>
 
               <b-form-select
                 v-if="chosenLanguage === 'english'"
@@ -227,6 +268,8 @@ export default {
       mobileScreen: false,
       isLoading: true,
       strings: {},
+      selectedLogoUrl: '',
+      imgLoaded: 0,
     };
   },
   computed: {
@@ -273,16 +316,18 @@ export default {
       if (
         !this.newTeamName ||
         this.names.length !== this.numberOfPlayers ||
-        !this.checkIfNamesExist()
+        !this.checkIfNamesExist() ||
+        !this.selectedLogoUrl
       ) {
         this.unfinishedForm = true;
       } else {
         this.isLoading = true;
-        const num = Math.floor(Math.random() * this.colors.length);
-        const color = this.colors[num];
+        // const num = Math.floor(Math.random() * this.colors.length);
+        // const color = this.colors[num];
         const newTeam = {
-          logo: `https://avatar.oxro.io/avatar.svg?name=${this.newTeamName}&caps=1&fontSize=200&bold=true&background=${color.bg}&color=${color.text}`,
+          // logo: `https://avatar.oxro.io/avatar.svg?name=${this.newTeamName}&caps=1&fontSize=200&bold=true&background=${color.bg}&color=${color.text}`,
           name: this.newTeamName,
+          logo: this.selectedLogoUrl,
           players: this.names,
           points: 0,
           explainingPlayerIndex: 0,
@@ -302,6 +347,7 @@ export default {
         }
         this.$refs['team-modal'].hide();
         this.clearForm();
+        this.isLoading = false;
       }
     },
     deleteTeam() {
@@ -322,6 +368,7 @@ export default {
       this.numberOfPlayers = foundTeam.players.length;
       this.editingTeam = true;
       this.previousTeamName = teamName;
+      this.selectedLogoUrl = foundTeam.logo;
       this.$refs['team-modal'].show();
     },
     openEmptyTeamModal() {
@@ -343,8 +390,15 @@ export default {
       this.names = [];
       this.unfinishedForm = false;
     },
-    onImageLoad() {
-      this.isLoading = false;
+    setSelectedLogo(url) {
+      this.selectedLogoUrl = url;
+      this.$refs['logo-modal'].hide();
+    },
+    handleImgLoading() {
+      this.imgLoaded++;
+      if (this.imgLoaded === this.getCurrentTeams.length) {
+        this.isLoading = false;
+      }
     },
     translate() {
       this.chosenLanguage === 'english'
@@ -363,7 +417,9 @@ export default {
           (this.strings.thereMustBe = 'There must be at least 2 teams!'),
           (this.strings.enterTeamName = 'Enter team name'),
           (this.strings.enterPlayerName = "Enter player's name"),
-          (this.strings.player = 'Player'))
+          (this.strings.player = 'Player'),
+          (this.strings.chooseLogo = 'Choose logo'),
+          (this.strings.changeLogo = 'Change logo'))
         : ((this.strings.teams = 'Ekipe'.toUpperCase()),
           (this.strings.addTeamsToStart =
             'Dodajte ekipe kako bi započeli igru.'),
@@ -380,7 +436,9 @@ export default {
           (this.strings.thereMustBe = 'Trebaju se dodati barem 2 ekipe!'),
           (this.strings.enterTeamName = 'Unesite ime ekipe'),
           (this.strings.enterPlayerName = 'Unesite ime igrača'),
-          (this.strings.player = 'Igrač'));
+          (this.strings.player = 'Igrač'),
+          (this.strings.chooseLogo = 'Izaberi logo'),
+          (this.strings.changeLogo = 'Promijeni logo'));
     },
   },
 };
@@ -443,6 +501,9 @@ main > * {
 
 .select-form {
   margin-top: 10px;
+  position: relative;
+  top: 14px;
+  margin-bottom: 2px;
 }
 
 #add-team-form {
@@ -453,6 +514,35 @@ main > * {
   border: none;
   font-family: 'Poppins', sans-serif;
   margin: 14px 0;
+
+  #selected-logo {
+    position: relative;
+    top: 6px;
+    margin-bottom: 2px;
+    max-width: 70px;
+    max-height: 70px;
+  }
+
+  #choose-logo-button {
+    background-color: #374b7b;
+    color: #f5f5f5;
+    font-size: 15px;
+    font-weight: 600;
+    max-width: 150px;
+    transform: scale(1.13, 1.13);
+    margin-top: 5px;
+
+    &:hover {
+      background: #e2e2e2;
+      color: #374b7b;
+      box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
 
   .select-form {
     color: #374b7b;
@@ -640,6 +730,9 @@ main > * {
     padding: 10px 10px 10px 0;
 
     #team-logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
       max-width: 80px;
       max-height: 80px;
       border-radius: 8px;
@@ -675,14 +768,30 @@ main > * {
 
 .custom-range::-webkit-slider-thumb {
   background: #385494;
+  box-shadow: none;
+
+  &:active,
+  &:hover {
+    background: #6b87c7;
+  }
 }
 
 .custom-range::-moz-range-thumb {
   background: #385494;
+
+  &:active,
+  &:hover {
+    background: #6b87c7;
+  }
 }
 
 .custom-range::-ms-thumb {
   background: #385494;
+
+  &:active,
+  &:hover {
+    background: #6b87c7;
+  }
 }
 
 .dark-mode {
@@ -720,14 +829,29 @@ main > * {
 
     .custom-range::-webkit-slider-thumb {
       background: hsl(267, 100%, 74%);
+
+      &:active,
+      &:hover {
+        background: hsl(267, 100%, 65%);
+      }
     }
 
     .custom-range::-moz-range-thumb {
       background: hsl(267, 100%, 74%);
+
+      &:active,
+      &:hover {
+        background: hsl(267, 100%, 65%);
+      }
     }
 
     .custom-range::-ms-thumb {
       background: hsl(267, 100%, 74%);
+
+      &:active,
+      &:hover {
+        background: hsl(267, 100%, 65%);
+      }
     }
   }
 
@@ -749,7 +873,8 @@ main > * {
 }
 
 @media only screen and (max-width: 1000px) and (min-width: 600px) {
-  .team-name-input, .select-form {
+  .team-name-input,
+  .select-form {
     width: 256px;
   }
 
