@@ -3,7 +3,7 @@
     <BaseLoader v-if="isLoading" />
 
     <h1>CHOOSE LOGO</h1>
-    <section>
+    <div id="logo-selection">
       <div class="pb-1">
         <p>FOOTBALL</p>
         <div class="logos-container">
@@ -516,7 +516,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </main>
 </template>
 
@@ -538,7 +538,11 @@ export default {
     handleLoading() {
       this.imgLoaded++;
 
-      if (this.imgLoaded === 68) {
+      if (
+        this.imgLoaded ===
+        document.getElementById('logo-selection').getElementsByTagName('img')
+          .length
+      ) {
         this.isLoading = false;
       }
     },
@@ -558,7 +562,7 @@ main {
     color: #374b7b;
   }
 
-  section {
+  #logo-selection {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
@@ -621,7 +625,7 @@ main {
 
 @media only screen and (max-width: 600px) {
   main {
-    section {
+    logo-selection {
       .logo-container {
         margin: 0px 2px 8px 10px;
         width: 56px;
