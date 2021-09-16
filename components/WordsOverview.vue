@@ -89,8 +89,7 @@ main {
   margin-right: 14px;
 
   .words {
-    max-width: 450px;
-    min-width: 400px;
+    width: 520px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -167,6 +166,14 @@ main {
       .ball {
         background-color: #18191b;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    .words {
+      width: 90vw;
     }
   }
 }
