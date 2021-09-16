@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "ansi-html": "^0.0.7",
     "csshake": "^1.5.3",
     "glob-parent": "^6.0.1",
     "node-sass": "^6.0.1",

@@ -106,7 +106,7 @@
               >
                 <BaseButton
                   id="choose-logo-button"
-                  class="mb-2 mt-2"
+                  class="mb-2 mt-3"
                   :buttonText="strings.chooseLogo"
                 />
               </div>
