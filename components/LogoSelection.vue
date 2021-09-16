@@ -538,7 +538,7 @@ export default {
     handleLoading() {
       this.imgLoaded++;
 
-      if (this.imgLoaded === 21) {
+      if (this.imgLoaded === 68) {
         this.isLoading = false;
       }
     },
