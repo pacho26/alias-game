@@ -1,4 +1,6 @@
-# alias
+# Alias game
+
+## [Live Demo](https://alias-game.vercel.app/)
 
 ## Build Setup
 
