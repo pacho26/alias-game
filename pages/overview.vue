@@ -66,9 +66,7 @@ export default {
       // the first hash into the history
       window.location.hash = 'Again-No-back-button';
 
-      window.onhashchange = function () {
-        window.location.hash = 'no-back-button';
-      };
+      window.onhashchange = () => (window.location.hash = 'no-back-button');
     },
   },
 };

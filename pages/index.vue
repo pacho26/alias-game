@@ -131,8 +131,8 @@ export default {
       this.componentKey++;
     },
     showAlertBeforeUnload() {
-      window.addEventListener('beforeunload', function (e) {
-        var confirmationMessage = '\o/';
+      window.addEventListener('beforeunload', (e) => {
+        const confirmationMessage = '\o/';
 
         (e || window.event).returnValue = confirmationMessage; //Gecko + IE
         return confirmationMessage; //Webkit, Safari, Chrome
