@@ -325,6 +325,7 @@ export default {
         // const num = Math.floor(Math.random() * this.colors.length);
         // const color = this.colors[num];
         const newTeam = {
+          // set random colors with initial letters as a logo
           // logo: `https://avatar.oxro.io/avatar.svg?name=${this.newTeamName}&caps=1&fontSize=200&bold=true&background=${color.bg}&color=${color.text}`,
           name: this.newTeamName,
           logo: this.selectedLogoUrl,
@@ -521,6 +522,7 @@ main > * {
     margin-bottom: 2px;
     max-width: 70px;
     max-height: 70px;
+    border-radius: 8px;
   }
 
   #choose-logo-button {

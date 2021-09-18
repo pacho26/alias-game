@@ -73,6 +73,7 @@ main {
 
   .btn {
     font-size: 22px;
+    margin-top: 10px;
   }
 
   h2 {

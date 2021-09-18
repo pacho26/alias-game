@@ -4,7 +4,7 @@
 
     <main v-if="getStartedOnIndexPage">
       <h1>{{ strings.modifyAnswers }}</h1>
-      <div class="words-container">
+      <div id="words-container">
         <WordsOverview />
       </div>
       <div id="btn" @click="addPoints">
@@ -41,6 +41,14 @@ export default {
 
     this.isLoading = false;
     this.preventClickingBack();
+
+    if (screen.height < 600) {
+      document.getElementById('words-container').style.height = '55vh';
+    }
+
+    if (screen.height < 700) {
+      document.getElementById('words-container').style.height = '64vh';
+    }
   },
   methods: {
     ...mapMutations(['setPoints', 'changeGameScreenStatus']),
@@ -82,11 +90,12 @@ main {
   h1 {
     font-weight: 700;
     margin: 20px 0;
+    text-align: center;
   }
 
-  .words-container {
-    overflow-y: scroll;
-    height: 70vh;
+  #words-container {
+    overflow-y: auto;
+    height: 68vh;
   }
 
   #btn {

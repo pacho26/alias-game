@@ -41,6 +41,17 @@ export default {
     ...mapGetters('words', ['getPreviousRoundWords']),
     ...mapState(['isDarkMode']),
   },
+  created() {
+    this.words = _.cloneDeep(this.getPreviousRoundWords);
+  },
+  mounted() {
+    this.isDarkMode
+      ? document.body.classList.add('dark-mode')
+      : document.body.classList.remove('dark-mode');
+
+    this.updateCheckboxColors();
+    this.isLoading = false;
+  },
   methods: {
     ...mapMutations('words', ['setPreviousRoundWords']),
 
@@ -66,17 +77,6 @@ export default {
         }
       }
     },
-  },
-  created() {
-    this.words = _.cloneDeep(this.getPreviousRoundWords);
-  },
-  mounted() {
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
-
-    this.updateCheckboxColors();
-    this.isLoading = false;
   },
 };
 </script>
