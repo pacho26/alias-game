@@ -7,6 +7,11 @@
       <div id="words-container">
         <WordsOverview />
       </div>
+      <div v-if="getAudioRecording" id="record-container">
+        <a id="download" download="test.mp3">
+          <BaseButton id="download-btn" :buttonText="'Download recording'" />
+        </a>
+      </div>
       <div id="btn" @click="addPoints">
         <BaseButton :to="'/standings'" :buttonText="strings.continue" />
       </div>
@@ -27,7 +32,12 @@ export default {
   computed: {
     ...mapState('words', ['previousRoundWords']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
-    ...mapGetters(['getStartedOnIndexPage']),
+    ...mapGetters([
+      'getStartedOnIndexPage',
+      'getCurrentTeam',
+      'getCurrentRound',
+    ]),
+    ...mapGetters('recordings', ['getAudioRecording']),
   },
   created() {
     !this.getStartedOnIndexPage
@@ -39,7 +49,6 @@ export default {
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
 
-    this.isLoading = false;
     this.preventClickingBack();
 
     if (screen.height < 600) {
@@ -49,6 +58,12 @@ export default {
     if (screen.height < 700) {
       document.getElementById('words-container').style.height = '64vh';
     }
+    document.getElementById('download').href = this.getAudioRecording.src;
+    document.getElementById(
+      'download'
+    ).download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
+
+    this.isLoading = false;
   },
   methods: {
     ...mapMutations(['setPoints', 'changeGameScreenStatus']),
@@ -101,6 +116,12 @@ main {
   #btn {
     margin-top: 50px;
     margin-bottom: 24px;
+  }
+
+  #download-btn {
+    transform: scale(0.6, 0.6);
+    background-color: #e6e6e6;
+    color: #374b7b;
   }
 }
 

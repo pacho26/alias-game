@@ -4,26 +4,27 @@ export const state = () => ({
     {
       name: 'Chelsea',
       players: ['Kepa', 'Timo'],
-      logo: 'https://upload.wikimedia.org/wikipedia/bs/thumb/c/cc/Chelsea_FC.svg/1200px-Chelsea_FC.svg.png',
+      logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fchelsea.png?alt=media&token=44556fdc-0ccc-40f0-ad52-0708298c6e7f',
       points: 0,
       explainingPlayerIndex: 0,
     },
     {
       name: 'Manchester United',
       players: ['David', 'Luke'],
-      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/1200px-Manchester_United_FC_crest.svg.png',
+      logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fmanchester-united.png?alt=media&token=f62e0b41-8c15-4579-88ea-a109d5a3c65e',
       points: 0,
       explainingPlayerIndex: 0,
     },
     {
       name: 'Milan',
       players: ['Ante', 'Zlatan'],
-      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Logo_of_AC_Milan.svg/1306px-Logo_of_AC_Milan.svg.png',
+      logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fmilan.png?alt=media&token=3f16dc0b-b429-41d1-b268-f808e3d6f73f',
       points: 0,
       explainingPlayerIndex: 0,
     },
   ],
   hasWinner: false,
+  currentRound: 1,
   currentTeamIndex: 0,
   targetResult: 60,
   durationOfRound: 60,
@@ -41,6 +42,9 @@ export const getters = {
   },
   getCurrentTeamIndex(state) {
     return state.currentTeamIndex;
+  },
+  getCurrentTeam(state) {
+    return state.currentTeams[state.currentTeamIndex];
   },
   getAllTeams(state) {
     let allNames = [];
@@ -66,6 +70,9 @@ export const getters = {
   },
   getDurationOfRound(state) {
     return state.durationOfRound;
+  },
+  getCurrentRound(state) {
+    return state.currentRound;
   },
   getChosenLanguage(state) {
     return state.chosenLanguage;
@@ -93,7 +100,7 @@ export const mutations = {
   },
   continueOnNextTeam(state) {
     state.currentTeamIndex + 1 === state.currentTeams.length
-      ? (state.currentTeamIndex = 0)
+      ? ((state.currentTeamIndex = 0), state.currentRound++)
       : state.currentTeamIndex++;
 
     if (state.currentTeamIndex === 0) {
@@ -160,5 +167,3 @@ export const mutations = {
     state.startedOnIndexPage = true;
   },
 };
-
-export const actions = {};

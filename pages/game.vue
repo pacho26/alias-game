@@ -190,6 +190,8 @@ export default {
       countdownSound: '',
       startBellSound: '',
       gameStarted: false,
+      mediaRecorder: null,
+      recordedAudio: null,
     };
   },
   computed: {
@@ -247,6 +249,7 @@ export default {
       'setPreviousRoundWords',
     ]),
     ...mapMutations(['setGameInProgress', 'changeGameScreenStatus']),
+    ...mapMutations('recordings', ['setAudioRecording']),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
@@ -313,6 +316,7 @@ export default {
       if (!this.gameStarted) {
         this.startBellSound.play();
         this.gameStarted = true;
+        this.startRecording();
 
         // prevent seeing text change while modal is closing
         setTimeout(() => {
@@ -328,7 +332,8 @@ export default {
             this.shake(false);
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
-            this.$router.push({ path: 'overview' });
+            this.stopRecording();
+            this.$router.push({ path: 'overview' }); // probaj vidjeti jel se ostale stvari izvrse ako je ovo prvo
           }
 
           this.openedModal || this.remainingSeconds < 1
@@ -407,6 +412,36 @@ export default {
       window.location.hash = 'Again-No-back-button';
 
       window.onhashchange = () => (window.location.hash = 'no-back-button');
+    },
+    startRecording() {
+      // dodati i opciju da se s fancym gumbima play, pause i stop
+      // (mozda ima neki player na npm) moze poslusati, ali i skinuti na overview page
+      // za ime audiozapisa pri skidanju koristiti ime ekipe i broj runde
+      console.log('Started recording...');
+      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+        this.mediaRecorder = new MediaRecorder(stream);
+        this.mediaRecorder.start();
+        let chunks = [];
+
+        this.mediaRecorder.addEventListener('dataavailable', (e) => {
+          chunks.push(e.data);
+        });
+        this.mediaRecorder.addEventListener('stop', () => {
+          let blob = new Blob(chunks, {
+            type: 'audio/mp3',
+          });
+          let recordedAudioUrl = URL.createObjectURL(blob);
+          this.recordedAudio = new Audio(recordedAudioUrl);
+          this.recordedAudio.setAttribute('controls', 1);
+        });
+      });
+    },
+    stopRecording() {
+      console.log('Recording stopped!');
+      this.mediaRecorder.stop();
+      setTimeout(() => {
+        this.setAudioRecording(this.recordedAudio);
+      }, 50);
     },
   },
 };

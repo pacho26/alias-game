@@ -102,7 +102,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 5;
+  z-index: 99;
   box-shadow: 0 1.5px 2px 2px rgb(243, 243, 243);
 }
 

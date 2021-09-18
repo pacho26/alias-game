@@ -23,5 +23,3 @@ export const mutations = {
     state.previousRoundWords = previousWords;
   },
 };
-
-export const actions = {};

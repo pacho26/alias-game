@@ -11,7 +11,7 @@
               :src="team.logo"
               id="team-logo"
               alt="team logo"
-              @load="$emit('stopLoading')"
+              @load="handleLoading"
             />
           </td>
           <td id="team-name">{{ team.name }}</td>
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       sortedTeams: [],
+      imgLoaded: 0,
     };
   },
   emits: ['stopLoading'],
@@ -41,6 +42,15 @@ export default {
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
+  },
+  methods: {
+    handleLoading() {
+      this.imgLoaded++;
+
+      if (this.imgLoaded === this.getAllTeams.length) {
+        this.$emit('stopLoading');
+      }
+    },
   },
 };
 </script>
