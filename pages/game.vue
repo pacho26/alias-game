@@ -168,6 +168,8 @@
 
 <script>
 import { mapMutations, mapGetters, mapState } from 'vuex';
+import { MediaRecorder, register } from 'extendable-media-recorder';
+import { connect } from 'extendable-media-recorder-wav-encoder';
 
 export default {
   data() {
@@ -413,27 +415,36 @@ export default {
 
       window.onhashchange = () => (window.location.hash = 'no-back-button');
     },
-    startRecording() {
+    async startRecording() {
       // dodati i opciju da se s fancym gumbima play, pause i stop
       // (mozda ima neki player na npm) moze poslusati, ali i skinuti na overview page
       // za ime audiozapisa pri skidanju koristiti ime ekipe i broj runde
+      await register(await connect());
       console.log('Started recording...');
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-        this.mediaRecorder = new MediaRecorder(stream);
-        this.mediaRecorder.start();
-        let chunks = [];
 
-        this.mediaRecorder.addEventListener('dataavailable', (e) => {
-          chunks.push(e.data);
+      let stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          autoGainControl: true,
+          echoCancellation: false,
+          noiseSuppression: false,
+        },
+      });
+      this.mediaRecorder = new MediaRecorder(stream, {
+        mimeType: 'audio/wav',
+      });
+      this.mediaRecorder.start();
+      let chunks = [];
+
+      this.mediaRecorder.addEventListener('dataavailable', (e) => {
+        chunks.push(e.data);
+      });
+      this.mediaRecorder.addEventListener('stop', () => {
+        let blob = new Blob(chunks, {
+          type: 'audio/wav',
         });
-        this.mediaRecorder.addEventListener('stop', () => {
-          let blob = new Blob(chunks, {
-            type: 'audio/mp3',
-          });
-          let recordedAudioUrl = URL.createObjectURL(blob);
-          this.recordedAudio = new Audio(recordedAudioUrl);
-          this.recordedAudio.setAttribute('controls', 1);
-        });
+        let recordedAudioUrl = URL.createObjectURL(blob);
+        this.recordedAudio = new Audio(recordedAudioUrl);
+        this.recordedAudio.setAttribute('controls', 1);
       });
     },
     stopRecording() {
