@@ -7,7 +7,10 @@
       <div id="words-container">
         <WordsOverview />
       </div>
-      <div v-if="audioRecording" id="record-container">
+      <div id="recording-container">
+        <audio controls controlsList="nodownload noplaybackrate">
+          <source id="audio-src" type="audio/wav" />
+        </audio>
         <a id="download" download="test.mp3">
           <BaseButton id="download-btn" :buttonText="'Download recording'" />
         </a>
@@ -37,7 +40,7 @@ export default {
       'getCurrentTeam',
       'getCurrentRound',
     ]),
-    ...mapState('recordings', ['audioRecording']),
+    ...mapState('recordings', ['audioRecording', 'downloadlink']),
   },
   created() {
     !this.getStartedOnIndexPage
@@ -59,19 +62,18 @@ export default {
       document.getElementById('words-container').style.height = '64vh';
     }
 
-    console.log(this.audioRecording.src);
-    while (!this.audioRecording) {
-      console.log('Waiting for audio recording');
-    }
+    console.log('download link: ' + this.audioRecording.src);
     document.getElementById('download').href = this.audioRecording.src;
     document.getElementById(
       'download'
     ).download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
+    document.getElementById('audio-src').src = this.audioRecording.src;
 
     this.isLoading = false;
   },
   methods: {
     ...mapMutations(['setPoints', 'changeGameScreenStatus']),
+    ...mapMutations('recordings', ['setDownloadLink']),
 
     addPoints() {
       let pointsCounter = 0;
@@ -123,10 +125,23 @@ main {
     margin-bottom: 24px;
   }
 
-  #download-btn {
-    transform: scale(0.6, 0.6);
-    background-color: #e6e6e6;
-    color: #374b7b;
+  #recording-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #audio-src {
+      background-color: red;
+      color: red;
+    }
+
+    #download-btn {
+      transform: scale(0.6, 0.6);
+      background-color: #e6e6e6;
+      color: #374b7b;
+      width: 360px;
+    }
   }
 }
 

@@ -1,5 +1,7 @@
 export const state = () => ({
+  mediaRecorder: null,
   audioRecording: null,
+  isMediaRecorderInitialized: false,
 });
 
 export const getters = {
@@ -9,6 +11,10 @@ export const getters = {
 };
 
 export const mutations = {
+  setMediaRecorder(state, mediaRecorder) {
+    state.mediaRecorder = mediaRecorder;
+    state.isMediaRecorderInitialized = true;
+  },
   setAudioRecording(state, audio) {
     state.audioRecording = audio;
   },

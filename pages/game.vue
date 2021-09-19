@@ -192,7 +192,6 @@ export default {
       countdownSound: '',
       startBellSound: '',
       gameStarted: false,
-      mediaRecorder: null,
       recordedAudio: null,
     };
   },
@@ -205,6 +204,7 @@ export default {
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
+    ...mapState('recordings', ['mediaRecorder', 'isMediaRecorderInitialized']),
 
     colorChangeDuration() {
       return {
@@ -241,8 +241,11 @@ export default {
         : document.body.classList.remove('dark-mode');
     }
 
-    // because the game could be aborted accidently
+    // because the game could be aborted accidentally
     this.preventClickingBack();
+    if (!this.isMediaRecorderInitialized) {
+      this.prepareMediaRecorder();
+    }
   },
   methods: {
     ...mapMutations('words', [
@@ -251,7 +254,7 @@ export default {
       'setPreviousRoundWords',
     ]),
     ...mapMutations(['setGameInProgress', 'changeGameScreenStatus']),
-    ...mapMutations('recordings', ['setAudioRecording']),
+    ...mapMutations('recordings', ['setAudioRecording', 'setMediaRecorder']),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
@@ -335,7 +338,9 @@ export default {
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
             this.stopRecording();
-            this.$router.push({ path: 'overview' }); // probaj vidjeti jel se ostale stvari izvrse ako je ovo prvo
+            setTimeout(() => {
+              this.$router.push({ path: 'overview' });
+            }, 100);
           }
 
           this.openedModal || this.remainingSeconds < 1
@@ -415,12 +420,8 @@ export default {
 
       window.onhashchange = () => (window.location.hash = 'no-back-button');
     },
-    async startRecording() {
-      // dodati i opciju da se s fancym gumbima play, pause i stop
-      // (mozda ima neki player na npm) moze poslusati, ali i skinuti na overview page
-      // za ime audiozapisa pri skidanju koristiti ime ekipe i broj runde
+    async prepareMediaRecorder() {
       await register(await connect());
-      console.log('Started recording...');
 
       let stream = await navigator.mediaDevices.getUserMedia({
         audio: {
@@ -429,10 +430,18 @@ export default {
           noiseSuppression: false,
         },
       });
-      this.mediaRecorder = new MediaRecorder(stream, {
+      let recorder = new MediaRecorder(stream, {
         mimeType: 'audio/wav',
       });
+      this.setMediaRecorder(recorder);
+    },
+    async startRecording() {
+      // dodati i opciju da se s fancym gumbima play, pause i stop
+      // (mozda ima neki player na npm) moze poslusati, ali i skinuti na overview page
+      this.setAudioRecording(null);
+      console.log(this.mediaRecorder);
       this.mediaRecorder.start();
+      console.log('Started recording...');
       let chunks = [];
 
       this.mediaRecorder.addEventListener('dataavailable', (e) => {
