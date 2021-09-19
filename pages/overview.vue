@@ -7,7 +7,7 @@
       <div id="words-container">
         <WordsOverview />
       </div>
-      <div v-if="getAudioRecording" id="record-container">
+      <div v-if="audioRecording" id="record-container">
         <a id="download" download="test.mp3">
           <BaseButton id="download-btn" :buttonText="'Download recording'" />
         </a>
@@ -37,7 +37,7 @@ export default {
       'getCurrentTeam',
       'getCurrentRound',
     ]),
-    ...mapGetters('recordings', ['getAudioRecording']),
+    ...mapState('recordings', ['audioRecording']),
   },
   created() {
     !this.getStartedOnIndexPage
@@ -58,7 +58,12 @@ export default {
     if (screen.height < 700) {
       document.getElementById('words-container').style.height = '64vh';
     }
-    document.getElementById('download').href = this.getAudioRecording.src;
+
+    console.log(this.audioRecording.src);
+    while (!this.audioRecording) {
+      console.log('Waiting for audio recording');
+    }
+    document.getElementById('download').href = this.audioRecording.src;
     document.getElementById(
       'download'
     ).download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;

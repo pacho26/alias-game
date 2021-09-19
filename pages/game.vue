@@ -452,7 +452,7 @@ export default {
       this.mediaRecorder.stop();
       setTimeout(() => {
         this.setAudioRecording(this.recordedAudio);
-      }, 50);
+      }, 100);
     },
   },
 };
