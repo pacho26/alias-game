@@ -78,7 +78,7 @@ $secondary-color: #374b7b;
 @media only screen and (max-width: 600px) {
   .btn {
     width: 75vw;
-    transform: scale(1.1, 1.1);
+    transform: scale(1.1);
   }
 }
 </style>

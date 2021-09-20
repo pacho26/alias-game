@@ -103,17 +103,17 @@ export default {
           document.getElementById('croatia-flag').style.opacity = '1';
           document.getElementById('united-kingdom-flag').style.opacity = '0.45';
           document.getElementById('croatia-flag').style.transform =
-            'scale(1.2, 1.2)';
+            'scale(1.2)';
           document.getElementById('united-kingdom-flag').style.transform =
-            'scale(1, 1)';
+            'scale(1)';
           break;
         case 'english':
           document.getElementById('croatia-flag').style.opacity = '0.45';
           document.getElementById('united-kingdom-flag').style.opacity = '1';
           document.getElementById('united-kingdom-flag').style.transform =
-            'scale(1.2, 1.2)';
+            'scale(1.2)';
           document.getElementById('croatia-flag').style.transform =
-            'scale(1, 1)';
+            'scale(1)';
           break;
       }
       this.translate();

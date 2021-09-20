@@ -7,12 +7,15 @@
       <div id="words-container">
         <WordsOverview />
       </div>
-      <div id="recording-container">
-        <audio controls controlsList="nodownload noplaybackrate">
+      <div v-if="enabledRecording" id="recording-container">
+        <audio controls controlsList="nodownload noplaybackrate ">
           <source id="audio-src" type="audio/wav" />
         </audio>
         <a id="download" download="test.mp3">
-          <BaseButton id="download-btn" :buttonText="'Download recording'" />
+          <BaseButton
+            id="download-btn"
+            :buttonText="strings.downloadRecording"
+          />
         </a>
       </div>
       <div id="btn" @click="addPoints">
@@ -40,7 +43,7 @@ export default {
       'getCurrentTeam',
       'getCurrentRound',
     ]),
-    ...mapState('recordings', ['audioRecording', 'downloadlink']),
+    ...mapState('recordings', ['audioRecording', 'enabledRecording']),
   },
   created() {
     !this.getStartedOnIndexPage
@@ -55,19 +58,30 @@ export default {
     this.preventClickingBack();
 
     if (screen.height < 600) {
-      document.getElementById('words-container').style.height = '55vh';
+      document.getElementById('words-container').style.height = '54vh';
     }
 
     if (screen.height < 700) {
-      document.getElementById('words-container').style.height = '64vh';
+      document.getElementById('words-container').style.height = '63vh';
     }
 
-    console.log('download link: ' + this.audioRecording.src);
-    document.getElementById('download').href = this.audioRecording.src;
-    document.getElementById(
-      'download'
-    ).download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
-    document.getElementById('audio-src').src = this.audioRecording.src;
+    if (this.enabledRecording) {
+      document.getElementById('download').href = this.audioRecording.src;
+      document.getElementById(
+        'download'
+      ).download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
+      document.getElementById('audio-src').src = this.audioRecording.src;
+
+      document.getElementById('words-container').style.height = '57vh';
+
+      if (screen.height < 600) {
+        document.getElementById('words-container').style.height = '35vh';
+      }
+
+      if (screen.height < 700) {
+        document.getElementById('words-container').style.height = '50vh';
+      }
+    }
 
     this.isLoading = false;
   },
@@ -85,9 +99,11 @@ export default {
     translate() {
       this.chosenLanguage === 'english'
         ? ((this.strings.continue = 'Continue'),
-          (this.strings.modifyAnswers = 'Modify answers'.toUpperCase()))
+          (this.strings.modifyAnswers = 'Modify answers'.toUpperCase()),
+          (this.strings.downloadRecording = 'Download recording'))
         : ((this.strings.continue = 'Nastavi'),
-          (this.strings.modifyAnswers = 'Izmijeni odgovore'.toUpperCase()));
+          (this.strings.modifyAnswers = 'Izmijeni odgovore'.toUpperCase()),
+          (this.strings.downloadRecording = 'Preuzmi snimku'));
     },
     preventClickingBack() {
       window.location.hash = 'no-back-button';
@@ -122,7 +138,7 @@ main {
 
   #btn {
     margin-top: 50px;
-    margin-bottom: 24px;
+    margin-bottom: 23px;
   }
 
   #recording-container {
@@ -130,14 +146,12 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    #audio-src {
-      background-color: red;
-      color: red;
-    }
+    transform: scale(1.08);
+    position: relative;
+    top: 27px;
 
     #download-btn {
-      transform: scale(0.6, 0.6);
+      transform: scale(0.68);
       background-color: #e6e6e6;
       color: #374b7b;
       width: 360px;
@@ -148,6 +162,12 @@ main {
 .dark-mode {
   main {
     color: #f2f2f2;
+  }
+
+  #recording-container {
+    #download-btn {
+      color: #202124;
+    }
   }
 }
 

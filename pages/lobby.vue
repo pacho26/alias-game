@@ -222,6 +222,26 @@
             max="90"
             step="10"
           ></b-form-input>
+
+          <div id="checkbox-container" class="mt-4">
+            {{ strings.recordingSound }}
+            <input
+              type="checkbox"
+              class="checkbox"
+              name="checkbox"
+              v-model="recordingSelected"
+            />
+            <label
+              class="label mt-2"
+              name="label"
+              @click="
+                updateRecordingCheckbox();
+                updateCheckboxColors();
+              "
+            >
+              <div class="ball"></div>
+            </label>
+          </div>
         </div>
       </div>
 
@@ -270,6 +290,7 @@ export default {
       strings: {},
       selectedLogoUrl: '',
       imgLoaded: 0,
+      recordingSelected: false,
     };
   },
   computed: {
@@ -281,6 +302,7 @@ export default {
     ]),
     ...mapState('colors', ['colors']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
+    ...mapState('recordings', ['enabledRecording']),
   },
   created() {
     !this.getStartedOnIndexPage
@@ -291,6 +313,7 @@ export default {
 
     this.duration = this.getDurationOfRound;
     this.targetResult = this.getTargetResult;
+    this.recordingSelected = this.enabledRecording;
   },
   mounted() {
     this.isDarkMode
@@ -300,6 +323,7 @@ export default {
     if (this.getCurrentTeams.length === 0) {
       this.isLoading = false;
     }
+    this.updateCheckboxColors();
   },
   methods: {
     ...mapMutations([
@@ -311,6 +335,7 @@ export default {
       'deleteTeamByIndex',
       'setGameInProgress',
     ]),
+    ...mapMutations('recordings', ['setEnabledRecording']),
 
     addTeamMethod() {
       if (
@@ -401,6 +426,23 @@ export default {
         this.isLoading = false;
       }
     },
+    updateRecordingCheckbox() {
+      this.recordingSelected = !this.recordingSelected;
+      this.setEnabledRecording(this.recordingSelected);
+    },
+    updateCheckboxColors() {
+      const label = document.getElementsByName('label')[0];
+
+      if (this.isDarkMode) {
+        this.recordingSelected
+          ? (label.style.backgroundColor = '#bb86fc')
+          : (label.style.backgroundColor = '#e6e6e6');
+      } else {
+        this.recordingSelected
+          ? (label.style.backgroundColor = '#47619e')
+          : (label.style.backgroundColor = '#b3b3b3');
+      }
+    },
     translate() {
       this.chosenLanguage === 'english'
         ? ((this.strings.teams = 'Teams'.toUpperCase()),
@@ -420,7 +462,8 @@ export default {
           (this.strings.enterPlayerName = "Enter player's name"),
           (this.strings.player = 'Player'),
           (this.strings.chooseLogo = 'Choose logo'),
-          (this.strings.changeLogo = 'Change logo'))
+          (this.strings.changeLogo = 'Change logo'),
+          (this.strings.recordingSound = 'Sound recording during the round'))
         : ((this.strings.teams = 'Ekipe'.toUpperCase()),
           (this.strings.addTeamsToStart =
             'Dodajte ekipe kako bi započeli igru.'),
@@ -439,7 +482,8 @@ export default {
           (this.strings.enterPlayerName = 'Unesite ime igrača'),
           (this.strings.player = 'Igrač'),
           (this.strings.chooseLogo = 'Izaberi logo'),
-          (this.strings.changeLogo = 'Promijeni logo'));
+          (this.strings.changeLogo = 'Promijeni logo'),
+          (this.strings.recordingSound = 'Snimanje zvuka tijekom runde'));
     },
   },
 };
@@ -497,7 +541,7 @@ main > * {
 .select-form,
 .team-name-input {
   max-width: 250px;
-  transform: scale(1.2, 1.2);
+  transform: scale(1.2);
 }
 
 .select-form {
@@ -531,7 +575,7 @@ main > * {
     font-size: 15px;
     font-weight: 600;
     max-width: 150px;
-    transform: scale(1.13, 1.13);
+    transform: scale(1.13);
     margin-top: 5px;
 
     &:hover {
@@ -570,7 +614,7 @@ main > * {
 }
 
 .players-container {
-  transform: scale(1.18, 1.18);
+  transform: scale(1.18);
   margin-top: 34px;
   color: #374b7b;
   font-weight: 600;
@@ -607,7 +651,7 @@ main > * {
     box-shadow: 0 5px 15px rgba(114, 137, 192, 0.8);
 
     .icon-plus {
-      transform: scale(1.15, 1.15);
+      transform: scale(1.15);
     }
   }
 }
@@ -621,7 +665,7 @@ main > * {
 #confirm-form-button {
   color: #f5f5f5;
   background: #374b7b;
-  transform: scale(1.2, 1.2);
+  transform: scale(1.2);
 
   &:hover {
     background: #e2e2e2;
@@ -641,7 +685,7 @@ main > * {
   font-size: 15px;
   font-weight: 700;
   max-width: 110px;
-  transform: scale(1.2, 1.2);
+  transform: scale(1.2);
 
   &:hover {
     background: #e2e2e2;
@@ -747,6 +791,52 @@ main > * {
   border-radius: 8px;
   min-width: 360px;
 
+  #checkbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    text-align: center;
+
+    .label {
+      transform: scale(1.22);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+      border-radius: 50px;
+      height: 26px;
+      width: 50px;
+      position: relative;
+      top: 5px;
+    }
+
+    .ball {
+      background-color: white;
+      position: absolute;
+      height: 22px;
+      top: 2px;
+      left: 2px;
+      border-radius: 50%;
+      width: 22px;
+      transition: transform 0.2s linear;
+    }
+
+    .checkbox {
+      opacity: 0;
+      position: absolute;
+    }
+
+    .checkbox:checked + .label .ball {
+      transform: translateX(24px);
+    }
+
+    .label {
+      cursor: pointer;
+    }
+  }
+
   h3 {
     text-align: center;
     margin-bottom: 16px;
@@ -828,6 +918,12 @@ main > * {
 
   .settings-container {
     background: #303136;
+
+    #checkbox-container {
+      .ball {
+        background-color: #242529;
+      }
+    }
 
     .custom-range::-webkit-slider-thumb {
       background: hsl(267, 100%, 74%);
@@ -911,14 +1007,14 @@ main > * {
     padding: 24px 12vw;
 
     .custom-range {
-      transform: scale(1.15, 1.15);
+      transform: scale(1.15);
     }
   }
 
   .select-form,
   .team-name-input {
     max-width: 60vw;
-    transform: scale(1.3, 1.3);
+    transform: scale(1.3);
   }
 
   .team-name-input {
@@ -930,7 +1026,7 @@ main > * {
   }
 
   .players-container {
-    transform: scale(1.34, 1.34);
+    transform: scale(1.34);
     margin-top: 40px;
   }
 
@@ -939,11 +1035,11 @@ main > * {
     max-width: 66vw;
 
     #close-form-button {
-      transform: scale(1.4, 1.4);
+      transform: scale(1.4);
     }
 
     #confirm-form-button {
-      transform: scale(1.4, 1.4);
+      transform: scale(1.4);
     }
   }
 
@@ -951,7 +1047,7 @@ main > * {
     #delete-team-button {
       margin-top: 8px;
       margin-bottom: 10px;
-      transform: scale(1.2, 1.2);
+      transform: scale(1.2);
       max-width: 63vw;
     }
   }

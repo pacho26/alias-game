@@ -2,6 +2,7 @@ export const state = () => ({
   mediaRecorder: null,
   audioRecording: null,
   isMediaRecorderInitialized: false,
+  enabledRecording: false,
 });
 
 export const getters = {
@@ -17,5 +18,8 @@ export const mutations = {
   },
   setAudioRecording(state, audio) {
     state.audioRecording = audio;
+  },
+  setEnabledRecording(state, bool) {
+    state.enabledRecording = bool;
   },
 };

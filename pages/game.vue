@@ -204,7 +204,11 @@ export default {
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
-    ...mapState('recordings', ['mediaRecorder', 'isMediaRecorderInitialized']),
+    ...mapState('recordings', [
+      'mediaRecorder',
+      'isMediaRecorderInitialized',
+      'enabledRecording',
+    ]),
 
     colorChangeDuration() {
       return {
@@ -243,7 +247,7 @@ export default {
 
     // because the game could be aborted accidentally
     this.preventClickingBack();
-    if (!this.isMediaRecorderInitialized) {
+    if (!this.isMediaRecorderInitialized && this.enabledRecording) {
       this.prepareMediaRecorder();
     }
   },
@@ -254,7 +258,11 @@ export default {
       'setPreviousRoundWords',
     ]),
     ...mapMutations(['setGameInProgress', 'changeGameScreenStatus']),
-    ...mapMutations('recordings', ['setAudioRecording', 'setMediaRecorder']),
+    ...mapMutations('recordings', [
+      'setAudioRecording',
+      'setMediaRecorder',
+      'setEnabledRecording',
+    ]),
 
     async setWordsInDatabase() {
       let input = document.querySelector('input');
@@ -337,10 +345,12 @@ export default {
             this.shake(false);
             clearInterval(interval);
             this.setPreviousRoundWords(this.previousWords);
-            this.stopRecording();
-            setTimeout(() => {
-              this.$router.push({ path: 'overview' });
-            }, 100);
+            this.enabledRecording
+              ? (this.stopRecording(),
+                setTimeout(() => {
+                  this.$router.push({ path: 'overview' });
+                }, 170))
+              : this.$router.push({ path: 'overview' });
           }
 
           this.openedModal || this.remainingSeconds < 1
@@ -421,47 +431,61 @@ export default {
       window.onhashchange = () => (window.location.hash = 'no-back-button');
     },
     async prepareMediaRecorder() {
-      await register(await connect());
+      try {
+        await register(await connect());
 
-      let stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          autoGainControl: true,
-          echoCancellation: false,
-          noiseSuppression: false,
-        },
-      });
-      let recorder = new MediaRecorder(stream, {
-        mimeType: 'audio/wav',
-      });
-      this.setMediaRecorder(recorder);
+        let stream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            autoGainControl: true,
+            echoCancellation: false,
+            noiseSuppression: false,
+          },
+        });
+        let recorder = new MediaRecorder(stream, {
+          mimeType: 'audio/wav',
+        });
+        this.setMediaRecorder(recorder);
+      } catch (error) {
+        this.setEnabledRecording(false);
+        console.log('Not able to record sound.');
+      }
     },
     async startRecording() {
-      // dodati i opciju da se s fancym gumbima play, pause i stop
-      // (mozda ima neki player na npm) moze poslusati, ali i skinuti na overview page
-      this.setAudioRecording(null);
-      console.log(this.mediaRecorder);
-      this.mediaRecorder.start();
-      console.log('Started recording...');
-      let chunks = [];
+      if (this.enabledRecording) {
+        try {
+          this.setAudioRecording(null);
+          this.mediaRecorder.start();
+          console.log('Started recording...');
+          let chunks = [];
 
-      this.mediaRecorder.addEventListener('dataavailable', (e) => {
-        chunks.push(e.data);
-      });
-      this.mediaRecorder.addEventListener('stop', () => {
-        let blob = new Blob(chunks, {
-          type: 'audio/wav',
-        });
-        let recordedAudioUrl = URL.createObjectURL(blob);
-        this.recordedAudio = new Audio(recordedAudioUrl);
-        this.recordedAudio.setAttribute('controls', 1);
-      });
+          this.mediaRecorder.addEventListener('dataavailable', (e) => {
+            chunks.push(e.data);
+          });
+          this.mediaRecorder.addEventListener('stop', () => {
+            let blob = new Blob(chunks, {
+              type: 'audio/wav',
+            });
+            let recordedAudioUrl = URL.createObjectURL(blob);
+            this.recordedAudio = new Audio(recordedAudioUrl);
+            this.recordedAudio.setAttribute('controls', 1);
+          });
+        } catch (error) {
+          this.setEnabledRecording(false);
+          console.log('Not able to record sound.');
+        }
+      }
     },
     stopRecording() {
-      console.log('Recording stopped!');
-      this.mediaRecorder.stop();
-      setTimeout(() => {
-        this.setAudioRecording(this.recordedAudio);
-      }, 100);
+      try {
+        console.log('Recording stopped!');
+        this.mediaRecorder.stop();
+        setTimeout(() => {
+          this.setAudioRecording(this.recordedAudio);
+        }, 150);
+      } catch (error) {
+        this.setEnabledRecording(false);
+        console.log('Not able to record sound.');
+      }
     },
   },
 };
@@ -506,7 +530,7 @@ section {
         cursor: pointer;
 
         #pause-icon {
-          transform: scale(1.2, 1.2);
+          transform: scale(1.2);
         }
       }
     }
@@ -719,7 +743,7 @@ section {
       opacity: 1;
 
       #button-wrong {
-        transform: scale(1.25, 1.25);
+        transform: scale(1.25);
       }
     }
   }
@@ -745,7 +769,7 @@ section {
       opacity: 1;
 
       #button-correct {
-        transform: scale(1.25, 1.25);
+        transform: scale(1.25);
       }
     }
   }
