@@ -16,7 +16,7 @@
       <div
         @click="
           setPreviousTeams();
-          changeGameScreenStatus(true);
+          changeGameScreenStatus(false);
           $confetti.stop();
         "
       >
@@ -59,10 +59,10 @@ export default {
         )),
         this.setGameInProgress(false),
         // It's true because if this page rerenders, song is starting over and over again
-        this.changeGameScreenStatus(true));
+        this.changeGameScreenStatus(true),
+        this.translate());
   },
   mounted() {
-    this.translate();
     this.isDarkMode
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');

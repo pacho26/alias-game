@@ -5,7 +5,13 @@
     <main v-if="getStartedOnIndexPage">
       <section>
         <div id="pause-and-points">
-          <div id="pause-container" @click="openGameModal">
+          <div
+            id="pause-container"
+            @click="
+              openGameModal();
+              enabledRecording ? mediaRecorder.pause() : null;
+            "
+          >
             <fa id="pause-icon" icon="pause"></fa>
           </div>
           <div id="points-container">
@@ -62,11 +68,7 @@
             <h1>{{ getCurrentTeams[getCurrentTeamIndex].name }}</h1>
             <h4>
               {{ strings.explaining }}:
-              <span>{{
-                getCurrentTeams[getCurrentTeamIndex].players[
-                  getCurrentTeams[getCurrentTeamIndex].explainingPlayerIndex
-                ]
-              }}</span>
+              <span>{{ explainingPlayer }}</span>
             </h4>
           </div>
 
@@ -122,7 +124,12 @@
                 :buttonText="strings.no"
               />
             </div>
-            <div @click="changeGameScreenStatus(false)">
+            <div
+              @click="
+                changeGameScreenStatus(false);
+                stopRecording();
+              "
+            >
               <BaseButton
                 class="modal-button confirm-modal-button"
                 :buttonText="strings.yes"
@@ -193,6 +200,7 @@ export default {
       startBellSound: '',
       gameStarted: false,
       recordedAudio: null,
+      explainingPlayer: '',
     };
   },
   computed: {
@@ -201,6 +209,7 @@ export default {
       'getCurrentTeamIndex',
       'getDurationOfRound',
       'getStartedOnIndexPage',
+      'getCurrentRound',
     ]),
     ...mapGetters('words', ['getAppearedIndexes']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
@@ -235,6 +244,8 @@ export default {
         (this.startBellSound = new Audio(
           'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fstart-bell.mp3?alt=media&token=3ff66936-e9ca-41e4-8c86-b61abe875d5f'
         )));
+
+    this.calculateExplainingPlayer();
   },
   mounted() {
     if (this.getStartedOnIndexPage) {
@@ -265,18 +276,19 @@ export default {
     ]),
 
     async setWordsInDatabase() {
-      let input = document.querySelector('input');
-
-      let files = input.files;
-
+      const input = document.querySelector('input');
+      const files = input.files;
       const file = files[0];
 
-      let reader = new FileReader();
+      const reader = new FileReader();
 
       reader.onload = async (e) => {
         const file = e.target.result;
         const lines = await file.split(/\r\n|\n/);
-        const set = new Set(lines);
+        // case-insensitive sorting
+        const set = [...new Set(lines)].sort((a, b) => {
+          return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
 
         const docRef = this.$fire.firestore
           .collection('dictionaries')
@@ -330,13 +342,14 @@ export default {
         this.startBellSound.play();
         this.gameStarted = true;
         this.startRecording();
-
         // prevent seeing text change while modal is closing
         setTimeout(() => {
           this.chosenLanguage === 'english'
             ? (this.gameModalText = 'Continue')
             : (this.gameModalText = 'Nastavi');
         }, 100);
+      } else if (this.enabledRecording) {
+        this.mediaRecorder.resume();
       }
 
       const interval = setInterval(
@@ -371,6 +384,16 @@ export default {
         }.bind(this),
         1000
       );
+    },
+    calculateExplainingPlayer() {
+      const currentRound = this.getCurrentRound;
+      const currentPlayers =
+        this.getCurrentTeams[this.getCurrentTeamIndex].players;
+
+      currentRound % currentPlayers.length === 0
+        ? (this.explainingPlayer = currentPlayers[currentRound - 1])
+        : (this.explainingPlayer =
+            currentPlayers[(currentRound % currentPlayers.length) - 1]);
     },
     shake(needsToShake) {
       needsToShake
@@ -447,7 +470,6 @@ export default {
         this.setMediaRecorder(recorder);
       } catch (error) {
         this.setEnabledRecording(false);
-        console.log('Not able to record sound.');
       }
     },
     async startRecording() {
@@ -455,10 +477,12 @@ export default {
         try {
           this.setAudioRecording(null);
           this.mediaRecorder.start();
-          console.log('Started recording...');
           let chunks = [];
 
           this.mediaRecorder.addEventListener('dataavailable', (e) => {
+            chunks.push(e.data);
+          });
+          this.mediaRecorder.addEventListener('resume', (e) => {
             chunks.push(e.data);
           });
           this.mediaRecorder.addEventListener('stop', () => {
@@ -471,20 +495,21 @@ export default {
           });
         } catch (error) {
           this.setEnabledRecording(false);
-          console.log('Not able to record sound.');
+          console.error('Not able to record sound.');
         }
       }
     },
     stopRecording() {
-      try {
-        console.log('Recording stopped!');
-        this.mediaRecorder.stop();
-        setTimeout(() => {
-          this.setAudioRecording(this.recordedAudio);
-        }, 150);
-      } catch (error) {
-        this.setEnabledRecording(false);
-        console.log('Not able to record sound.');
+      if (this.enabledRecording) {
+        try {
+          this.mediaRecorder.stop();
+          setTimeout(() => {
+            this.setAudioRecording(this.recordedAudio);
+          }, 150);
+        } catch (error) {
+          this.setEnabledRecording(false);
+          console.error('Not able to record sound.');
+        }
       }
     },
   },

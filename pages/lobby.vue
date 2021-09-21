@@ -8,16 +8,13 @@
           <h3>{{ strings.teams }}</h3>
           <div id="teams-table">
             <table style="width: 100%">
-              <tr
-                id="team-placeholder"
-                v-if="this.getCurrentTeams.length === 0"
-              >
+              <tr id="team-placeholder" v-if="this.currentTeams.length === 0">
                 {{
                   strings.addTeamsToStart
                 }}
               </tr>
               <tr
-                v-for="team in this.getCurrentTeams"
+                v-for="team in this.currentTeams"
                 :key="team.name"
                 @click="prepareEditing(team.name)"
               >
@@ -149,8 +146,11 @@
               </div>
             </div>
 
-            <p id="error-message" v-if="unfinishedForm">
+            <p class="error-message" v-if="unfinishedForm">
               {{ strings.emptyValues }}
+            </p>
+            <p class="error-message" v-if="areDuplicateNames">
+              {{ strings.duplicateName }}
             </p>
 
             <div class="modal-buttons">
@@ -245,7 +245,7 @@
         </div>
       </div>
 
-      <div v-if="this.getCurrentTeams.length >= 2" @click="clearPreviousGame()">
+      <div v-if="this.currentTeams.length >= 2" @click="clearPreviousGame()">
         <BaseButton
           id="startBtn"
           :buttonText="strings.startGame"
@@ -281,6 +281,7 @@ export default {
       ],
       names: [],
       unfinishedForm: false,
+      areDuplicateNames: false,
       editingTeam: false,
       previousTeamName: '',
       targetResult: '60',
@@ -295,11 +296,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCurrentTeams',
       'getStartedOnIndexPage',
       'getDurationOfRound',
       'getTargetResult',
     ]),
+    ...mapState(['currentTeams']),
     ...mapState('colors', ['colors']),
     ...mapState(['isDarkMode', 'chosenLanguage']),
     ...mapState('recordings', ['enabledRecording']),
@@ -320,7 +321,7 @@ export default {
       ? document.body.classList.add('dark-mode')
       : document.body.classList.remove('dark-mode');
 
-    if (this.getCurrentTeams.length === 0) {
+    if (this.currentTeams.length === 0) {
       this.isLoading = false;
     }
     this.updateCheckboxColors();
@@ -345,6 +346,10 @@ export default {
         !this.selectedLogoUrl
       ) {
         this.unfinishedForm = true;
+        this.areDuplicateNames = false;
+      } else if (this.checkForDuplicateNames()) {
+        this.unfinishedForm = false;
+        this.areDuplicateNames = true;
       } else {
         this.isLoading = true;
         // const num = Math.floor(Math.random() * this.colors.length);
@@ -356,9 +361,8 @@ export default {
           logo: this.selectedLogoUrl,
           players: this.names,
           points: 0,
-          explainingPlayerIndex: 0,
         };
-        const idx = this.getCurrentTeams.findIndex(
+        const idx = this.currentTeams.findIndex(
           (t) => t.name === this.previousTeamName
         );
 
@@ -384,9 +388,9 @@ export default {
     },
     prepareEditing(teamName) {
       const foundTeam = _.cloneDeep(
-        this.getCurrentTeams.find((t) => t.name === teamName)
+        this.currentTeams.find((t) => t.name === teamName)
       );
-      this.currentTeamIndex = this.getCurrentTeams.findIndex(
+      this.currentTeamIndex = this.currentTeams.findIndex(
         (t) => t.name === teamName
       );
       this.newTeamName = foundTeam.name;
@@ -396,11 +400,23 @@ export default {
       this.previousTeamName = teamName;
       this.selectedLogoUrl = foundTeam.logo;
       this.$refs['team-modal'].show();
+      this.unfinishedForm = false;
+      this.areDuplicateNames = false;
     },
     openEmptyTeamModal() {
       this.clearForm();
       this.$refs['team-modal'].show();
       this.editingTeam = false;
+    },
+    checkForDuplicateNames() {
+      for (const [idx, team] of this.currentTeams.entries()) {
+        if (this.editingTeam && idx === this.currentTeamIndex) {
+          continue;
+        } else if (team.name === this.newTeamName) {
+          return true;
+        }
+      }
+      return false;
     },
     checkIfNamesExist() {
       for (const name of this.names) {
@@ -415,6 +431,7 @@ export default {
       this.numberOfPlayers = null;
       this.names = [];
       this.unfinishedForm = false;
+      this.areDuplicateNames = false;
     },
     setSelectedLogo(url) {
       this.selectedLogoUrl = url;
@@ -422,7 +439,7 @@ export default {
     },
     handleImgLoading() {
       this.imgLoaded++;
-      if (this.imgLoaded === this.getCurrentTeams.length) {
+      if (this.imgLoaded === this.currentTeams.length) {
         this.isLoading = false;
       }
     },
@@ -463,7 +480,8 @@ export default {
           (this.strings.player = 'Player'),
           (this.strings.chooseLogo = 'Choose logo'),
           (this.strings.changeLogo = 'Change logo'),
-          (this.strings.recordingSound = 'Sound recording during the round'))
+          (this.strings.recordingSound = 'Sound recording during the round'),
+          (this.strings.duplicateName = 'Team name already exists!'))
         : ((this.strings.teams = 'Ekipe'.toUpperCase()),
           (this.strings.addTeamsToStart =
             'Dodajte ekipe kako bi započeli igru.'),
@@ -483,7 +501,8 @@ export default {
           (this.strings.player = 'Igrač'),
           (this.strings.chooseLogo = 'Izaberi logo'),
           (this.strings.changeLogo = 'Promijeni logo'),
-          (this.strings.recordingSound = 'Snimanje zvuka tijekom runde'));
+          (this.strings.recordingSound = 'Snimanje zvuka tijekom runde'),
+          (this.strings.duplicateName = 'Ime ekipe već postoji!'));
     },
   },
 };
@@ -601,7 +620,7 @@ main > * {
   }
 }
 
-#error-message {
+.error-message {
   color: #8e609f;
   font-weight: 500;
   text-align: center;
@@ -745,6 +764,7 @@ main > * {
     user-select: none;
     color: #374b7b;
     text-align: center;
+    font-size: 22px;
 
     &:hover {
       background: none;

@@ -6,21 +6,18 @@ export const state = () => ({
       players: ['Kepa', 'Timo'],
       logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fchelsea.png?alt=media&token=44556fdc-0ccc-40f0-ad52-0708298c6e7f',
       points: 0,
-      explainingPlayerIndex: 0,
     },
     {
       name: 'Manchester United',
       players: ['David', 'Luke'],
       logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fmanchester-united.png?alt=media&token=f62e0b41-8c15-4579-88ea-a109d5a3c65e',
       points: 0,
-      explainingPlayerIndex: 0,
     },
     {
       name: 'Milan',
       players: ['Ante', 'Zlatan'],
       logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fmilan.png?alt=media&token=3f16dc0b-b429-41d1-b268-f808e3d6f73f',
       points: 0,
-      explainingPlayerIndex: 0,
     },
   ],
   hasWinner: false,
@@ -126,11 +123,6 @@ export const mutations = {
         }
       }
     }
-    // set the next player who explains
-    state.currentTeams[state.currentTeamIndex].explainingPlayerIndex + 1 ===
-    state.currentTeams[state.currentTeamIndex].players.length
-      ? (state.currentTeams[state.currentTeamIndex].explainingPlayerIndex = 0)
-      : state.currentTeams[state.currentTeamIndex].explainingPlayerIndex++;
   },
   setTargetResult(state, res) {
     state.targetResult = res;
@@ -142,12 +134,12 @@ export const mutations = {
     state.chosenLanguage = language;
   },
   clearPreviousGame(state) {
+    state.currentRound = 1;
     state.currentTeamIndex = 0;
     state.hasWinner = false;
     state.loserTeams = [];
     for (const team of state.currentTeams) {
       team.points = 0;
-      team.explainingPlayerIndex = 0;
     }
   },
   setCurrentTeams(state, teams) {
@@ -160,8 +152,8 @@ export const mutations = {
     state.isDarkMode = !state.isDarkMode;
     state.changingColorTheme = true;
   },
-  changeGameScreenStatus(state, status) {
-    state.isGameScreen = status;
+  changeGameScreenStatus(state, bool) {
+    state.isGameScreen = bool;
   },
   startingFromIndexPage(state) {
     state.startedOnIndexPage = true;
