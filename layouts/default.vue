@@ -2,13 +2,21 @@
   <div :key="componentKey">
     <header>
       <div id="header-content">
-        <div>
-          <nuxt-link v-if="!this.gameInProgress" to="/" id="logo-link"
-            >Alias<span>Game</span>
-          </nuxt-link>
-          <nuxt-link v-else to="/" id="logo-link" class="no-click"
-            >Alias<span>Game</span>
-          </nuxt-link>
+        <div v-if="isLightLogo">
+          <nuxt-link v-if="!this.gameInProgress" to="/" id="logo-link">
+            <img src="../assets/logo-light.svg" id="logo-pic" alt="Alias logo"
+          /></nuxt-link>
+          <nuxt-link v-else to="/" id="logo-link" class="no-click">
+            <img src="../assets/logo-light.svg" id="logo-pic" alt="Alias logo"
+          /></nuxt-link>
+        </div>
+        <div v-else>
+          <nuxt-link v-if="!this.gameInProgress" to="/" id="logo-link">
+            <img src="../assets/logo-dark.svg" id="logo-pic" alt="Alias logo"
+          /></nuxt-link>
+          <nuxt-link v-else to="/" id="logo-link" class="no-click">
+            <img src="../assets/logo-dark.svg" id="logo-pic" alt="Alias logo"
+          /></nuxt-link>
         </div>
 
         <div id="theme-switch" v-if="!isGameScreen">
@@ -42,6 +50,7 @@ export default {
       componentKey: 0,
       darkMode: false,
       bgColor: '#d0defb',
+      isLightLogo: true,
     };
   },
   computed: {
@@ -76,6 +85,7 @@ export default {
             (this.bgColor = '#000'))
           : ((document.body.style.backgroundColor = 'white'),
             (this.bgColor = '#d0defb'));
+        this.isLightLogo = !this.isLightLogo;
         this.forceRerender();
       }, 200);
     },
@@ -166,19 +176,14 @@ header {
 }
 
 #logo-link {
-  text-decoration: none;
-  font-family: 'Poppins Bold', sans-serif;
-  color: #3a5088;
-  font-size: 40px;
-  font-weight: 800;
-  padding: 8px;
-  user-select: none;
+  padding: 6px;
 
-  span {
-    font-family: 'Poppins Extra Bold', sans-serif;
-    color: #9f6db0;
-    font-size: 20px;
-    font-weight: 800;
+  #logo-pic {
+    width: 200px;
+    position: relative;
+    top: 2px;
+    right: 10px;
+    transform: scale(0.82);
   }
 }
 

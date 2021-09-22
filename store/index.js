@@ -1,25 +1,6 @@
 export const state = () => ({
   loserTeams: [],
-  currentTeams: [
-    {
-      name: 'Chelsea',
-      players: ['Kepa', 'Timo'],
-      logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fchelsea.png?alt=media&token=44556fdc-0ccc-40f0-ad52-0708298c6e7f',
-      points: 0,
-    },
-    {
-      name: 'Manchester United',
-      players: ['David', 'Luke'],
-      logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fmanchester-united.png?alt=media&token=f62e0b41-8c15-4579-88ea-a109d5a3c65e',
-      points: 0,
-    },
-    {
-      name: 'Milan',
-      players: ['Ante', 'Zlatan'],
-      logo: 'https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Ffootball%2Fmilan.png?alt=media&token=3f16dc0b-b429-41d1-b268-f808e3d6f73f',
-      points: 0,
-    },
-  ],
+  currentTeams: [],
   hasWinner: false,
   currentRound: 1,
   currentTeamIndex: 0,

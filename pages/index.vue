@@ -112,8 +112,7 @@ export default {
           document.getElementById('united-kingdom-flag').style.opacity = '1';
           document.getElementById('united-kingdom-flag').style.transform =
             'scale(1.2)';
-          document.getElementById('croatia-flag').style.transform =
-            'scale(1)';
+          document.getElementById('croatia-flag').style.transform = 'scale(1)';
           break;
       }
       this.translate();
@@ -208,13 +207,15 @@ $secondary-color: #e6e6e6;
       margin-bottom: 20px;
     }
   }
+}
 
-  .dark-mode {
+.dark-mode {
+  #page-container {
     #desc {
-      background: #303136;
+      background: #bc85ff;
 
       h1 {
-        color: #f2f2f2;
+        color: #202124;
       }
     }
   }
