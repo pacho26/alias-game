@@ -212,10 +212,10 @@ $secondary-color: #e6e6e6;
 .dark-mode {
   #page-container {
     #desc {
-      background: #bc85ff;
+      background: #303136;
 
       h1 {
-        color: #202124;
+        color: #f2f2f2;
       }
     }
   }
