@@ -115,17 +115,15 @@
               </div>
 
               <b-form-select
-                v-if="chosenLanguage === 'english'"
+                @change="setMarginBottom"
+                id="select-number-of-players"
                 class="select-form"
                 v-model="numberOfPlayers"
-                :options="optionsEnglish"
-              ></b-form-select>
-
-              <b-form-select
-                v-else
-                class="select-form"
-                v-model="numberOfPlayers"
-                :options="optionsCroatian"
+                :options="
+                  chosenLanguage === 'english'
+                    ? optionsEnglish
+                    : optionsCroatian
+                "
               ></b-form-select>
 
               <div class="players-container">
@@ -443,6 +441,11 @@ export default {
     setSelectedLogo(url) {
       this.selectedLogoUrl = url;
       this.$refs['logo-modal'].hide();
+    },
+    setMarginBottom() {
+      document.getElementById(
+        'select-number-of-players'
+      ).style.marginBottom = `${this.numberOfPlayers * 4}px`;
     },
     handleImgLoading() {
       this.imgLoaded++;
