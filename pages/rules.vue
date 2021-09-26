@@ -18,7 +18,7 @@
         voluptates minus quisquam doloremque? Error laudantium voluptatum
         dolorem adipisci.
       </p>
-      <BaseButton class="btn" :to="'/'" :buttonText="this.strings.return" />
+      <BaseButton class="btn" to="/" :buttonText="this.strings.return" />
     </main>
   </div>
 </template>
@@ -43,9 +43,7 @@ export default {
       : this.translate();
   },
   mounted() {
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
+    document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
     this.isLoading = false;
   },
   methods: {

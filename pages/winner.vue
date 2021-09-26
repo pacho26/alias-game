@@ -20,9 +20,9 @@
           $confetti.stop();
         "
       >
-        <BaseButton id="btn" :to="'lobby'" :buttonText="strings.goToLobby" />
+        <BaseButton id="btn" to="lobby" :buttonText="strings.goToLobby" />
       </div>
-      <audio id="champions-audio">
+      <audio ref="championsAudio">
         <source
           src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/sfx%2Fwe-are-the-champions-sfx.mp3?alt=media&token=7a029d8b-6ade-4e4e-9809-5a6a629cca84"
           type="audio/mpeg"
@@ -63,9 +63,7 @@ export default {
         this.translate());
   },
   mounted() {
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
+    document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
   },
   methods: {
     ...mapMutations([
@@ -79,7 +77,7 @@ export default {
     },
     async stopLoading() {
       this.isLoading = false;
-      await document.getElementById('champions-audio').play();
+      await this.$refs.championsAudio.play();
       this.startParticles();
     },
     translate() {

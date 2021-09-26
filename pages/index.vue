@@ -9,16 +9,8 @@
         </div>
         <main>
           <div class="buttons">
-            <BaseButton
-              class="btn"
-              :to="'/lobby'"
-              :buttonText="strings.newGame"
-            />
-            <BaseButton
-              class="btn"
-              :to="'/rules'"
-              :buttonText="strings.rules"
-            />
+            <BaseButton class="btn" to="/lobby" :buttonText="strings.newGame" />
+            <BaseButton class="btn" to="/rules" :buttonText="strings.rules" />
           </div>
         </main>
       </div>
@@ -27,7 +19,7 @@
           <img
             src="../assets/countryFlags/croatia.svg"
             alt="Croatia flag"
-            id="croatia-flag"
+            ref="croatiaFlag"
             class="flag"
             @click="
               setLanguage('croatian');
@@ -38,7 +30,7 @@
           <img
             src="../assets/countryFlags/united-kingdom.svg"
             alt="United Kingdom flag"
-            id="united-kingdom-flag"
+            ref="unitedKingdomFlag"
             class="flag"
             @click="
               setLanguage('english');
@@ -73,11 +65,7 @@ export default {
     this.$confetti.stop();
     this.selectFlag();
 
-    this.isDarkMode
-      ? ((document.body.style.backgroundColor = '#202124'),
-        document.body.classList.add('dark-mode'))
-      : ((document.body.style.backgroundColor = 'white'),
-        document.body.classList.remove('dark-mode'));
+    document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
 
     // timeout is for preventing black screen for a moment
     this.changingColorTheme
@@ -98,21 +86,21 @@ export default {
     ]),
 
     selectFlag() {
+      const croatiaFlagEl = this.$refs.croatiaFlag;
+      const unitedKingdomFlagEl = this.$refs.unitedKingdomFlag;
+
       switch (this.chosenLanguage) {
         case 'croatian':
-          document.getElementById('croatia-flag').style.opacity = '1';
-          document.getElementById('united-kingdom-flag').style.opacity = '0.45';
-          document.getElementById('croatia-flag').style.transform =
-            'scale(1.2)';
-          document.getElementById('united-kingdom-flag').style.transform =
-            'scale(1)';
+          croatiaFlagEl.style.opacity = '1';
+          croatiaFlagEl.style.transform = 'scale(1.2)';
+          unitedKingdomFlagEl.style.opacity = '0.45';
+          unitedKingdomFlagEl.style.transform = 'scale(1)';
           break;
         case 'english':
-          document.getElementById('croatia-flag').style.opacity = '0.45';
-          document.getElementById('united-kingdom-flag').style.opacity = '1';
-          document.getElementById('united-kingdom-flag').style.transform =
-            'scale(1.2)';
-          document.getElementById('croatia-flag').style.transform = 'scale(1)';
+          unitedKingdomFlagEl.style.opacity = '1';
+          unitedKingdomFlagEl.style.transform = 'scale(1.2)';
+          croatiaFlagEl.style.opacity = '0.45';
+          croatiaFlagEl.style.transform = 'scale(1)';
           break;
       }
       this.translate();
@@ -210,6 +198,9 @@ $secondary-color: #e6e6e6;
 }
 
 .dark-mode {
+  body {
+    background: #202124;
+  }
   #page-container {
     #desc {
       background: #303136;

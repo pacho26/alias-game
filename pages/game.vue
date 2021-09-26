@@ -35,8 +35,12 @@
         </div>
 
         <div id="countdown-container">
-          <div id="shake-container">
-            <h1 id="countdown-text" :style="colorChangeDuration">
+          <div ref="shakeContainer">
+            <h1
+              id="countdown-text"
+              ref="countdownText"
+              :style="colorChangeDuration"
+            >
               {{ remainingSeconds }}
             </h1>
           </div>
@@ -133,7 +137,7 @@
               <BaseButton
                 class="modal-button confirm-modal-button"
                 :buttonText="strings.yes"
-                :to="'/lobby'"
+                to="/lobby"
               />
             </div>
           </div>
@@ -251,9 +255,7 @@ export default {
     if (this.getStartedOnIndexPage) {
       this.$refs['game-modal'].show();
 
-      this.isDarkMode
-        ? document.body.classList.add('dark-mode')
-        : document.body.classList.remove('dark-mode');
+      document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
     }
 
     // because the game could be aborted accidentally
@@ -337,7 +339,8 @@ export default {
       this.wordsArray.shift();
     },
     startCountdown() {
-      document.getElementById('countdown-text').classList.add('color-changer');
+      this.$refs.countdownText.classList.add('color-changer');
+
       if (!this.gameStarted) {
         this.startBellSound.play();
         this.gameStarted = true;
@@ -396,19 +399,13 @@ export default {
             currentPlayers[(currentRound % currentPlayers.length) - 1]);
     },
     shake(needsToShake) {
+      const shakeContainerEl = this.$refs.shakeContainer;
+
       needsToShake
-        ? (document
-            .getElementById('shake-container')
-            .classList.add('shake-rotate'),
-          document
-            .getElementById('shake-container')
-            .classList.add('shake-constant'))
-        : (document
-            .getElementById('shake-container')
-            .classList.remove('shake-rotate'),
-          document
-            .getElementById('shake-container')
-            .classList.remove('shake-constant'));
+        ? (shakeContainerEl.classList.add('shake-rotate'),
+          shakeContainerEl.classList.add('shake-constant'))
+        : (shakeContainerEl.classList.remove('shake-rotate'),
+          shakeContainerEl.classList.remove('shake-constant'));
     },
     openGameModal() {
       this.openedModal = true;
@@ -615,7 +612,8 @@ section {
     #countdown-text {
       font-size: 70px;
       font-weight: 600;
-      padding: 10px;
+      font-family: 'Roboto mono', monospace;
+      padding: 8px 10px 10px 10px;
       background: #374b7b;
       color: #f4f4f4;
       border-radius: 8px;

@@ -4,14 +4,14 @@
 
     <main v-if="getStartedOnIndexPage">
       <h1>{{ strings.modifyAnswers }}</h1>
-      <div id="words-container">
+      <div id="words-container" ref="wordsContainer">
         <WordsOverview />
       </div>
       <div v-if="enabledRecording" id="recording-container">
         <audio controls controlsList="nodownload noplaybackrate ">
-          <source id="audio-src" type="audio/wav" />
+          <source ref="audioSrc" type="audio/wav" />
         </audio>
-        <a id="download" download="test.mp3">
+        <a ref="downloadLink" download="test.mp3">
           <BaseButton
             id="download-btn"
             :buttonText="strings.downloadRecording"
@@ -19,7 +19,7 @@
         </a>
       </div>
       <div id="btn" @click="addPoints">
-        <BaseButton :to="'/standings'" :buttonText="strings.continue" />
+        <BaseButton to="/standings" :buttonText="strings.continue" />
       </div>
     </main>
   </div>
@@ -51,36 +51,31 @@ export default {
       : (this.translate(), this.changeGameScreenStatus(false));
   },
   mounted() {
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
+    document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
 
     this.preventClickingBack();
 
-    if (screen.height < 600) {
-      document.getElementById('words-container').style.height = '54vh';
-    }
-
-    if (screen.height < 700) {
-      document.getElementById('words-container').style.height = '63vh';
-    }
+    let containerHeight;
 
     if (this.enabledRecording) {
-      document.getElementById('download').href = this.audioRecording.src;
-      document.getElementById(
-        'download'
-      ).download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
-      document.getElementById('audio-src').src = this.audioRecording.src;
+      const downloadLinkEl = this.$refs.downloadLink;
+      const audioSrcEl = this.$refs.audioSrc;
 
-      document.getElementById('words-container').style.height = '57vh';
+      downloadLinkEl.href = this.audioRecording.src;
+      audioSrcEl.src = this.audioRecording.src;
+      downloadLinkEl.download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
+    }
 
-      if (screen.height < 600) {
-        document.getElementById('words-container').style.height = '35vh';
-      }
+    if (screen.height < 600) {
+      containerHeight = this.enabledRecording ? '35vh' : '54vh';
+    } else if (screen.height < 700) {
+      containerHeight = this.enabledRecording ? '50vh' : '63vh';
+    } else if (this.enabledRecording) {
+      containerHeight = '57vh';
+    }
 
-      if (screen.height < 700) {
-        document.getElementById('words-container').style.height = '50vh';
-      }
+    if (containerHeight) {
+      this.$refs.wordsContainer.style.height = containerHeight;
     }
 
     this.isLoading = false;
@@ -138,7 +133,7 @@ main {
 
   #btn {
     margin-top: 50px;
-    margin-bottom: 23px;
+    margin-bottom: 20px;
   }
 
   #recording-container {

@@ -3,10 +3,11 @@
     <header>
       <div id="header-content">
         <div v-if="isLightLogo">
-          <nuxt-link v-if="!this.gameInProgress" to="/" id="logo-link">
-            <img src="../assets/logo-light.svg" id="logo-pic" alt="Alias logo"
-          /></nuxt-link>
-          <nuxt-link v-else to="/" id="logo-link" class="no-click">
+          <nuxt-link
+            to="/"
+            id="logo-link"
+            :class="{ 'no-click': this.gameInProgress }"
+          >
             <img src="../assets/logo-light.svg" id="logo-pic" alt="Alias logo"
           /></nuxt-link>
         </div>
@@ -176,13 +177,13 @@ header {
 }
 
 #logo-link {
-  padding: 6px;
+  user-select: none;
 
   #logo-pic {
     width: 200px;
     position: relative;
     top: 2px;
-    right: 10px;
+    right: 6px;
     transform: scale(0.82);
   }
 }

@@ -5,10 +5,10 @@
     <main v-if="getStartedOnIndexPage">
       <TeamStandings @stopLoading="onImagesLoaded" />
       <div v-if="!getHasWinner" class="btn">
-        <BaseButton :to="'/game'" :buttonText="strings.continue" />
+        <BaseButton to="/game" :buttonText="strings.continue" />
       </div>
       <div v-else class="btn">
-        <BaseButton :to="'/winner'" :buttonText="strings.finish" />
+        <BaseButton to="/winner" :buttonText="strings.finish" />
       </div>
     </main>
   </div>

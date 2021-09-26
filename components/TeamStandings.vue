@@ -39,9 +39,7 @@ export default {
     ...mapState(['isDarkMode']),
   },
   mounted() {
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
+    document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
   },
   methods: {
     handleLoading() {
@@ -114,6 +112,12 @@ main {
     tr:not(:last-child) {
       border-bottom: rgba(187, 134, 252, 0.3) 1px solid;
     }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #team-players {
+    font-size: 20px;
   }
 }
 </style>

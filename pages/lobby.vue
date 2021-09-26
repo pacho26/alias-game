@@ -149,8 +149,11 @@
             <p class="error-message" v-if="unfinishedForm">
               {{ strings.emptyValues }}
             </p>
-            <p class="error-message" v-if="areDuplicateNames">
-              {{ strings.duplicateName }}
+            <p class="error-message" v-if="areDuplicateTeamNames">
+              {{ strings.duplicateTeamNames }}
+            </p>
+            <p class="error-message" v-if="areDuplicatePlayerNames">
+              {{ strings.duplicatePlayerNames }}
             </p>
 
             <div class="modal-buttons">
@@ -169,14 +172,12 @@
               <div v-if="!editingTeam" @click="addTeamMethod">
                 <BaseButton
                   id="confirm-form-button"
-                  class="add-team-button"
                   :buttonText="strings.addTeam"
                 />
               </div>
               <div v-else @click="addTeamMethod">
                 <BaseButton
                   id="confirm-form-button"
-                  class="add-team-button"
                   :buttonText="strings.confirm"
                 />
               </div>
@@ -246,11 +247,7 @@
       </div>
 
       <div v-if="this.currentTeams.length >= 2" @click="clearPreviousGame()">
-        <BaseButton
-          id="startBtn"
-          :buttonText="strings.startGame"
-          :to="'/game'"
-        />
+        <BaseButton id="startBtn" :buttonText="strings.startGame" to="/game" />
       </div>
 
       <h2 v-else>{{ strings.thereMustBe }}</h2>
@@ -281,7 +278,8 @@ export default {
       ],
       names: [],
       unfinishedForm: false,
-      areDuplicateNames: false,
+      areDuplicateTeamNames: false,
+      areDuplicatePlayerNames: false,
       editingTeam: false,
       previousTeamName: '',
       targetResult: '60',
@@ -317,9 +315,7 @@ export default {
     this.recordingSelected = this.enabledRecording;
   },
   mounted() {
-    this.isDarkMode
-      ? document.body.classList.add('dark-mode')
-      : document.body.classList.remove('dark-mode');
+    document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
 
     if (this.currentTeams.length === 0) {
       this.isLoading = false;
@@ -346,10 +342,16 @@ export default {
         !this.selectedLogoUrl
       ) {
         this.unfinishedForm = true;
-        this.areDuplicateNames = false;
-      } else if (this.checkForDuplicateNames()) {
+        this.areDuplicateTeamNames = false;
+        this.areDuplicatePlayerNames = false;
+      } else if (this.checkForDuplicateTeamNames()) {
+        this.areDuplicateTeamNames = true;
         this.unfinishedForm = false;
-        this.areDuplicateNames = true;
+        this.areDuplicatePlayerNames = false;
+      } else if (this.checkForDuplicatePlayerNames()) {
+        this.areDuplicatePlayerNames = true;
+        this.unfinishedForm = false;
+        this.areDuplicateTeamNames = false;
       } else {
         this.isLoading = true;
         // const num = Math.floor(Math.random() * this.colors.length);
@@ -401,14 +403,15 @@ export default {
       this.selectedLogoUrl = foundTeam.logo;
       this.$refs['team-modal'].show();
       this.unfinishedForm = false;
-      this.areDuplicateNames = false;
+      this.areDuplicateTeamNames = false;
+      this.areDuplicatePlayerNames = false;
     },
     openEmptyTeamModal() {
       this.clearForm();
       this.$refs['team-modal'].show();
       this.editingTeam = false;
     },
-    checkForDuplicateNames() {
+    checkForDuplicateTeamNames() {
       for (const [idx, team] of this.currentTeams.entries()) {
         if (this.editingTeam && idx === this.currentTeamIndex) {
           continue;
@@ -417,6 +420,9 @@ export default {
         }
       }
       return false;
+    },
+    checkForDuplicatePlayerNames() {
+      return !(this.names.length === new Set(this.names).size);
     },
     checkIfNamesExist() {
       for (const name of this.names) {
@@ -431,7 +437,8 @@ export default {
       this.numberOfPlayers = null;
       this.names = [];
       this.unfinishedForm = false;
-      this.areDuplicateNames = false;
+      this.areDuplicateTeamNames = false;
+      this.areDuplicatePlayerNames = false;
     },
     setSelectedLogo(url) {
       this.selectedLogoUrl = url;
@@ -449,6 +456,10 @@ export default {
     },
     updateCheckboxColors() {
       const label = document.getElementsByName('label')[0];
+
+      if (!label) {
+        return;
+      }
 
       if (this.isDarkMode) {
         this.recordingSelected
@@ -481,7 +492,9 @@ export default {
           (this.strings.chooseLogo = 'Choose logo'),
           (this.strings.changeLogo = 'Change logo'),
           (this.strings.recordingSound = 'Sound recording during the round'),
-          (this.strings.duplicateName = 'Team name already exists!'))
+          (this.strings.duplicateTeamNames = 'Team name already exists!'),
+          (this.strings.duplicatePlayerNames =
+            'Player names in a team has to be unique!'))
         : ((this.strings.teams = 'Ekipe'.toUpperCase()),
           (this.strings.addTeamsToStart =
             'Dodajte ekipe kako bi započeli igru.'),
@@ -502,7 +515,9 @@ export default {
           (this.strings.chooseLogo = 'Izaberi logo'),
           (this.strings.changeLogo = 'Promijeni logo'),
           (this.strings.recordingSound = 'Snimanje zvuka tijekom runde'),
-          (this.strings.duplicateName = 'Ime ekipe već postoji!'));
+          (this.strings.duplicateTeamNames = 'Ime ekipe već postoji!'),
+          (this.strings.duplicatePlayerNames =
+            'Imena igrača u timu moraju biti jedinstvena!'));
     },
   },
 };
@@ -675,16 +690,13 @@ main > * {
   }
 }
 
-.add-team-button {
-  font-size: 15px;
-  font-weight: 700;
-  max-width: 110px;
-}
-
 #confirm-form-button {
   color: #f5f5f5;
   background: #374b7b;
   transform: scale(1.2);
+  font-size: 15px;
+  font-weight: 700;
+  max-width: 110px;
 
   &:hover {
     background: #e2e2e2;
