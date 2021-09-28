@@ -120,11 +120,10 @@ main {
   }
 
   #team-logo {
-    max-width: 14vw;
-    max-height: 18vh;
+    max-width: 14vh;
     position: relative;
     bottom: 46vh;
-    opacity: 0.9;
+    opacity: 0.8;
     padding: 10px 0;
     background: #fac809;
     border-radius: 8px;

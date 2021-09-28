@@ -15,7 +15,11 @@
             />
           </td>
           <td id="team-name">{{ team.name }}</td>
-          <td id="team-players">{{ team.players.join(', ') }}</td>
+          <td id="team-players">
+            <div id="players" v-for="player in team.players" :key="player">
+              <p>{{ player }}</p>
+            </div>
+          </td>
           <td id="team-points" class="px-5">{{ team.points }}</td>
         </tr>
       </table>
@@ -100,7 +104,14 @@ main {
     }
 
     #team-players {
-      padding-left: 10px;
+      padding: 0 90px;
+      font-size: 18px;
+
+      #players {
+        line-height: 0.5;
+        position: relative;
+        top: 8px;
+      }
     }
   }
 }
@@ -115,9 +126,14 @@ main {
   }
 }
 
-@media only screen and (max-width: 1000px) {
-  #team-players {
-    font-size: 20px;
+@media only screen and (max-width: 720px) {
+  #teams-table {
+    tr {
+      #team-players {
+        font-size: 16px;
+        padding: 0 20px 0 28px;
+      }
+    }
   }
 }
 </style>
