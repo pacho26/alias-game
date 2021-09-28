@@ -41,17 +41,6 @@
           </div>
 
           <div
-            v-if="mobileScreen"
-            class="icon-plus-container"
-            @click="
-              selectedLogoUrl = '';
-              openEmptyTeamModal();
-            "
-          >
-            <fa class="icon-plus" icon="plus"></fa>
-          </div>
-          <div
-            v-else
             class="icon-plus-container"
             v-b-tooltip.hover.right="strings.tooltipAddTeam"
             @click="
@@ -282,7 +271,6 @@ export default {
       previousTeamName: '',
       targetResult: '60',
       duration: '60',
-      mobileScreen: false,
       isLoading: true,
       strings: {},
       selectedLogoUrl: '',
@@ -305,7 +293,7 @@ export default {
     !this.getStartedOnIndexPage
       ? this.$router.push({ path: '/' })
       : (this.translate(),
-        (this.mobileScreen = screen.width < 1000 ? true : false),
+        this.isTouchDevice() ? (this.strings.tooltipAddTeam = '') : null,
         this.setGameInProgress(false));
 
     this.duration = this.getDurationOfRound;
@@ -442,6 +430,13 @@ export default {
       this.selectedLogoUrl = url;
       this.$refs['logo-modal'].hide();
     },
+    isTouchDevice() {
+      return (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        navigator.msMaxTouchPoints > 0
+      );
+    },
     setMarginBottom() {
       document.getElementById(
         'select-number-of-players'
@@ -511,7 +506,7 @@ export default {
           (this.strings.targetResult = 'Ciljni rezultat'),
           (this.strings.duration = 'Vrijeme trajanja runde'),
           (this.strings.startGame = 'Započni igru'),
-          (this.strings.thereMustBe = 'Trebaju se dodati barem 2 ekipe!'),
+          (this.strings.thereMustBe = 'Treba se dodati barem 2 ekipe!'),
           (this.strings.enterTeamName = 'Unesite ime ekipe'),
           (this.strings.enterPlayerName = 'Unesite ime igrača'),
           (this.strings.player = 'Igrač'),
@@ -1085,6 +1080,11 @@ main > * {
       transform: scale(1.2);
       max-width: 63vw;
     }
+  }
+
+  .error-message {
+    position: relative;
+    top: 16px;
   }
 }
 </style>

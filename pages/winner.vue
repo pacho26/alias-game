@@ -116,16 +116,19 @@ main {
 
   #trophy {
     max-width: 46vh;
+    user-select: none;
   }
 
   #team-logo {
-    max-width: 14vh;
+    max-width: 14vw;
+    max-height: 18vh;
     position: relative;
     bottom: 46vh;
-    opacity: 0.75;
+    opacity: 0.9;
     padding: 10px 0;
     background: #fac809;
     border-radius: 8px;
+    user-select: none;
   }
 
   #team-name {

@@ -111,7 +111,7 @@ export default {
           (this.strings.rules = 'Rules'),
           (this.strings.desc = 'Explain using other words!'))
         : ((this.strings.newGame = 'Nova igra'),
-          (this.strings.rules = 'Pravila'),
+          (this.strings.rules = 'Pravila igre'),
           (this.strings.desc = 'Reci drugim riječima!'));
     },
     forceRerender() {

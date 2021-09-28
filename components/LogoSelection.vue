@@ -92,15 +92,15 @@
         <div class="logos-container">
           <div class="logo-container" @click="selectLogo">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcompanies%2Famazon.png?alt=media&token=33199418-7902-4926-944a-c84ffc524ce3"
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcompanies%2Faliexpress.png?alt=media&token=766884e3-c1c6-4ea9-b9ec-4ca393ff717e"
               alt="amazon"
               @load="handleLoading"
             />
           </div>
           <div class="logo-container" @click="selectLogo">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcompanies%2Fapple.png?alt=media&token=4611d4d3-eb73-4118-a46b-27f983b8f845"
-              alt="apple"
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcompanies%2Famazon.png?alt=media&token=33199418-7902-4926-944a-c84ffc524ce3"
+              alt="amazon"
               @load="handleLoading"
             />
           </div>
@@ -391,7 +391,7 @@
           </div>
           <div class="logo-container" @click="selectLogo">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fcitroen.png?alt=media&token=2b802d72-783c-45e2-9cbf-60ac213ee800"
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fcitroen.png?alt=media&token=1a810ba7-0e72-4740-9bf7-d9557cb46214"
               alt="citroen"
               @load="handleLoading"
             />
@@ -405,14 +405,14 @@
           </div>
           <div class="logo-container" @click="selectLogo">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fford.png?alt=media&token=f4592fbd-bdc0-49e6-8e60-2acc0f656afd"
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fford.png?alt=media&token=0f5fc126-effe-4987-a2d3-5121a39df332"
               alt="ford"
               @load="handleLoading"
             />
           </div>
           <div class="logo-container" @click="selectLogo">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fhyundai.png?alt=media&token=acc76d71-5dc1-4790-a3df-4b0661d62b80"
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fhyundai.png?alt=media&token=f43fca72-a0db-41b1-895e-4a1cc9ed25ca"
               alt="hyundai"
               @load="handleLoading"
             />
@@ -470,6 +470,166 @@
       </div>
 
       <div class="pb-1">
+        <p>TECH</p>
+        <div class="logos-container">
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fapple.png?alt=media&token=36d6ef1b-3b56-4421-ad2c-5b0b3f6fa63a"
+              alt="apple"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Flinux.png?alt=media&token=fb538aab-f27b-4a2e-a758-48ce7a103287"
+              alt="linux"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fwindows.png?alt=media&token=9547228d-0192-40e5-9ff2-bc7550301560"
+              alt="windows"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fandroid.png?alt=media&token=56b98231-3430-41f0-8322-65df79759074"
+              alt="android"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fhtml.png?alt=media&token=11ac2390-cb78-4b55-85d7-75a3e02ef767"
+              alt="html"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fcss.png?alt=media&token=aea6d7be-7899-4deb-9cd2-fa76a83d9a31"
+              alt="css"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fjavascript.png?alt=media&token=991433bd-efbb-4753-840c-c98aa052bc3c"
+              alt="javascript"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Ftypescript.png?alt=media&token=eede36ed-7508-4303-942b-aaf9ca6fff02"
+              alt="typescript"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fangular.png?alt=media&token=ba59a0cd-8ec7-4f5d-b7d4-df85c4d92fbe"
+              alt="angular"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Freact.png?alt=media&token=609ccfcd-3626-460d-80cc-4342774f5e08"
+              alt="react"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fvue.png?alt=media&token=20b7f478-ad59-4c84-a3f6-bb4b2ca9cd6e"
+              alt="vue"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fnuxt.png?alt=media&token=06e7a2b3-4ac2-4283-b11b-07f423f3b428"
+              alt="nuxt"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fjava.png?alt=media&token=e7eae2e9-d116-4e88-994b-a305ed4d625b"
+              alt="java"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fcpp.png?alt=media&token=4fbff1c5-7032-492b-a409-3086cf3d6b84"
+              alt="cpp"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fcs.png?alt=media&token=b2e3e573-1008-4a3d-872d-1b06d1cf24b7"
+              alt="c-sharp"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fpython.png?alt=media&token=9a897678-92ec-42ad-83d4-bdb2cc19d0b6"
+              alt="python"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fgo.png?alt=media&token=f7c0f2b7-ce60-4d70-a688-0ec8b5739e86"
+              alt="go"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fmysql.png?alt=media&token=d958d461-f105-4b3d-ad62-20de6cf93868"
+              alt="mysql"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Fpostgre.png?alt=media&token=c2d935f2-a618-4315-8b28-b5ef13a7cf87"
+              alt="postgre"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Ffirebase.png?alt=media&token=4b4d6950-4913-4006-b9d8-055f0e6599a3"
+              alt="firebase"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Funity.jpg?alt=media&token=13c1eb20-2333-4c92-be3b-37dde9dd12a5"
+              alt="unity"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fit%2Funreal.png?alt=media&token=4a93cccb-8f86-4c67-99fc-2ec7239dcb3c"
+              alt="unreal"
+              @load="handleLoading"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-1">
         <p>ALCOHOL</p>
         <div class="logos-container">
           <div class="logo-container" @click="selectLogo">
@@ -488,7 +648,7 @@
           </div>
           <div class="logo-container" @click="selectLogo">
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Falcohol%2Fkarlovacko.png?alt=media&token=cae466ec-91e3-4b27-a3c5-871e8e9295f5"
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Falcohol%2Fkarlovacko.png?alt=media&token=58a9a752-8462-49fe-b0b3-b03fdd56457d"
               alt="karlovacko"
               @load="handleLoading"
             />
@@ -647,8 +807,6 @@ main {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      position: relative;
-      right: 4px;
     }
   }
 }
@@ -669,6 +827,13 @@ main {
   &:hover,
   &:active {
     background: #a7b6d7;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .logos-container {
+    position: relative;
+    right: 5px;
   }
 }
 
