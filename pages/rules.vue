@@ -126,12 +126,12 @@ main {
 
   .btn {
     font-size: 22px;
-    margin-top: 30px;
+    margin: 30px 0 12px 0;
   }
 
   h2 {
-    font-family: 'Poppins Extra Bold', sans-serif;
-    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     font-size: 46px;
     color: #374b7b;
     margin: 4px 0 32px 0;
@@ -142,7 +142,7 @@ main {
 
   p {
     font-size: 20px;
-    padding: 3px;
+    padding: 0 9px;
   }
 }
 

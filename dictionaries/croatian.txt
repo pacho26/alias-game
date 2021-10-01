@@ -2448,7 +2448,7 @@ fizički
 početi
 predobar
 televizor
-brigadir
+brigada
 nizak
 mehanizam
 radovati se
@@ -2553,9 +2553,7 @@ uzdrmati
 ubaciti
 dovoziti
 naginjati
-dospijevati
 isticati
-pristanište
 trenutan
 kancelarija
 reći
@@ -2572,8 +2570,7 @@ varanje
 sprovod
 dobar
 lopovski
-kupoprodaja
-prednjačiti
+Nikola Tesla
 navući
 znamenka
 odzvanjati
@@ -2586,7 +2583,6 @@ novinski
 zamijeniti
 teren
 iseliti
-ocrtavati
 rekreacija
 optužni
 ljubomoran
@@ -2594,7 +2590,6 @@ dizajnerica
 vesta
 blijed
 nezainteresiran
-ovladati
 pristanak
 dati
 val
@@ -2608,8 +2603,7 @@ letjeti
 reproducirati
 novac
 diktat
-osvrtati
-objediniti
+osvrt
 trijezan
 forumski
 cestovan
@@ -2630,7 +2624,6 @@ filtriranje
 polovica
 premjestiti
 razraditi
-približan
 diplomirati
 teorija
 poskupjeti
@@ -2641,7 +2634,7 @@ shvatiti
 sunčanje
 spominjati
 prakticirati
-sabrati
+sabrati se
 biografski
 šteta
 drek
@@ -2780,7 +2773,7 @@ radijski
 iskaznica
 dodatan
 poziv
-rezultatski
+rezultat
 prenosiv
 planinarski
 kupati
