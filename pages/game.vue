@@ -650,7 +650,7 @@ section {
 }
 
 #cheat-pic {
-  max-height: 50vh;
+  max-height: 40vh;
   margin: 0 auto;
 }
 
