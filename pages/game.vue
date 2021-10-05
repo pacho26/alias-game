@@ -797,7 +797,7 @@ section {
     }
   }
 
-  @media only screen and (max-width: 1000px) {
+  @media only screen and (max-width: 800px) {
     #wrong-container {
       height: 22vw;
     }

@@ -7,7 +7,10 @@
       <div id="words-container" ref="wordsContainer">
         <WordsOverview />
       </div>
-      <div v-if="enabledRecording" id="recording-container">
+      <div
+        v-if="enabledRecording && !problemWithRecording"
+        id="recording-container"
+      >
         <audio controls controlsList="nodownload noplaybackrate ">
           <source ref="audioSrc" type="audio/wav" />
         </audio>
@@ -33,6 +36,7 @@ export default {
     return {
       strings: {},
       isLoading: true,
+      problemWithRecording: false,
     };
   },
   computed: {
@@ -57,20 +61,23 @@ export default {
 
     let containerHeight;
 
-    if (this.enabledRecording) {
+    try {
       const downloadLinkEl = this.$refs.downloadLink;
       const audioSrcEl = this.$refs.audioSrc;
 
       downloadLinkEl.href = this.audioRecording.src;
       audioSrcEl.src = this.audioRecording.src;
       downloadLinkEl.download = `${this.getCurrentTeam.name}-${this.getCurrentRound}`;
+    } catch {
+      this.problemWithRecording = true;
+      alert(this.strings.problemsWithRecordingAudio);
     }
 
     if (screen.height < 600) {
-      containerHeight = this.enabledRecording ? '35vh' : '54vh';
+      containerHeight = !this.problemWithRecording ? '35vh' : '54vh';
     } else if (screen.height < 700) {
-      containerHeight = this.enabledRecording ? '50vh' : '63vh';
-    } else if (this.enabledRecording) {
+      containerHeight = !this.problemWithRecording ? '50vh' : '63vh';
+    } else if (!this.problemWithRecording) {
       containerHeight = '57vh';
     }
 
@@ -95,10 +102,14 @@ export default {
       this.chosenLanguage === 'english'
         ? ((this.strings.continue = 'Continue'),
           (this.strings.modifyAnswers = 'Modify answers'.toUpperCase()),
-          (this.strings.downloadRecording = 'Download recording'))
+          (this.strings.downloadRecording = 'Download recording'),
+          (this.strings.problemsWithRecordingAudio =
+            'Problems with recording audio during this round.'))
         : ((this.strings.continue = 'Nastavi'),
           (this.strings.modifyAnswers = 'Izmijeni odgovore'.toUpperCase()),
-          (this.strings.downloadRecording = 'Preuzmi snimku'));
+          (this.strings.downloadRecording = 'Preuzmi snimku'),
+          (this.strings.problemsWithRecordingAudio =
+            'Dogodio se problem sa snimanjem zvuka tijekom runde.'));
     },
     preventClickingBack() {
       window.location.hash = 'no-back-button';
