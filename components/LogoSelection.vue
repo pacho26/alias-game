@@ -283,6 +283,96 @@
       </div>
 
       <div class="pb-1">
+        <p>CARS</p>
+        <div class="logos-container">
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Falfa-romeo.png?alt=media&token=4279d4cb-5425-4ae9-b036-62da14dcdc92"
+              alt="alfa-romeo"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fcitroen.png?alt=media&token=1a810ba7-0e72-4740-9bf7-d9557cb46214"
+              alt="citroen"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fferrari.png?alt=media&token=9b093ab1-7f63-4c9a-959c-804e7be3cdaf"
+              alt="ferrari"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fford.png?alt=media&token=0f5fc126-effe-4987-a2d3-5121a39df332"
+              alt="ford"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fhyundai.png?alt=media&token=f43fca72-a0db-41b1-895e-4a1cc9ed25ca"
+              alt="hyundai"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Flamborghini.png?alt=media&token=141a72be-e57a-42d8-a24d-1aa80507f07e"
+              alt="lamborghini"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fopel.png?alt=media&token=9643eb7b-d64e-4707-98eb-105723eda612"
+              alt="opel"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Frenault.png?alt=media&token=994cadb3-5b38-4dcf-abd5-16f83d527824"
+              alt="renault"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Frimac.png?alt=media&token=368954ed-5a5b-4c1e-8041-6c6a0fcd7491"
+              alt="rimac"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fskoda.png?alt=media&token=61882f7a-e629-47f5-b08c-01381dc88eb0"
+              alt="skoda"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Ftesla.png?alt=media&token=04429a59-1610-4ec8-a848-fb599f206b3a"
+              alt="tesla"
+              @load="handleLoading"
+            />
+          </div>
+          <div class="logo-container" @click="selectLogo">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fvolkswagen.png?alt=media&token=0d968e86-77d3-4c85-a976-9ce24069f3d1"
+              alt="volkswagen"
+              @load="handleLoading"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-1">
         <p>FOOD</p>
         <div class="logos-container">
           <div class="logo-container" @click="selectLogo">
@@ -373,96 +463,6 @@
             <img
               src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/food%2Fwatermelon.png?alt=media&token=4a3d6645-a74c-4aeb-9f86-33dbf74157c9"
               alt="watermelon"
-              @load="handleLoading"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="pb-1">
-        <p>CARS</p>
-        <div class="logos-container">
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Falfa-romeo.png?alt=media&token=4279d4cb-5425-4ae9-b036-62da14dcdc92"
-              alt="alfa-romeo"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fcitroen.png?alt=media&token=1a810ba7-0e72-4740-9bf7-d9557cb46214"
-              alt="citroen"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fferrari.png?alt=media&token=9b093ab1-7f63-4c9a-959c-804e7be3cdaf"
-              alt="ferrari"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fford.png?alt=media&token=0f5fc126-effe-4987-a2d3-5121a39df332"
-              alt="ford"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fhyundai.png?alt=media&token=f43fca72-a0db-41b1-895e-4a1cc9ed25ca"
-              alt="hyundai"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Flamborghini.png?alt=media&token=141a72be-e57a-42d8-a24d-1aa80507f07e"
-              alt="lamborghini"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fopel.png?alt=media&token=9643eb7b-d64e-4707-98eb-105723eda612"
-              alt="opel"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Frenault.png?alt=media&token=994cadb3-5b38-4dcf-abd5-16f83d527824"
-              alt="renault"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Frimac.png?alt=media&token=368954ed-5a5b-4c1e-8041-6c6a0fcd7491"
-              alt="rimac"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fskoda.png?alt=media&token=61882f7a-e629-47f5-b08c-01381dc88eb0"
-              alt="skoda"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Ftesla.png?alt=media&token=04429a59-1610-4ec8-a848-fb599f206b3a"
-              alt="tesla"
-              @load="handleLoading"
-            />
-          </div>
-          <div class="logo-container" @click="selectLogo">
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2Fcars%2Fvolkswagen.png?alt=media&token=0d968e86-77d3-4c85-a976-9ce24069f3d1"
-              alt="volkswagen"
               @load="handleLoading"
             />
           </div>
