@@ -19,23 +19,25 @@
           <img
             src="../assets/countryFlags/croatia.svg"
             alt="Croatia flag"
-            ref="croatiaFlag"
-            class="flag"
+            :class="
+              chosenLanguage === 'croatian' ? 'flag selected-flag' : 'flag'
+            "
             @click="
               setLanguage('croatian');
-              selectFlag();
               forceRerender();
+              translate();
             "
           />
           <img
             src="../assets/countryFlags/united-kingdom.svg"
             alt="United Kingdom flag"
-            ref="unitedKingdomFlag"
-            class="flag"
+            :class="
+              chosenLanguage === 'english' ? 'flag selected-flag' : 'flag'
+            "
             @click="
               setLanguage('english');
-              selectFlag();
               forceRerender();
+              translate();
             "
           />
         </div>
@@ -63,7 +65,6 @@ export default {
   },
   mounted() {
     this.$confetti.stop();
-    this.selectFlag();
 
     document.body.classList[this.isDarkMode ? 'add' : 'remove']('dark-mode');
 
@@ -84,27 +85,6 @@ export default {
       'setLanguage',
       'startingFromIndexPage',
     ]),
-
-    selectFlag() {
-      const croatiaFlagEl = this.$refs.croatiaFlag;
-      const unitedKingdomFlagEl = this.$refs.unitedKingdomFlag;
-
-      switch (this.chosenLanguage) {
-        case 'croatian':
-          croatiaFlagEl.style.opacity = '1';
-          croatiaFlagEl.style.transform = 'scale(1.2)';
-          unitedKingdomFlagEl.style.opacity = '0.45';
-          unitedKingdomFlagEl.style.transform = 'scale(1)';
-          break;
-        case 'english':
-          unitedKingdomFlagEl.style.opacity = '1';
-          unitedKingdomFlagEl.style.transform = 'scale(1.2)';
-          croatiaFlagEl.style.opacity = '0.45';
-          croatiaFlagEl.style.transform = 'scale(1)';
-          break;
-      }
-      this.translate();
-    },
     translate() {
       this.chosenLanguage === 'english'
         ? ((this.strings.newGame = 'New game'),
@@ -178,6 +158,12 @@ $secondary-color: #e6e6e6;
         margin: 0 20px;
         cursor: pointer;
         transition: 0.5s;
+        opacity: 0.45;
+      }
+
+      .selected-flag {
+        opacity: 1;
+        transform: scale(1.2);
       }
     }
   }
