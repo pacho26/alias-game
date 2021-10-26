@@ -15,6 +15,7 @@
             class="logo-container"
             v-for="img in logoCategory.images"
             :key="img.token"
+            @click="selectLogo"
           >
             <img
               :src="`https://firebasestorage.googleapis.com/v0/b/alias-game-24cb4.appspot.com/o/logos%2F${logoCategory.category}%2F${img.alt}.png?alt=media&token=${img.token}`"
