@@ -1,4 +1,4 @@
-# Alias game
+<img src="https://raw.githubusercontent.com/pacho26/alias-game/879d17f08fbbeafb6c3c5d8b08e552b1126e97fd/assets/logo-light.svg" width="250">
 
 ## [Live Demo](https://alias-game.vercel.app/)
 
